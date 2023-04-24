@@ -1,0 +1,19 @@
+<!-- Каждая БД так начинается -->
+<?xml version = "1.0" encoding = "utf-8"?>
+
+<organization>
+
+    <!-- Шаблон пользователя с индексом 1 и 2 -->
+    <user id = "1">
+        <name>Александр</name>
+        <city>Иркутск</city>
+        <age>21</age>
+    </user>
+
+    <user id = "2">
+        <name>Олег</name>
+        <city>Краснодар</city>
+        <age>54</age>
+    </user>
+
+</organization>
