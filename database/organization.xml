@@ -1,19 +1,20 @@
-<!-- Каждая БД так начинается -->
+<!-- Эта строчка важна! -->
 <?xml version = "1.0" encoding = "utf-8"?>
 
-<organization>
+<!-- База данных организации -->
+<Organization>
 
-    <!-- Шаблон пользователя с индексом 1 и 2 -->
-    <user id = "1">
-        <name>Александр</name>
-        <city>Иркутск</city>
-        <age>21</age>
-    </user>
+    <!-- Сведенья о Персонах -->
+    <Person id = "1">
+        <Name>Иван</Name>
+        <Age>25</Age>
+        <Gender>Мужской</Gender>
+    </Person>
+    <Person id = "2">
+        <Name>Мария</Name>
+        <Age>32</Age>
+        <Gender>Женский</Gender>
+    </Person>
 
-    <user id = "2">
-        <name>Олег</name>
-        <city>Краснодар</city>
-        <age>54</age>
-    </user>
-
-</organization>
+    <!-- Дополнительные записи о людях, вне шаблона -->
+</Organization>
