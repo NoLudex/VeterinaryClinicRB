@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace VeterinaryClinicRB
 {
@@ -10,24 +11,24 @@ namespace VeterinaryClinicRB
     {
         public static void Main(string[] args)
         {
-            // Путь до баз данных
-            string FilePathOrganization = "./database/organization.xml";
-            string FilePathClientele = "./database/clientele.xml";
+            List<Pacientes> client = new List<Pacientes>();
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(FilePathOrganization);
+            // Pacientes p1 = new Pacientes { 3, "Скунс", "Олег", 'F', 6, "Олежек Вячеславович"};
+            Pacientes p1 = new Pacientes();
+            p1.Id = 3;
+            p1.AnimalType = "Капибара";
+            p1.Name = "Рогалик";
+            p1.Gender = 'M';
+            p1.Age = 3;
+            p1.FullnameOwner = "Олежек Вячеславович";
+            client.Add(p1);
 
-            int searchId = 1; // Индификатор искомого человека
-            XmlNode ?personNode = doc.SelectSingleNode($"/Organization/Person[@id='{searchId}']");
-
-            if (personNode != null)
+            string PathFilePacients = "./database/pacientes.xml";
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Pacientes>));
+            using (TextWriter writer = new StreamWriter(PathFilePacients))
             {
-                string name = personNode.SelectSingleNode("Name")?.InnerText;
-                int age = int.Parse(personNode.SelectSingleNode("Age")?.InnerText);
-                string gender = personNode.SelectSingleNode("Gender")?.InnerText;
-                System.Console.WriteLine($"{name}, {gender} {age} лет");
+                xmlSerializer.Serialize(writer, client);
             }
-
             
         }
     }
