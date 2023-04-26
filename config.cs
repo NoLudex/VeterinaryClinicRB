@@ -55,7 +55,26 @@ namespace VeterinaryClinicRB
                     if (node.InnerText == key)
                         return true;
             return false;
+        }
+        public static bool UpdateAccessKey(string oldKey, string newKey)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load("./database/accessKey.xml");
+            XmlNode ?oldKeyNode = doc.SelectSingleNode($"//accessKey[text()='{oldKey}']");
 
+            if (oldKeyNode == null)
+                return false;
+            else
+            {
+                XmlNode ?newKeyNode = doc.SelectSingleNode($"//accessKey[text()='{newKey}']");
+                if (newKeyNode != null)
+                    return false;
+                
+                oldKeyNode.InnerText = newKey;
+                doc.Save("./database/accessKey.xml");
+
+                return true;
+            }
         }
     }
 }
