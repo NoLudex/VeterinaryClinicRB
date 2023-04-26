@@ -1,27 +1,35 @@
-﻿<?xml version = "1.0" encoding = "utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <doctors>
-    <doctor>
-        <id>1</id>
-        <name>Иванов Олег Григорьевич</name>
-        <birthday>01.01.1970</birthday>
-        <experience>10</experience>
-        <animals-treated>100</animals-treated>
-        <telegram-id>@telegram</telegram-id>
-    </doctor>
-    <doctor>
-        <id>2</id>
-        <name>Колотушкин Сергей Сергеевич</name>
-        <birthday>01.01.1970</birthday>
-        <experience>10</experience>
-        <animals-treated>100</animals-treated>
-        <telegram-id>@ystenk</telegram-id>
-    </doctor>
-    <doctor>
-        <id>3</id>
-        <name>Морковкин Андрей Иванович</name>
-        <birthday>01.01.1970</birthday>
-        <experience>10</experience>
-        <animals-treated>100</animals-treated>
-        <telegram-id>@telegram-id</telegram-id>
-    </doctor>
+  <doctor>
+    <id>1</id>
+    <fullname-doctor>Иванов Олег Григорьевич</fullname-doctor>
+    <birthday>01.01.1970</birthday>
+    <experience>10</experience>
+    <animals-treated>100</animals-treated>
+    <telegram-id>@telegram</telegram-id>
+  </doctor>
+  <doctor>
+    <id>2</id>
+    <fullname-doctor>Колотушкин Сергей Сергеевич</fullname-doctor>
+    <birthday>01.01.1970</birthday>
+    <experience>10</experience>
+    <animals-treated>100</animals-treated>
+    <telegram-id>@ystenk</telegram-id>
+  </doctor>
+  <doctor>
+    <id>3</id>
+    <fullname-doctor>Морковкин Андрей Иванович</fullname-doctor>
+    <birthday>01.01.1970</birthday>
+    <experience>10</experience>
+    <animals-treated>100</animals-treated>
+    <telegram-id>@telegram-id</telegram-id>
+  </doctor>
+  <doctor>
+    <id>4</id>
+    <fullname-doctor>Василёк Степан Борисович</fullname-doctor>
+    <birthday>12.12.1998</birthday>
+    <experience>5</experience>
+    <animals-treated>10</animals-treated>
+    <telegram-id>@tginfo</telegram-id>
+  </doctor>
 </doctors>
