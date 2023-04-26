@@ -2,7 +2,7 @@
 <?xml version = "1.0" encoding = "utf-8"?>
 
 <!-- База данных Врачей  -->
-<Pacientes>
+<Doctors>
 
     <Person id = "1">
         <FullnameDoctor>Иванов Алексей Андреевич</FullnameDoctor>
@@ -26,4 +26,4 @@
     </Person>
 
     <!-- Дополнительные записи о людях, вне шаблона -->
-</Pacientes>
+</Doctors>
