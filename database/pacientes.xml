@@ -6,8 +6,8 @@
         <name>Max</name>
         <gender>Unknown</gender>
         <age>3</Age>
-        <fullnameOwner>FullnameOwner</fullnameowner>
-        <valid>Действительная анкета? </valid>     
+        <fullname-owner>ФИО владельца</fullname-owner>
+        <valid>Действительная анкета?</valid>     
         <telegram-id>@istung</telegram-id>
     </paciente>
     <paciente>
@@ -16,7 +16,8 @@
         <name>Oleg</name>
         <gender>Female</gender>
         <age>4</age>
-        <fullnameowner>FullnameOwner</fullnameowner>
+        <fullname-owner>fullname-owner</fullname-owner>
+        <valid>Действительная анкета?</valid>    
         <telegram-id>@nagivas</telegram-id>
     </paciente>
     <paciente>
@@ -25,7 +26,8 @@
         <name>Alex</name>
         <gender>Male</gender>
         <age>7</age>
-        <fullnameowner>fullnameOwner</fullnameowner>
+        <fullname-owner>fullname-owner</fullname-owner>
+        <valid>Действительная анкета?</valid>    
         <telegram-id>@pufages</telegram-id>
     </paciente>
 </pacientes>
