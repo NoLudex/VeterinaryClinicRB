@@ -11,6 +11,7 @@ namespace VeterinaryClinicRB
     {
         public static void Main(string[] args)
         {
+            List<Doctors> doctors = new List<Doctors>();
             string filePath = "./database/doctors.xml";
 
             // Создаем документ и загружаем из файла
@@ -21,6 +22,18 @@ namespace VeterinaryClinicRB
             XmlNode ?doctorNode = FindDoctorById(doc, 1);
             if (doctorNode != null)
             {
+                foreach (XmlNode xmlNode in xmlNodeList)
+                {
+                    doctors.Add(new Doctors
+                    {
+                        id = xmlNode.SelectSingleNode("id").InnerText,
+                        name = xmlNode.SelectSingleNode("name").InnerText,
+                        birthday = xmlNode.SelectSingleNode("birthday").InnerText,
+                        experience = xmlNode.SelectSingleNode("experience").InnerText,
+                        animalsTreated = xmlNode.SelectSingleNode("animals-treated").InnerText,
+                        telegramId = xmlNode.SelectSingleNode("telegram-id").InnerText
+                    });
+                }
                 Console.WriteLine(doctorNode.OuterXml);
             }
             else
