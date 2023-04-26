@@ -1,25 +1,31 @@
-<!-- Эта строчка важна! -->
 <?xml version = "1.0" encoding = "utf-8"?>
-
-<!-- База данных организации (Шаблон) -->
-<Pacientes>
-
-    <!-- Сведенья о Пациентах -->
-    <Person id = "1">
-        <AnimalType>Кошка</AnimalType>
-        <Name>Макима</Name>
-        <Gender>Женский</Gender>
-        <Age>3</Age>
-        <FullnameOwner>Иванов Иван Иванович</FullnameOwner>
-    </Person>
-
-    <Person id = "2">
-        <AnimalType>Собака</AnimalType>
-        <Name>Ростик</Name>
-        <Gender>Неопределённый</Gender>
-        <Age>1</Age>
-        <FullnameOwner>Пупкина Елизавета Сергеевна</FullnameOwner>
-    </Person>
-
-    <!-- Дополнительные записи о людях, вне шаблона -->
-</Pacientes>
+<pacientes>
+    <paciente>
+        <id>1</id>
+        <animaltype>Cat</animaltype>
+        <name>Max</name>
+        <gender>Unknown</gender>
+        <age>3</Age>
+        <fullnameOwner>FullnameOwner</fullnameowner>
+        <valid>Действительная анкета? </valid>     
+        <telegram-id>@istung</telegram-id>
+    </paciente>
+    <paciente>
+        <id>2</id>
+        <animaltype>Dog</animaltype>
+        <name>Oleg</name>
+        <gender>Female</gender>
+        <age>4</age>
+        <fullnameowner>FullnameOwner</fullnameowner>
+        <telegram-id>@nagivas</telegram-id>
+    </paciente>
+    <paciente>
+        <id>3</id>
+        <animaltype>Lizard</animaltype>
+        <name>Alex</name>
+        <gender>Male</gender>
+        <age>7</age>
+        <fullnameowner>fullnameOwner</fullnameowner>
+        <telegram-id>@pufages</telegram-id>
+    </paciente>
+</pacientes>
