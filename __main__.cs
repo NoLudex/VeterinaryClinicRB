@@ -20,7 +20,7 @@ namespace VeterinaryClinicRB
 
             XmlNodeList ?xmlNodeList = doc.DocumentElement?.SelectNodes("./doctors/doctor");
             // Поиск врача по ID
-            XmlNode ?doctorNode = FindDoctorById(doc, 1);
+            XmlNodeList ?doctorNode = FindDoctorsByName(doc, "Оktl");
             if (doctorNode != null)
             {   
                 if (xmlNodeList != null) 
