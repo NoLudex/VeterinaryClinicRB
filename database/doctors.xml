@@ -2,7 +2,7 @@
 <doctors>
     <doctor>
         <id>1</id>
-        <name>Оktl</name>
+        <name>Олег</name>
         <birthday>01.01.1970</birthday>
         <experience>10</experience>
         <animals-treated>100</animals-treated>
@@ -10,7 +10,7 @@
     </doctor>
     <doctor>
         <id>2</id>
-        <name>Имя</name>
+        <name>Сергей</name>
         <birthday>01.01.1970</birthday>
         <experience>10</experience>
         <animals-treated>100</animals-treated>
@@ -18,7 +18,7 @@
     </doctor>
     <doctor>
         <id>3</id>
-        <name>Имя</name>
+        <name>Андрей</name>
         <birthday>01.01.1970</birthday>
         <experience>10</experience>
         <animals-treated>100</animals-treated>

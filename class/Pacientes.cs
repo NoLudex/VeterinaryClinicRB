@@ -21,11 +21,11 @@ namespace VeterinaryClinicRB
             // Присвоение значений
             this.id = id;
             this.name = name;
-            this.gender=gender;
-            this.age=age;
-            this.fullnameOwner=fullnameOwner;
-            this.valid=valid;
-            this.telegramId=telegramId;
+            this.gender = gender;
+            this.age = age;
+            this.fullnameOwner = fullnameOwner;
+            this.valid = valid;
+            this.telegramId = telegramId;
         }
         public Pacientes()
         {
