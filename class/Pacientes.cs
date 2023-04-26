@@ -17,10 +17,12 @@ namespace VeterinaryClinicRB
             FullnameOwner = "Нет владельца";
         }
 
+        // Pacientes hui = new Pacientes(ID, AnimalType, Gender, Age, Name, FullnameOwner);
+
         // Конструктор класса
-        public Pacientes(int id, string AnimalType, char Gender, double Age, string Name, string FullnameOwner)
+        public Pacientes(int ID, string AnimalType, char Gender, double Age, string Name, string FullnameOwner)
         {
-            this.Id = id;
+            this.Id = ID;
             this.AnimalType = AnimalType;
             this.Gender = Gender;
             this.Age = Age;
