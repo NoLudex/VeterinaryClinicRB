@@ -1,31 +1,26 @@
 <?xml version = "1.0" encoding = "utf-8"?>
-
-
-<Admission>
-    <Animal id = "1">
-        <id>
-        <Datetime>26.04.2023</Datetime>
-        <FullnameDoctor>Яковлев Максим Вадимович</FullnameDoctor>
-        <Complaints>потеря аппетита</Complaints>
-        <Diagnosis>Инсульт</Diagnosis>
-        <Info>Какая - либо информация</Info>
-    </Animal>
-
-    <Animal id = "2">
-        <Datetime>26.04.2023</Datetime>
-        <FullnameDoctor>Поп Алексей Витальевич</FullnameDoctor>
-        <Complaints>сухой нос</Complaints>
-        <Diagnosis>Диарея</Diagnosis>
-        <Info>что то про прием</Info>
-    </Animal>
-
-    <Animal id = "3">
-        <Datetime>23.04.2023</Datetime>
-        <FullnameDoctor>Дюдя Остап Панасович</FullnameDoctor>
-        <Complaints>слепота</Complaints>
-        <Diagnosis>Коньюктивит</Diagnosis>
-        <Info>информация о приеме</Info>
-    </Animal>
-
-    <!-- Дополнительные записи о посещениях, вне шаблона -->
-</Admission>
+<admission>
+    <animal>
+        <id>1<id>  
+        <id>Неизвестно<id>
+        <datetime>26.04.2023</datetime>
+        <fullnamedoctor>Яковлев Максим Вадимович</fullnamedoctor>
+        <complaints>потеря аппетита</complaints>
+        <diagnosis>Инсульт</diagnosis>
+        <info>Какая - либо информация</info>
+    </animal>
+        <id>2<id>  
+        <datetime>23.02.2023</datetime>
+        <fullnamedoctor>Чиганцев Алексей Витальевич</fullnamedoctor>
+        <complaints>сухой нос</complaints>
+        <diagnosis>Диарея</diagnosis>
+        <info>что то про прием</info>
+    </animal>
+        <id>2<id>  
+        <datetime>23.04.2023</datetime>
+        <fullnameDoctor>Дюдя Остап Панасович</fullnameDoctor>
+        <complaints>слепота</complaints>
+        <diagnosis>Коньюктивит</diagnosis>
+        <info>информация о приеме</info>
+    </animal>
+</admission>
