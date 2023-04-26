@@ -2,7 +2,7 @@
 <doctors>
     <doctor>
         <id>1</id>
-        <name>Имя</name>
+        <name>Оktl</name>
         <birthday>01.01.1970</birthday>
         <experience>10</experience>
         <animals-treated>100</animals-treated>
@@ -14,7 +14,7 @@
         <birthday>01.01.1970</birthday>
         <experience>10</experience>
         <animals-treated>100</animals-treated>
-        <telegram-id>@telegram-id</telegram-id>
+        <telegram-id>@ystenk</telegram-id>
     </doctor>
     <doctor>
         <id>3</id>
