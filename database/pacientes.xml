@@ -1,0 +1,25 @@
+<!-- Эта строчка важна! -->
+<?xml version = "1.0" encoding = "utf-8"?>
+
+<!-- База данных организации -->
+<Pacientes>
+
+    <!-- Сведенья о Пациентах -->
+    <Person id = "1">
+        <AnimalType>Кошка</AnimalType>
+        <Name>Макима</Name>
+        <Gender>Женский</Gender>
+        <Age>3</Age>
+        <FullnameOwner>Иванов Иван Иванович</FullnameOwner>
+    </Person>
+
+    <Person id = "2">
+        <AnimalType>Собака</AnimalType>
+        <Name>Ростик</Name>
+        <Gender>Неопределённый</Gender>
+        <Age>1</Age>
+        <FullnameOwner>Пупкина Елизавета Сергеевна</FullnameOwner>
+    </Person>
+
+    <!-- Дополнительные записи о людях, вне шаблона -->
+</Pacientes>

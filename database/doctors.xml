@@ -1,0 +1,14 @@
+<!-- Эта строчка важна! -->
+<?xml version = "1.0" encoding = "utf-8"?>
+
+<!-- База данных организации -->
+<Doctors>
+    <!-- Сведенья о Пациентах -->
+    <Person id = "1">
+        <FullnameDoctor>Здесь пиши Имя</FullnameDoctor>
+        <Birthday>Тут дата рождения</Birthday>
+        <>
+    </Person>
+
+    <!-- Дополнительные записи о людях, вне шаблона -->
+</Doctors>
