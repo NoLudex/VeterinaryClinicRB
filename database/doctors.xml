@@ -6,7 +6,7 @@
         <birthday>01.01.1970</birthday>
         <experience>10</experience>
         <animals-treated>100</animals-treated>
-        <telegram-id>@telegram-id</telegram-id>
+        <telegram-id>@telegram</telegram-id>
     </doctor>
     <doctor>
         <id>2</id>
