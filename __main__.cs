@@ -18,29 +18,39 @@ namespace VeterinaryClinicRB
             XmlDocument doc = new XmlDocument();
             doc.Load(filePath);
 
+            XmlNodeList ?xmlNodeList = doc.DocumentElement?.SelectNodes("./doctors/doctor");
             // Поиск врача по ID
             XmlNode ?doctorNode = FindDoctorById(doc, 1);
             if (doctorNode != null)
-            {
-                foreach (XmlNode xmlNode in xmlNodeList)
+            {   
+                if (xmlNodeList != null) 
                 {
-                    doctors.Add(new Doctors
+                    foreach (XmlNode xmlNode in xmlNodeList)
                     {
-                        id = xmlNode.SelectSingleNode("id").InnerText,
-                        name = xmlNode.SelectSingleNode("name").InnerText,
-                        birthday = xmlNode.SelectSingleNode("birthday").InnerText,
-                        experience = xmlNode.SelectSingleNode("experience").InnerText,
-                        animalsTreated = xmlNode.SelectSingleNode("animals-treated").InnerText,
-                        telegramId = xmlNode.SelectSingleNode("telegram-id").InnerText
-                    });
+                        string ?id = xmlNode.SelectSingleNode("id")?.InnerText;
+                        string ?name = xmlNode.SelectSingleNode("name")?.InnerText;
+                        string ?birthday = xmlNode.SelectSingleNode("birthday")?.InnerText;
+                        string ?experience = xmlNode.SelectSingleNode("experience")?.InnerText;
+                        string ?animalsTreated = xmlNode.SelectSingleNode("animals-treated")?.InnerText;
+                        string ?telegramId = xmlNode.SelectSingleNode("telegram-id")?.InnerText;
+                        
+                        if (id != null && name != null && birthday != null && experience != null && animalsTreated != null && telegramId != null)
+                            doctors.Add(new Doctors(id, name, birthday, experience, animalsTreated, telegramId));
+                        else
+                        {
+                            Console.WriteLine("Произошла внутренняя ошибка с вычислением данных.");
+                        }
+                    }
                 }
-                Console.WriteLine(doctorNode.OuterXml);
+                else
+                {
+                    Console.WriteLine("Error");
+                }
             }
             else
             {
                 Console.WriteLine("Доктор не найден");
             }
-            
             // Обновить данные врача по ID
             UpdateDoctorById(doc, 2, "Иванова Иванна Ивановна", "02.02.1975", 12, 150, "@ivanova_ivan");
 
