@@ -21,6 +21,7 @@ namespace VeterinaryClinicRB
                     Id = value;
             }
         }
+        public int Telegram_ID { get; set; }
         public string FullnameDoctor
         {
             get 
