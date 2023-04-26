@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "4HI1vB8B9vKqMhCxP9+rNRO0VznudKAfYtG2UgzjUoCCuGp09vY4DpXyBClwVYcMLrq0TMakGYscKp9/mliFeQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\newar\\VeterinaryClinicRB\\VeterinaryClinicRB.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\newar\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\newar\\.nuget\\packages\\system.configuration.configurationmanager\\7.0.0\\system.configuration.configurationmanager.7.0.0.nupkg.sha512",
+    "C:\\Users\\newar\\.nuget\\packages\\system.diagnostics.eventlog\\7.0.0\\system.diagnostics.eventlog.7.0.0.nupkg.sha512",
+    "C:\\Users\\newar\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
+    "C:\\Users\\newar\\.nuget\\packages\\system.security.cryptography.protecteddata\\7.0.0\\system.security.cryptography.protecteddata.7.0.0.nupkg.sha512",
+    "C:\\Users\\newar\\.nuget\\packages\\system.security.permissions\\7.0.0\\system.security.permissions.7.0.0.nupkg.sha512",
+    "C:\\Users\\newar\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
