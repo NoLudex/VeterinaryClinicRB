@@ -7,95 +7,35 @@ namespace VeterinaryClinicRB
 {
     public class Admission
     {
-        public int Id
-        {
-            get
-            {
-                return Id;
-            }
-            set
-            {
-                if (value < 0)
-                    Id = 0;
-                else
-                    Id = value;
-            } 
-        }  
+        public string id {get; set;}
+        public string dateTime {get; set;}
+        public  string fullnameDoctor {get; set;}
+        public string complaints {get; set;}
+        public string diagnosis {get; set;}
+        public string info {get; set;}
 
-        public string FullnameDoctor
+        // Конструктор класса
+        public Admission(string id, string dateTime, string fullnameDoctor, string complaints, string diagnosis, string info )
         {
-            get
-            {
-                return FullnameDoctor;
-            }
-            set
-            {
-                if (value == null)
-                    FullnameDoctor = "Неизвестно";
-                else
-                    FullnameDoctor = value;
-            }
+            // Присвоение значений
+            this.id = id;
+            this.dateTime = dateTime;
+            this.fullnameDoctor = fullnameDoctor;
+            this.complaints = complaints;
+            this.diagnosis = diagnosis;
+            this.info = info;
         }
-        
-        public string Datetime
+        public Admission()
         {
-            get
-            {
-                return Datetime;
-            }
-            set
-            {
-                if (value == null)
-                    Datetime = "Неизвестная дата";
-                else
-                    Datetime = value;
-            }
-        }
-
-        public string Complaints
-        {
-            get
-            {
-                return Complaints;
-            }
-            set
-            {
-                if (value == null)
-                    Complaints = "Неизвестная дата";
-                else
-                    Complaints = value;
-            }
-        }
-
-        public string Diagnosis
-        {
-            get
-            {
-                return Diagnosis;
-            }
-            set
-            {
-                if (value == null)
-                    Diagnosis = "Неизвестная дата";
-                else
-                    Diagnosis = value;
-            }
-        }
-
-        public string Info
-        {
-            get
-            {
-                return Info;
-            }
-            set
-            {
-                if (value == null)
-                    Info = "Неизвестная дата";
-                else
-                    Info = value;
-            }
+            // Присвоение значений, если их нет
+            this.id = "0";
+            this.dateTime = "Дата и Время неизвестны";
+            this.fullnameDoctor = "Неизвестно";
+            this.complaints = "Неопределено";
+            this.diagnosis = "Неопределен";
+            this.info = "Информация отсутствует";
         }
     } 
+       
 }
 

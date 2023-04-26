@@ -1,23 +1,24 @@
 <?xml version = "1.0" encoding = "utf-8"?>
 <admission>
     <animal>
-        <id>1<id>  
-        <id>Неизвестно<id>
-        <datetime>26.04.2023</datetime>
-        <fullnamedoctor>Яковлев Максим Вадимович</fullnamedoctor>
+        <id>1</id>  
+        <dateTime>26.04.2023</dateTime>
+        <fullnameDoctor>Яковлев Максим Вадимович</fullnameDoctor>
         <complaints>потеря аппетита</complaints>
         <diagnosis>Инсульт</diagnosis>
         <info>Какая - либо информация</info>
     </animal>
-        <id>2<id>  
-        <datetime>23.02.2023</datetime>
-        <fullnamedoctor>Чиганцев Алексей Витальевич</fullnamedoctor>
+    <animal>
+        <id>2</id>  
+        <dateTime>23.02.2023</dateTime>
+        <fullnameDoctor>Чиганцев Алексей Витальевич</fullnameDoctor>
         <complaints>сухой нос</complaints>
         <diagnosis>Диарея</diagnosis>
         <info>что то про прием</info>
     </animal>
-        <id>2<id>  
-        <datetime>23.04.2023</datetime>
+    <animal>
+        <id>3</id>  
+        <dateTime>23.04.2023</dateTime>
         <fullnameDoctor>Дюдя Остап Панасович</fullnameDoctor>
         <complaints>слепота</complaints>
         <diagnosis>Коньюктивит</diagnosis>
