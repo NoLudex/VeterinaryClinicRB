@@ -7,7 +7,7 @@ namespace VeterinaryClinicRB
 {
     public class Organization
     {
-        // Получение данных из БД и запись как объектов
+        // Класс ориентирован на запись объекта под БД
         public int Id { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
