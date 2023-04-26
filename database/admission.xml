@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+
+<!-- База данных о посещениях -->
+<Admission>
+    <Animal id = "1">
+        <Datetime>26.04.2023</Datetime>
+        <FullnameDoctor>Яковлев Максим Вадимович</FullnameDoctor>
+        <Complaints>потеря аппетита</Complaints>
+        <Diagnosis>Инсульт</Diagnosis>
+        <Info>Какая - либо информация</Info>
+    </Animal>
+
+    <Animal id = "2">
+        <Datetime>26.04.2023</Datetime>
+        <FullnameDoctor>Поп Алексей Витальевич</FullnameDoctor>
+        <Complaints>сухой нос</Complaints>
+        <Diagnosis>Диарея</Diagnosis>
+        <Info>что то про прием</Info>
+    </Animal>
+
+    <Animal id = "3">
+        <Datetime>23.04.2023</Datetime>
+        <FullnameDoctor>Дюдя Остап Панасович</FullnameDoctor>
+        <Complaints>слепота</Complaints>
+        <Diagnosis>Коньюктивит</Diagnosis>
+        <Info>информация о приеме</Info>
+    </Animal>
+
+
+
+    <!-- Дополнительные записи о посещениях, вне шаблона -->
+
+
+</Admission>

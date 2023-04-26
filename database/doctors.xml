@@ -1,14 +1,28 @@
 <!-- Эта строчка важна! -->
 <?xml version = "1.0" encoding = "utf-8"?>
 
-<!-- База данных организации -->
+<!-- База данных Врачей  -->
 <Doctors>
-    <!-- Сведенья о Пациентах -->
+
     <Person id = "1">
-        <FullnameDoctor>Здесь пиши Имя</FullnameDoctor>
-        <Birthday>Тут дата рождения</Birthday>
-        <Experience>Опыт работы</Experience>
-        <CuredAnimals>Число вылеченных животных</CuredAnimals>
+        <FullnameDoctor>Иванов Алексей Андреевич</FullnameDoctor>
+        <birthday>05.07.1985</birthday> 
+        <Experience>10</Experience>
+        <CuredAnimals>45</CuredAnimals>
+    </Person>
+    
+     <Person id = "2">
+        <FullnameDoctor>Сидоров Сергей Алексеевич</FullnameDoctor>
+        <birthday>01.08.1991</birthday> 
+        <Experience>5</Experience>
+        <CuredAnimals>17</CuredAnimals>       
+    </Person>
+
+     <Person id = "3">
+        <FullnameDoctor>Петров Александр Владимирович</FullnameDoctor>
+        <birthday>08.02.1989</birthday> 
+        <Experience>7</Experience>
+        <CuredAnimals>21</CuredAnimals>
     </Person>
 
     <!-- Дополнительные записи о людях, вне шаблона -->
