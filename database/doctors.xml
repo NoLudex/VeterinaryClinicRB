@@ -2,7 +2,7 @@
 <doctors>
     <doctor>
         <id>1</id>
-        <name>Олег</name>
+        <name>Иванов Олег Григорьевич</name>
         <birthday>01.01.1970</birthday>
         <experience>10</experience>
         <animals-treated>100</animals-treated>
@@ -10,7 +10,7 @@
     </doctor>
     <doctor>
         <id>2</id>
-        <name>Сергей</name>
+        <name>Колотушкин Сергей Сергеевич</name>
         <birthday>01.01.1970</birthday>
         <experience>10</experience>
         <animals-treated>100</animals-treated>
@@ -18,7 +18,7 @@
     </doctor>
     <doctor>
         <id>3</id>
-        <name>Андрей</name>
+        <name>Морковкин Андрей Иванович</name>
         <birthday>01.01.1970</birthday>
         <experience>10</experience>
         <animals-treated>100</animals-treated>
