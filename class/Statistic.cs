@@ -20,7 +20,8 @@ namespace VeterinaryClinicRB
         public Statistic()
         {
             // Присвоение значений, если их нет
-            this.
+            this.date = "Дата неизвестна";
+            this.description = "Сведения о дне отсутствуют";
         }
     } 
        
