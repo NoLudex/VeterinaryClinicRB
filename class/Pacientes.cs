@@ -7,21 +7,29 @@ namespace VeterinaryClinicRB
 {
     public class Pacientes
     {
-        // Класс ориентирован на запись объекта под БД
-        public int Id 
+        public Pacientes() 
         { 
-            get
-            {
-                return Id;
-            } 
-            set
-            {
-                if (value < 0)
-                    Id = 0;
-                else
-                    Id = value;
-            } 
+            Id = 0;
+            AnimalType = "Неизвестно";
+            Gender = 'n';
+            Age = 0;
+            Name = "Нет клички";
+            FullnameOwner = "Нет владельца";
         }
+
+        // Конструктор класса
+        public Pacientes(int id, string AnimalType, char Gender, double Age, string Name, string FullnameOwner)
+        {
+            this.Id = id;
+            this.AnimalType = AnimalType;
+            this.Gender = Gender;
+            this.Age = Age;
+            this.Name = Name;
+            this.FullnameOwner = FullnameOwner;
+        }
+
+        // Класс ориентирован на запись объекта под БД
+        public int Id { get; set; }
         public string AnimalType
         {
             get
@@ -36,6 +44,7 @@ namespace VeterinaryClinicRB
                     AnimalType = value;
             }
         }
+        public char Gender { get; set; }
         public double Age
         {
             get
@@ -78,5 +87,6 @@ namespace VeterinaryClinicRB
                     Name = Convert.ToString(value);
             }
         }
+    
     }
 }
