@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace VeterinaryClinicRB
 {
-      public class Doctors
+    public class Doctors
     {
         public int Id
         {

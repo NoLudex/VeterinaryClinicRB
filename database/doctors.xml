@@ -1,29 +1,27 @@
-<!-- Эта строчка важна! -->
-<?xml version = "1.0" encoding = "utf-8"?>
-
-<!-- База данных Врачей (Шаблон) -->
-<Doctors>
-
-    <Person id = "1">
-        <FullnameDoctor>Иванов Алексей Андреевич</FullnameDoctor>
-        <birthday>05.07.1985</birthday> 
-        <Experience>10</Experience>
-        <CuredAnimals>45</CuredAnimals>
-    </Person>
-    
-     <Person id = "2">
-        <FullnameDoctor>Сидоров Сергей Алексеевич</FullnameDoctor>
-        <birthday>01.08.1991</birthday> 
-        <Experience>5</Experience>
-        <CuredAnimals>17</CuredAnimals>       
-    </Person>
-
-     <Person id = "3">
-        <FullnameDoctor>Петров Александр Владимирович</FullnameDoctor>
-        <birthday>08.02.1989</birthday> 
-        <Experience>7</Experience>
-        <CuredAnimals>21</CuredAnimals>
-    </Person>
-
-    <!-- Дополнительные записи о людях, вне шаблона -->
-</Doctors>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doctors>
+    <doctor>
+        <id>1</id>
+        <name>Имя</name>
+        <birthday>01.01.1970</birthday>
+        <experience>10</experience>
+        <animals-treated>100</animals-treated>
+        <telegram-id>@telegram-id</telegram-id>
+    </doctor>
+    <doctor>
+        <id>2</id>
+        <name>Имя</name>
+        <birthday>01.01.1970</birthday>
+        <experience>10</experience>
+        <animals-treated>100</animals-treated>
+        <telegram-id>@telegram-id</telegram-id>
+    </doctor>
+    <doctor>
+        <id>3</id>
+        <name>Имя</name>
+        <birthday>01.01.1970</birthday>
+        <experience>10</experience>
+        <animals-treated>100</animals-treated>
+        <telegram-id>@telegram-id</telegram-id>
+    </doctor>
+</doctors>
