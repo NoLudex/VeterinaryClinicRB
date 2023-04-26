@@ -8,6 +8,9 @@
     <Data date = "26.04.2023">
         <Description>Какая-то информация о данном дне\nПример</Description>
     </Data>
+    <Data date = "27.04.2023">
+        <Description>Тут также какая-то информация о дне</Description>
+    </Data>
 
     <!-- Дополнительные записи о людях, вне шаблона -->
 </Statistic>
