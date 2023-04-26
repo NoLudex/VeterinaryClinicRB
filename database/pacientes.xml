@@ -2,31 +2,31 @@
 <pacientes>
     <paciente>
         <id>1</id>
-        <animaltype>Cat</animaltype>
-        <name>Max</name>
-        <gender>Unknown</gender>
+        <animaltype>Кошка</animaltype>
+        <name>Макс</name>
+        <gender>Мужской</gender>
         <age>3</Age>
-        <fullname-owner>ФИО владельца</fullname-owner>
+        <fullname-owner>Дегтярев Сергей Анатольевич</fullname-owner>
         <valid>Действительная анкета?</valid>     
         <telegram-id>@istung</telegram-id>
     </paciente>
     <paciente>
         <id>2</id>
-        <animaltype>Dog</animaltype>
-        <name>Oleg</name>
-        <gender>Female</gender>
+        <animaltype>Собака</animaltype>
+        <name>Олег</name>
+        <gender>Женский</gender>
         <age>4</age>
-        <fullname-owner>fullname-owner</fullname-owner>
+        <fullname-owner>Запупин Роман Алексеевич</fullname-owner>
         <valid>Действительная анкета?</valid>    
         <telegram-id>@nagivas</telegram-id>
     </paciente>
     <paciente>
         <id>3</id>
-        <animaltype>Lizard</animaltype>
-        <name>Alex</name>
-        <gender>Male</gender>
+        <animaltype>Ящерица</animaltype>
+        <name>Алексей</name>
+        <gender>Мужской</gender>
         <age>7</age>
-        <fullname-owner>fullname-owner</fullname-owner>
+        <fullname-owner>Чекукин Сергей Романович</fullname-owner>
         <valid>Действительная анкета?</valid>    
         <telegram-id>@pufages</telegram-id>
     </paciente>
