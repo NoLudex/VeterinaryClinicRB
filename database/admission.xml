@@ -1,8 +1,9 @@
 <?xml version = "1.0" encoding = "utf-8"?>
 
-<!-- База данных о посещениях (Шаблон) -->
+
 <Admission>
     <Animal id = "1">
+        <id>
         <Datetime>26.04.2023</Datetime>
         <FullnameDoctor>Яковлев Максим Вадимович</FullnameDoctor>
         <Complaints>потеря аппетита</Complaints>
