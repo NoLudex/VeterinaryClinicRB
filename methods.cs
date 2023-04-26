@@ -13,9 +13,9 @@ namespace VeterinaryClinicRB
         // Найти по ID
         static XmlNode? FindDoctorById(XmlDocument doc, int ID)
         {
-            XmlNode ?doctorNode = doc.SelectSingleNode("/doctors/doctor[id='" + ID + "']");
-            if (doctorNode != null)
-                return doctorNode;
+            XmlNode ?doctorsNodes = doc.SelectSingleNode("/doctors/doctor[name='" + ID + "']");
+            if (doctorsNodes != null)
+                return doctorsNodes;
             else
                 return null;
         }
