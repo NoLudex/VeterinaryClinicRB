@@ -7,11 +7,11 @@ namespace VeterinaryClinicRB
 {
     public class Admission
     {
-        public int id
+        public int Id
         {
             get
             {
-                return id;
+                return Id;
             }
             set
             {
@@ -30,7 +30,7 @@ namespace VeterinaryClinicRB
             }
             set
             {
-                if (value = null)
+                if (value == null)
                     FullnameDoctor = "Неизвестно";
                 else
                     FullnameDoctor = value;
@@ -45,7 +45,7 @@ namespace VeterinaryClinicRB
             }
             set
             {
-                if (value = null)
+                if (value == null)
                     Datetime = "Неизвестная дата";
                 else
                     Datetime = value;
@@ -60,7 +60,7 @@ namespace VeterinaryClinicRB
             }
             set
             {
-                if (value = null)
+                if (value == null)
                     Complaints = "Неизвестная дата";
                 else
                     Complaints = value;
@@ -75,7 +75,7 @@ namespace VeterinaryClinicRB
             }
             set
             {
-                if (value = null)
+                if (value == null)
                     Diagnosis = "Неизвестная дата";
                 else
                     Diagnosis = value;
@@ -90,7 +90,7 @@ namespace VeterinaryClinicRB
             }
             set
             {
-                if (value = null)
+                if (value == null)
                     Info = "Неизвестная дата";
                 else
                     Info = value;
