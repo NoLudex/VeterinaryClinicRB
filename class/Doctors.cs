@@ -8,7 +8,6 @@ namespace VeterinaryClinicRB
     public class Doctors
     {
         // Параметры, которые принимаются (Нужно, чтобы был красивый вывод информации)
-        // ПОМЕТКА!!! ЭТИ (11-15) КОММЕНТАРИИ МОЖНО НЕ ДОБАВЛЯТЬ В ДРУГИЕ ФАЙЛЫ, при завершении работы с классами, в данном документе строку 11 удалить! Все вводимые данные должны быть string!
         // Без данного класса выводится целый элемент с БД в формате:
         /*
         <doctor><id>1</id><name>Имя</name><birthday>01.01.1970</birthday><experience>10</experience><animals-treated>100</animals-treated><telegram-id>@telegram</telegram-id></doctor>
@@ -33,7 +32,7 @@ namespace VeterinaryClinicRB
         }
         public Doctors() 
         {
-            // 
+            // Присвоение значений, если их нет
             this.id = "0";
             this.name = "Неизвестное Имя";
             this.birthday = "Неизвестная дата рождения";
