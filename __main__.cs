@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Configuration;
 
 namespace VeterinaryClinicRB
 {
@@ -11,67 +12,75 @@ namespace VeterinaryClinicRB
     {
         public static void Main(string[] args)
         {
-            List<Doctors> doctors = new List<Doctors>();
-            string filePath = "./database/doctors.xml";
-
-            // Создаем документ и загружаем из файла
-            XmlDocument doc = new XmlDocument();
-            doc.Load(filePath);
-
-            XmlNodeList ?xmlNodeList = doc.DocumentElement?.SelectNodes("./doctors/doctor");
-            // Поиск врача по ID
-            XmlNodeList ?doctorNode = FindDoctorsByName(doc, "Оktl");
-            if (doctorNode != null)
-            {   
-                if (xmlNodeList != null) 
-                {
-                    foreach (XmlNode xmlNode in xmlNodeList)
-                    {
-                        string ?id = xmlNode.SelectSingleNode("id")?.InnerText;
-                        string ?name = xmlNode.SelectSingleNode("name")?.InnerText;
-                        string ?birthday = xmlNode.SelectSingleNode("birthday")?.InnerText;
-                        string ?experience = xmlNode.SelectSingleNode("experience")?.InnerText;
-                        string ?animalsTreated = xmlNode.SelectSingleNode("animals-treated")?.InnerText;
-                        string ?telegramId = xmlNode.SelectSingleNode("telegram-id")?.InnerText;
-                        
-                        if (id != null && name != null && birthday != null && experience != null && animalsTreated != null && telegramId != null)
-                        {
-                            doctors.Add(new Doctors(id, name, birthday, experience, animalsTreated, telegramId));
-                        }
-                        else
-                        {
-                            Console.WriteLine("Произошла внутренняя ошибка с вычислением данных.");
-                        }
-                    }
-                    foreach (Doctors doctor in doctors)
-                    {
-                        Console.WriteLine("{0,-9}{1,-21}{2,-12}{3,-12}{4,-16}{5,-14}", doctor.id, doctor.name, doctor.birthday, doctor.experience, doctor.animalsTreated, doctor.telegramId);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Error");
-                }
-            }
-            else
+            Console.Clear();
+            // Проверка валидности ключа
+            if (!ValidateAccessKey())
             {
-                Console.WriteLine("Доктор не найден");
+                Console.Clear();
+                Console.Write("Введите ключ доступа программы.\nВвод: ");
+                string ?key = Console.ReadLine();
+                if (!ValidateAccessKey(key))
+                {
+                    Console.Clear();
+                    Console.WriteLine("Неверный ключ доступа! Программа остановлена.");
+                    Console.WriteLine("Нажмите любую клавишу, чтобы продолжить...");
+                    Console.ReadKey();
+                    return;
+                }
             }
-            // // Обновить данные врача по ID
-            // UpdateDoctorById(doc, 2, "Иванова Иванна Ивановна", "02.02.1975", 12, 150, "@ivanova_ivan");
 
-            // // Поиск врачей по имени
-            // XmlNodeList ?doctorsNodes = FindDoctorsByName(doc, "Иванова Иванна Ивановна");
-            // if (doctorsNodes != null)
-            // {
-            //     foreach (XmlNode node in doctorsNodes)
-            //     {
-            //         Console.WriteLine(node.OuterXml);
-            //     }
-            // }
+            // Запуск цикла меню
+            bool isRunning = true;
 
-            // // Сохранить изменения в файл
-            // doc.Save(filePath);
+            while (isRunning)
+            {
+                Console.Clear();
+                Console.Write(
+                    "Программа [VeterinaryClinicRB]\n" +
+                    "Что вы желаете сделать?\n" +
+                    "1. Показать всех врачей\n" +
+                    "2. Показать врача, указав ID\n" +
+                    "3. Обновить данные врача по ID\n" +
+                    "4. Добавить нового врача\n" +
+                    "5. Удалить врача, указав ID\n" +
+                    "6. Выход с приложения\n" +
+                    "Ввод: "
+                );
+
+                int choice = int.Parse(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        ReadXML("doctors", "doctors", "doctor");
+                        break;
+                    case 2:
+                        Console.Write("Введите ID: ");
+                        int idToFind = int.Parse(Console.ReadLine());
+                        ShowXMLByID("doctors", "doctors", "doctor", idToFind);
+                        break;
+                    case 3:
+                        Console.Write("Введите ID: ");
+                        int idToUpdate = int.Parse(Console.ReadLine());
+                        UpdateXML("doctors", "doctors", "doctor", idToUpdate);
+                        break;
+                    case 4:
+                        AddXML("doctors", "doctors", "doctor");
+                        break;
+                    case 5:
+                        Console.Write("Введите ID: ");
+                        int idToDelete = int.Parse(Console.ReadLine());
+                        DeleteXML("doctors", "doctors", "doctor", idToDelete);
+                        break;
+                    case 6:
+                        isRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Выберите правильный пункт.");
+                        break;
+                }
+                wait();
+            }
         }
     }
 }
