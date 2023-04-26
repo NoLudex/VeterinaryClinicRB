@@ -32,7 +32,7 @@ namespace VeterinaryClinicRB
         }
         public Doctors() 
         {
-            // 
+            // Присвоение значений, если их нет
             this.id = "0";
             this.name = "Неизвестное Имя";
             this.birthday = "Неизвестная дата рождения";
