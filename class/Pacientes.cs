@@ -15,8 +15,10 @@ namespace VeterinaryClinicRB
         public string valid {get; set;}
         public string telegramId { get; set;}
 
+        // Конструктор класса
         public Pacientes(string id, string name, string gender, string age, string fullnameOwner, string valid, string telegramId)
         {
+            // Присвоение значений
             this.id = id;
             this.name = name;
             this.gender=gender;
@@ -27,6 +29,7 @@ namespace VeterinaryClinicRB
         }
         public Pacientes()
         {
+            // Присвоение значений, если их нет
             this.id = "0";
             this.name = "Неизвестная Кличка";
             this.gender = "Неопределенный пол";
