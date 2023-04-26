@@ -1,27 +1,27 @@
 <?xml version = "1.0" encoding = "utf-8"?>
-<statistic>
+<tatistic>
+    <statistic>
     <data>
-        <id>1</id>
-    <data date = "26.04.2023">Неизвестно <data date = "26.04.2023">
-        <description>Информация о примере</description>Неизвестно</description>Информация о примере</description>
+        <date>26.04.2023</date>
+        <description>Информация о дне</desctription>
+    </data>
+    <data>
+        <date>27.04.2023</date>
+        <description>Информация о дне</desctription>
+    </data>
+    <data>
+        <date>23.02.2023</date>
+        <description>Данные о примере</description>
     </data> 
-    <data date = "27.04.2023">Неизвестно</data date = "27.04.2023">
-        <description>Информация о дне</description> <description>Информация о дне</description>
+        <date>15.07.2023</date>
+        <description>Данные о дне</description>
     </data> 
     <data>
-        <id>2</id>
-    <data date = "23.02.2023">неведомо <data date = "23.02.2023">
-        <description>Данные о примере</description>Неизвестно</description>Данные о примере</description>
-    </data> 
-    <data date = "15.07.2023">неведомо</data date = "15.07.2023">
-        <description>Данные о дне</description> <description>Данные о дне</description>
+        <date>24.09.2023</date>
+        <description>Сведения о примере</description>    
     </data> 
     <data>
-        <id>3</id>
-    <data date = "24.09.2023">малоизвестно <data date = "24.09.2023">
-        <description>Сведения о примере</description>Неизвестно</description>Сведения о примере</description>
-    </data> 
-    <data date = "11.08.2023">малоизвестно</data date = "11.08.2023">
-        <description>Сведения о дне</description> <description>Сведения о дне</description>
+        <date>11.08.2023</date>
+        <description>Сведения о дне</description>  
     </data> 
 </statistic>
