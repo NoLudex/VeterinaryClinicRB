@@ -32,4 +32,12 @@
     <animals-treated>10</animals-treated>
     <telegram-id>@tginfo</telegram-id>
   </doctor>
+  <doctor>
+    <id>5</id>
+    <fullname-doctor>Степанович Алексей Румынский</fullname-doctor>
+    <birthday>04.02.1993</birthday>
+    <experience>4</experience>
+    <animals-treated>68</animals-treated>
+    <telegram-id>@enurijwe2281337</telegram-id>
+  </doctor>
 </doctors>
