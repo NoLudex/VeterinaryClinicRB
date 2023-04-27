@@ -17,13 +17,13 @@ namespace VeterinaryClinicRB
             if (!ValidateAccessKey())
             {
                 Console.Clear();
-                Console.Write("Введите ключ доступа программы.\nВвод: ");
+                Console.Write("|enterKey|\n|input| ");
                 string ?key = Console.ReadLine();
                 if (!ValidateAccessKey(key))
                 {
                     Console.Clear();
-                    Console.WriteLine("Неверный ключ доступа! Программа остановлена.");
-                    Console.WriteLine("Нажмите любую клавишу, чтобы продолжить...");
+                    Console.WriteLine("|errorKey|");
+                    Console.WriteLine("|anyKey|");
                     Console.ReadKey();
                     return;
                 }
@@ -38,15 +38,15 @@ namespace VeterinaryClinicRB
                 {
                     Console.Clear();
                     Console.Write(
-                        "Программа [VeterinaryClinicRB]\n" +
-                        "Что вы желаете сделать?\n" +
-                        "1. Показать всех врачей\n" +
-                        "2. Показать врача, указав ID\n" +
-                        "3. Обновить данные врача по ID\n" +
-                        "4. Добавить нового врача\n" +
-                        "5. Удалить врача, указав ID\n" +
-                        "6. Выход с приложения\n" +
-                        "Ввод: "
+                        "Программа [|programmName|]\n" +
+                        "|choose|\n" +
+                        "1. |showDoctors|\n" +
+                        "2. |showDocID|\n" +
+                        "3. |updInfDoc|\n" +
+                        "4. |newDoctor|\n" +
+                        "5. |delDoctor|\n" +
+                        "6. |exit|\n" +
+                        "|input| "
                     );
     
                     int choice = int.Parse(Console.ReadLine());
@@ -57,12 +57,12 @@ namespace VeterinaryClinicRB
                             ReadXML("doctors", "doctors", "doctor");
                             break;
                         case 2:
-                            Console.Write("Введите ID: ");
+                            Console.Write("|enterID| ");
                             int idToFind = int.Parse(Console.ReadLine());
                             ShowXMLByID("doctors", "doctors", "doctor", idToFind);
                             break;
                         case 3:
-                            Console.Write("Введите ID: ");
+                            Console.Write("|enterID| ");
                             int idToUpdate = int.Parse(Console.ReadLine());
                             UpdateXML("doctors", "doctors", "doctor", idToUpdate);
                             break;
@@ -70,7 +70,7 @@ namespace VeterinaryClinicRB
                             AddXML("doctors", "doctors", "doctor");
                             break;
                         case 5:
-                            Console.Write("Введите ID: ");
+                            Console.Write("|enterID| ");
                             int idToDelete = int.Parse(Console.ReadLine());
                             DeleteXML("doctors", "doctors", "doctor", idToDelete);
                             break;
@@ -78,7 +78,7 @@ namespace VeterinaryClinicRB
                             isRunning = false;
                             break;
                         default:
-                            Console.WriteLine("Выберите правильный пункт.");
+                            Console.WriteLine("|errorChoise|");
                             break;
                     }
                     wait();
@@ -87,7 +87,7 @@ namespace VeterinaryClinicRB
             catch (System.FormatException)
             {
                 Console.Clear();
-                Console.WriteLine("Программа была закрыта из-за неверного ввода. Пожалуйста, вводите нужные символы!");
+                Console.WriteLine("|errorInput|");
                 wait();
             }
         }

@@ -39,16 +39,16 @@ namespace VeterinaryClinicRB
                             foreach (XmlNode FileNameNode in FileNameNodes) 
                             {
                                 Console.WriteLine(
-                                    "ID: " + FileNameNode.SelectSingleNode("id")?.InnerText + "\n" +
-                                    "ФИО врача: " + FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText + "\n" +
-                                    "Дата рождения: " + FileNameNode.SelectSingleNode("birthday")?.InnerText + "\n" +
-                                    "Опыт работы: " + FileNameNode.SelectSingleNode("experience")?.InnerText + " лет" + "\n" +
-                                    "Пациентов прошло данного врача: " + FileNameNode.SelectSingleNode("animals-treated")?.InnerText + "\n" +
-                                    "Telegram ID: " + FileNameNode.SelectSingleNode("telegram-id")?.InnerText + "\n" +
+                                    "|ID|" + FileNameNode.SelectSingleNode("id")?.InnerText + "\n" +
+                                    "|fullNameDoc|" + FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText + "\n" +
+                                    "|dateBorn|" + FileNameNode.SelectSingleNode("birthday")?.InnerText + "\n" +
+                                    "|exp|" + FileNameNode.SelectSingleNode("experience")?.InnerText + " лет" + "\n" +
+                                    "|pastPatients|" + FileNameNode.SelectSingleNode("animals-treated")?.InnerText + "\n" +
+                                    "|tgID|" + FileNameNode.SelectSingleNode("telegram-id")?.InnerText + "\n" +
                                     "-----------------------------"
                                     );
                             }
-                            Console.WriteLine("Нажмите 'p' Чтобы просмотреть предыдущую страницу, \nЧтобы посмотреть следующую страницу нажми 'n'\nЛюбая другая клавиша выводит вас с данного меню");
+                            Console.WriteLine("|prewPage|\n|nextPage|\n|otherKey|");
                             string input = Console.ReadLine();
 
                             switch (input.ToLower())
@@ -72,12 +72,12 @@ namespace VeterinaryClinicRB
                             
                             break;
                         default:
-                            Console.WriteLine("[DEBUG] Данный файл для БД не поддерживается");
+                            Console.WriteLine("[DEBUG] |wrongFile|");
                             break;
                     }
                 else
                 {
-                    Console.WriteLine("[DEBUG] Ошибка с чтением XML");
+                    Console.WriteLine("[DEBUG] |errorRead|");
                 }
             }
         }
@@ -98,21 +98,21 @@ namespace VeterinaryClinicRB
                         do 
                         {
                             Console.Clear();
-                            Console.WriteLine($"Открыт редактор профиля ID {id}");
+                            Console.WriteLine($"|editorID{id}|");
 
-                            Console.Write("Введите ФИО доктора: ");
+                            Console.Write("|inputFullname|");
                             fullName = Console.ReadLine();
 
-                            Console.Write("Введите дату рождения (ДД.ММ.ГГГГ): ");
+                            Console.Write("|inputDateBorn|");
                             birthday = Console.ReadLine();
 
-                            Console.Write("Введите опыт работы: ");
+                            Console.Write("inputExp");
                             experience = Console.ReadLine();
                             
-                            Console.Write("Введите число пациентов, которые прошли данного врача" + "\n" + "Ввод: ");
+                            Console.Write("|inputPastPatients|" + "\n" + "|input|");
                             animalsTreated = Console.ReadLine();
 
-                            Console.Write("Введите Telegram пользователя: ");
+                            Console.Write("|inputTgID|");
                             telegramID = Console.ReadLine();
                         } while (fullName == null || birthday == null || experience == null || animalsTreated == null || telegramID == null);
                         
@@ -124,16 +124,16 @@ namespace VeterinaryClinicRB
 
                         document.Save("./database/doctors.xml");
                         Console.Clear();
-                        Console.WriteLine("Доктор с ID {id} был успешно обновлен");
+                        Console.WriteLine("|updDoctorID{id}|");
                         break;
                     default:
-                        Console.WriteLine("[DEBUG] Данный файл для БД не поддерживается");
+                        Console.WriteLine("[DEBUG] |wrongFile|");
                         break;
                 }
             }
             else
             {
-                Console.WriteLine("Доктор с ID {id} не найден");
+                Console.WriteLine("|wrongDoctorID|");
             }
         }
         
@@ -154,21 +154,21 @@ namespace VeterinaryClinicRB
                     do 
                     {
                         Console.Clear();
-                        Console.WriteLine($"Открыт редактор создания профиля");
+                        Console.WriteLine($"|editorProfile|");
 
-                        Console.Write("Введите ФИО доктора: ");
+                        Console.Write("|inputFullname|");
                         fullName = Console.ReadLine();
 
-                        Console.Write("Введите дату рождения (ДД.ММ.ГГГГ): ");
+                        Console.Write("|inputDateBorn|");
                         birthday = Console.ReadLine();
 
-                        Console.Write("Введите опыт работы: ");
+                        Console.Write("|inputExp|");
                         experience = Console.ReadLine();
                         
-                        Console.Write("Введите число пациентов, которые прошли данного врача" + "\n" + "Ввод: ");
+                        Console.Write("|inputPastPatients|" + "\n" + "|input|");
                         animalsTreated = Console.ReadLine();
 
-                        Console.Write("Введите Telegram пользователя: ");
+                        Console.Write("|inputTgID|");
                         telegramID = Console.ReadLine();
                     } while (fullName == null || birthday == null || experience == null || animalsTreated == null || telegramID == null);
 
@@ -198,10 +198,10 @@ namespace VeterinaryClinicRB
                     int Abuz = Convert.ToInt32(id) + 1;
                     ConfigurationManager.AppSettings.Set("MaxDoctorId", Abuz.ToString());
                     Console.Clear();
-                    Console.WriteLine("Новый доктор был успешно добавлен.");
+                    Console.WriteLine("|newDoctorSucces|");
                     break;
                     default:
-                    Console.WriteLine("[DEBUG] Данный файл для БД не поддерживается");
+                    Console.WriteLine("[DEBUG] |wrongFile|");
                     break;
                 }
         }
@@ -219,14 +219,14 @@ namespace VeterinaryClinicRB
                 if (parentNode != null)
                     parentNode.RemoveChild(FileNameNode);
                 else
-                    Console.WriteLine("[DEBUG] Произошла внутренняя ошибка");
+                    Console.WriteLine("[DEBUG] |errorInside|");
                 
                 document.Save($"./database/{FileName}");
-                Console.WriteLine($"Успешно удалена секцая под ID: {id}, в файле {FileName}.xml");
+                Console.WriteLine($"| {id}, {FileName}|Успешно удалена секцая под ID: {id}, в файле {FileName}.xml");
             }
             else
             {
-                Console.WriteLine($"Секция под ID: {id}, в файле {FileName} не найдена");
+                Console.WriteLine($"|notFoundSection {id} {FileName}|");
             }
         }
 
@@ -250,16 +250,16 @@ namespace VeterinaryClinicRB
                         string animalsTreated = FileNameNode.SelectSingleNode("animalsTreated").InnerText;
                         string telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
-                        Console.WriteLine("ID: " + id);
-                        Console.WriteLine("ФИО доктора: " + fullName);
-                        Console.WriteLine("Дата рождения: " + birthday);
-                        Console.WriteLine("Опыт работы: " + experience);
-                        Console.WriteLine("Проверенные клиенты: " + animalsTreated);
-                        Console.WriteLine("Telegram ID: " + telegramID);
+                        Console.WriteLine("|ID|" + id);
+                        Console.WriteLine("|fullNameDoc|" + fullName);
+                        Console.WriteLine("|dateBorn|" + birthday);
+                        Console.WriteLine("|exp|" + experience);
+                        Console.WriteLine("|pastClients|" + animalsTreated);
+                        Console.WriteLine("|tgID|" + telegramID);
                     }
                     break;                    
                     default:
-                    Console.WriteLine("Невозможно вывести данные");
+                    Console.WriteLine("|errorOutput|");
                     break;
                 }
         }
@@ -306,21 +306,21 @@ namespace VeterinaryClinicRB
                     string animalsTreated = FileNameNode.SelectSingleNode("animals-treated").InnerText;
                     string telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
-                    Console.WriteLine("ID: " + id);
-                    Console.WriteLine("ФИО доктора: " + fullName);
-                    Console.WriteLine("Дата рождения: " + birthday);
-                    Console.WriteLine("Опыт работы: " + experience);
-                    Console.WriteLine("Проверенные клиенты: " + animalsTreated);
-                    Console.WriteLine("Telegram ID: " + telegramID);
+                    Console.WriteLine("|ID|" + id);
+                    Console.WriteLine("|fullNameDoc|" + fullName);
+                    Console.WriteLine("|dateBorn|" + birthday);
+                    Console.WriteLine("|exp|" + experience);
+                    Console.WriteLine("|pastClients|" + animalsTreated);
+                    Console.WriteLine("|tgID|" + telegramID);
                     break;                    
                     default:
-                    Console.WriteLine("Невозможно вывести данные");
+                    Console.WriteLine("|errorOutput|");
                     break;
                 }
         }
         static void wait()
         {
-            Console.Write("Нажмите любую клавишу, чтобы продолжить");
+            Console.Write("|anyKey|");
             Console.ReadKey();
         }
     }

@@ -20,7 +20,7 @@ namespace VeterinaryClinicRB
                     result = 0;
                 return result;
                 default:
-                Console.WriteLine("Файл ненайден");
+                Console.WriteLine("|notFoundFile|");
                 return 0;
             }
         }
