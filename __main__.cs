@@ -32,53 +32,62 @@ namespace VeterinaryClinicRB
             // Запуск цикла меню
             bool isRunning = true;
 
-            while (isRunning)
+            try
+            {
+                while (isRunning)
+                {
+                    Console.Clear();
+                    Console.Write(
+                        "Программа [VeterinaryClinicRB]\n" +
+                        "Что вы желаете сделать?\n" +
+                        "1. Показать всех врачей\n" +
+                        "2. Показать врача, указав ID\n" +
+                        "3. Обновить данные врача по ID\n" +
+                        "4. Добавить нового врача\n" +
+                        "5. Удалить врача, указав ID\n" +
+                        "6. Выход с приложения\n" +
+                        "Ввод: "
+                    );
+    
+                    int choice = int.Parse(Console.ReadLine());
+    
+                    switch (choice)
+                    {
+                        case 1:
+                            ReadXML("doctors", "doctors", "doctor");
+                            break;
+                        case 2:
+                            Console.Write("Введите ID: ");
+                            int idToFind = int.Parse(Console.ReadLine());
+                            ShowXMLByID("doctors", "doctors", "doctor", idToFind);
+                            break;
+                        case 3:
+                            Console.Write("Введите ID: ");
+                            int idToUpdate = int.Parse(Console.ReadLine());
+                            UpdateXML("doctors", "doctors", "doctor", idToUpdate);
+                            break;
+                        case 4:
+                            AddXML("doctors", "doctors", "doctor");
+                            break;
+                        case 5:
+                            Console.Write("Введите ID: ");
+                            int idToDelete = int.Parse(Console.ReadLine());
+                            DeleteXML("doctors", "doctors", "doctor", idToDelete);
+                            break;
+                        case 6:
+                            isRunning = false;
+                            break;
+                        default:
+                            Console.WriteLine("Выберите правильный пункт.");
+                            break;
+                    }
+                    wait();
+                }
+            }
+            catch (System.FormatException)
             {
                 Console.Clear();
-                Console.Write(
-                    "Программа [VeterinaryClinicRB]\n" +
-                    "Что вы желаете сделать?\n" +
-                    "1. Показать всех врачей\n" +
-                    "2. Показать врача, указав ID\n" +
-                    "3. Обновить данные врача по ID\n" +
-                    "4. Добавить нового врача\n" +
-                    "5. Удалить врача, указав ID\n" +
-                    "6. Выход с приложения\n" +
-                    "Ввод: "
-                );
-
-                int choice = int.Parse(Console.ReadLine());
-
-                switch (choice)
-                {
-                    case 1:
-                        ReadXML("doctors", "doctors", "doctor");
-                        break;
-                    case 2:
-                        Console.Write("Введите ID: ");
-                        int idToFind = int.Parse(Console.ReadLine());
-                        ShowXMLByID("doctors", "doctors", "doctor", idToFind);
-                        break;
-                    case 3:
-                        Console.Write("Введите ID: ");
-                        int idToUpdate = int.Parse(Console.ReadLine());
-                        UpdateXML("doctors", "doctors", "doctor", idToUpdate);
-                        break;
-                    case 4:
-                        AddXML("doctors", "doctors", "doctor");
-                        break;
-                    case 5:
-                        Console.Write("Введите ID: ");
-                        int idToDelete = int.Parse(Console.ReadLine());
-                        DeleteXML("doctors", "doctors", "doctor", idToDelete);
-                        break;
-                    case 6:
-                        isRunning = false;
-                        break;
-                    default:
-                        Console.WriteLine("Выберите правильный пункт.");
-                        break;
-                }
+                Console.WriteLine("Программа была закрыта из-за неверного ввода. Пожалуйста, вводите нужные символы!");
                 wait();
             }
         }
