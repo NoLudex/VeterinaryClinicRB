@@ -12,7 +12,7 @@ namespace VeterinaryClinicRB
     public class XmlDelete
     {
         // Удаление Элемента
-        static void Delete(string FileName, string MainTag, string ObjectTag, int id)
+        public static void Delete(string FileName, string MainTag, string ObjectTag, int id)
         {   
             Title.Set($"Удаление элемента в {FileName}.xml");
             XmlDocument document = new XmlDocument();
@@ -40,7 +40,7 @@ namespace VeterinaryClinicRB
             }
         }
         // Отдельное удаление элементов для статистики
-        static void DeleteStatistic(string date)
+        public static void DeleteStatistic(string date)
         {
             // Загрузка XML-документа 
             XmlDocument doc = new XmlDocument();

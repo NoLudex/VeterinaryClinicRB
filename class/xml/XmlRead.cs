@@ -12,7 +12,7 @@ namespace VeterinaryClinicRB
     public class XmlRead
     {
         // Вывод данных в список:
-        static void ReadBook(string FileName, string MainTag, string ObjectTag)
+        public static void Book(string FileName, string MainTag, string ObjectTag)
         {
             XmlDocument document = new XmlDocument();
             document.Load($"./././database/{FileName}.xml");
@@ -210,7 +210,7 @@ namespace VeterinaryClinicRB
         }
 
         // Показать информацию об одном элементе, указав ID
-        static void ShowByID(string FileName, string MainTag, string ObjectTag, int id)
+        public static void ShowByID(string FileName, string MainTag, string ObjectTag, int id)
         {
             Title.Set($"Просмотр элемента в {FileName}.xml");
             XmlDocument document = new XmlDocument();

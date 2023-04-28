@@ -12,7 +12,7 @@ namespace VeterinaryClinicRB
     public class XmlChange
     {
         // Обновить данные по ID
-        static void Update(string FileName, string MainTag, string ObjectTag, int id)
+        public static void Update(string FileName, string MainTag, string ObjectTag, int id)
         {
             Title.Set($"Редактируется: {FileName}.xml ({id})");
             XmlDocument document = new XmlDocument();
@@ -156,7 +156,7 @@ namespace VeterinaryClinicRB
         }
         
         // Отдельное обновление информации у Приёмов, ибо информация требует больше текста
-        static void UpdateInfo(string id) 
+        public static void UpdateInfo(string id) 
         {
             Title.Set($"Редактируется: admission.xml ({id})");
             XmlDocument document = new XmlDocument();
