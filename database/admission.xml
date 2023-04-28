@@ -7,7 +7,7 @@
         <fullname-doctor>Яковлев Максим Вадимович</fullname-doctor>
         <complaints>потеря аппетита</complaints>
         <diagnosis>Инсульт</diagnosis>
-        <info>Какая - либо информация</info>
+        <info>Нужно принимать такие-то лекарства</info>
     </animal>
     <animal>
         <id>2</id>  
