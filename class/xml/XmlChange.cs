@@ -176,8 +176,55 @@ namespace VeterinaryClinicRB
                     Console.Write("Начните ввод здесь: ");
                     info = Console.ReadLine();
                 } while (string.IsNullOrWhiteSpace(info));
-                admissionNode.SelectSingleNode("fullname-doctor").InnerText = info;
+                admissionNode.SelectSingleNode("info").InnerText = info;
                 document.Save("./././database/admission.xml");
+                Console.Clear();
+                Console.WriteLine($"Информация об приёме изменена в базе данных под ID ({id})");
+                Title.Set("Успех!");
+                Title.Wait();
+            }
+        }
+        public static void UpdateValid(string id) 
+        {
+            Title.Set($"Редактируется: pacientes.xml ({id})");
+            XmlDocument document = new XmlDocument();
+            document.Load($"./././database/pacientes.xml");
+            XmlNode ?admissionNode = document.SelectSingleNode($"/pacientes/paciente[id='{id}']");
+
+            if (admissionNode != null)
+            {
+                string? valid;
+                do
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Вы редактируете Пациента ID ({id})");
+
+                    Console.WriteLine("Введите валидность Пациента [Да / Нет]: ");
+                    do
+                        valid = Console.ReadLine();
+                    while (valid == null || valid.ToLower() != "да" || valid.ToLower() != "нет");
+                } while (string.IsNullOrWhiteSpace(valid));
+
+                XmlDocument doctor = new XmlDocument();
+                doctor.Load($"./././database/doctors.xml");
+                XmlNode ?doctorNode = document.SelectSingleNode($"/doctors/doctor[fullname-doctor='{admissionNode.SelectSingleNode("fullname-doctor").InnerText}']");
+                if (doctorNode != null)
+                {
+                    if (valid.ToLower() == "да")
+                    {
+                        valid = "Да";
+                        doctorNode.SelectSingleNode("animals-treated").InnerText = (Convert.ToInt32(doctorNode.SelectSingleNode("animals-treated").InnerText) + 1).ToString();
+                    }
+                    else if (valid.ToLower() == "нет")
+                    {
+                        valid = "Нет";
+                        doctorNode.SelectSingleNode("animals-treated").InnerText = (Convert.ToInt32(doctorNode.SelectSingleNode("animals-treated").InnerText) + 1).ToString();
+                    }
+                }
+
+                admissionNode.SelectSingleNode("valid").InnerText = valid;
+                document.Save("./././database/pacientes.xml");
+                doctor.Save("./././database/doctors.xml");
                 Console.Clear();
                 Console.WriteLine($"Информация об приёме изменена в базе данных под ID ({id})");
                 Title.Set("Успех!");
