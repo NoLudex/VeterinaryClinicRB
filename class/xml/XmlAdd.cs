@@ -166,7 +166,7 @@ namespace VeterinaryClinicRB
                             Console.Write("Введите ФИО владельца: ");
                             fullnameOwner = Console.ReadLine();
 
-                            Console.Write("Валиден ли данный пациент? (Да / Нет): ");
+                            Console.Write("Валиден ли данный пациент(?) [Да / Нет]: ");
                             do
                                 valid = Console.ReadLine();
                             while (valid == null || valid.ToLower() != "да" || valid.ToLower() != "нет");

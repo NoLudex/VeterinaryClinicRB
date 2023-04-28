@@ -82,8 +82,8 @@ namespace VeterinaryClinicRB
                                 Console.WriteLine(
                                     "Дата: " + FileNameNode.SelectSingleNode("date-time")?.InnerText + " ID (" + FileNameNode.SelectSingleNode("id")?.InnerText + ")\n" +
                                     "ФИО доктора: " + FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText + "\n" +
-                                    "Индификатор пациента: ID (" + FileNameNode.SelectSingleNode("paciente-id")?.InnerText + "\n" +
-                                    "Жалобы: " + FileNameNode.SelectSingleNode("complaints")?.InnerText + ")\n" +
+                                    "Индификатор пациента: ID (" + FileNameNode.SelectSingleNode("paciente-id")?.InnerText + ")\n" +
+                                    "Жалобы: " + FileNameNode.SelectSingleNode("complaints")?.InnerText + "\n" +
                                     "Диагноз:  " + FileNameNode.SelectSingleNode("diagnosis")?.InnerText + "\n" +
                                     "Дополнительная информация от доктора:  " + FileNameNode.SelectSingleNode("info")?.InnerText + "\n" +
                                     "-----------------------------"
@@ -126,6 +126,7 @@ namespace VeterinaryClinicRB
                                     "Пол: " + FileNameNode.SelectSingleNode("gender")?.InnerText + "\n" +
                                     "Возраст животного:  " + FileNameNode.SelectSingleNode("age")?.InnerText + "\n" +
                                     "ФИО владельца:  " + FileNameNode.SelectSingleNode("info")?.InnerText + "\n" +
+                                    "Валидно ли животное (?):  " + FileNameNode.SelectSingleNode("valid")?.InnerText + "\n" +
                                     "Телеграм владельца: " + FileNameNode.SelectSingleNode("telegram-id")?.InnerText + "\n" +
                                     "-----------------------------"
                                     );
@@ -244,7 +245,7 @@ namespace VeterinaryClinicRB
                         string info = FileNameNode.SelectSingleNode("info").InnerText;
 
                         Console.WriteLine("Информация об приёме:");
-                        Console.WriteLine($"ID пациента: {pacienteId} ID ({id})");
+                        Console.WriteLine($"ID пациента: {pacienteId}; ID приёма: ({id})");
                         Console.WriteLine("Дата приёма: " + dateTime);
                         Console.WriteLine("ФИО врача " + fullnameDoctor);
                         Console.WriteLine("Жалобы пациента: " + complaints);
