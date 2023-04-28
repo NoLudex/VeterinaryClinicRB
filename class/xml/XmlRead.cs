@@ -210,7 +210,7 @@ namespace VeterinaryClinicRB
         }
 
         // Показать информацию об одном элементе, указав ID
-        public static void ShowByID(string FileName, string MainTag, string ObjectTag, int id)
+        public static void ShowById(string FileName, string MainTag, string ObjectTag, int id)
         {
             Title.Set($"Просмотр элемента в {FileName}.xml");
             XmlDocument document = new XmlDocument();
