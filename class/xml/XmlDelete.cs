@@ -54,6 +54,7 @@ namespace VeterinaryClinicRB
             foreach (XmlNode node in nodesToDelete)
                 node.ParentNode.RemoveChild(node);
             
+            Console.Clear();
             // Проверка наличия найденных элементов и вывод уведомления
             if (deletedCount == 0)
                 Console.WriteLine($"Не найдено элементов, связанные с данной датой");
