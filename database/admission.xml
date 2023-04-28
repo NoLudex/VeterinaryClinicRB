@@ -3,7 +3,7 @@
     <animal>
         <id>1</id>
         <paciente-id>1</paciente-id>
-        <dateTime>26.04.2023</dateTime>
+        <date-time>26.04.2023</date-time>
         <fullname-doctor>Яковлев Максим Вадимович</fullname-doctor>
         <complaints>потеря аппетита</complaints>
         <diagnosis>Инсульт</diagnosis>
@@ -12,7 +12,7 @@
     <animal>
         <id>2</id>  
         <paciente-id>2</paciente-id>
-        <dateTime>23.02.2023</dateTime>
+        <date-time>23.02.2023</date-time>
         <fullname-doctor>Чиганцев Алексей Витальевич</fullname-doctor>
         <complaints>сухой нос</complaints>
         <diagnosis>Диарея</diagnosis>
@@ -21,7 +21,7 @@
     <animal>
         <id>3</id>  
         <paciente-id>3</paciente-id>
-        <dateTime>23.04.2023</dateTime>
+        <date-time>23.04.2023</date-time>
         <fullname-doctor>Дюдя Остап Панасович</fullname-doctor>
         <complaints>слепота</complaints>
         <diagnosis>Коньюктивит</diagnosis>
