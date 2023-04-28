@@ -12,7 +12,7 @@ namespace VeterinaryClinicRB
     public class XmlDelete
     {
         // Удаление Элемента
-        public static void Delete(string FileName, string MainTag, string ObjectTag, int id)
+        public static void This(string FileName, string MainTag, string ObjectTag, int id)
         {   
             Title.Set($"Удаление элемента в {FileName}.xml");
             XmlDocument document = new XmlDocument();

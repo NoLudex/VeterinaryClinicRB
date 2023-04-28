@@ -12,7 +12,7 @@ namespace VeterinaryClinicRB
     public class XmlAdd
     {
         // Добавить новый элемент в БД
-        public static void Add(string FileName, string MainTag, string ObjectTag)
+        public static void New(string FileName, string MainTag, string ObjectTag)
         {
             Title.Set($"Добавление нового элемента {FileName}.xml");
             XmlDocument document = new XmlDocument();
