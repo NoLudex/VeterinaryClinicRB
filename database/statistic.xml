@@ -1,17 +1,18 @@
 <?xml version = "1.0" encoding = "utf-8"?>
-<satistic>
+<statistic>
     <data>
         <date>26.04.2023</date>
-        <description>Информация о дне</desctription>
+        <description>Информация о дне</description>
     </data>
     <data>
         <date>27.04.2023</date>
-        <description>Информация о дне</desctription>
+        <description>Информация о дне</description>
     </data>
     <data>
         <date>23.02.2023</date>
         <description>Данные о примере</description>
     </data> 
+    <data>
         <date>15.07.2023</date>
         <description>Данные о дне</description>
     </data> 
