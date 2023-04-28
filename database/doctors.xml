@@ -40,4 +40,12 @@
     <animals-treated>68</animals-treated>
     <telegram-id>@enurijwe2281337</telegram-id>
   </doctor>
+  <doctor>
+    <id>6</id>
+    <fullname-doctor>Руманцев Олег Сергеевич</fullname-doctor>
+    <birthday>23.12.1974</birthday>
+    <experience>5</experience>
+    <animals-treated>100</animals-treated>
+    <telegram-id>@Jeronimo</telegram-id>
+  </doctor>
 </doctors>
