@@ -12,17 +12,11 @@ namespace VeterinaryClinicRB
     {
         public static int GetMaxXMLId(string FileName)
         {
-            switch (FileName)
-            {
-                case "doctor":
-                string ?maxValue = ConfigurationManager.AppSettings["MaxDoctorId"];
-                if (!int.TryParse (maxValue, out int result))
-                    result = 0;
-                return result;
-                default:
-                Console.WriteLine("|notFoundFile|");
-                return 0;
-            }
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            int newId = Convert.ToInt32(config.AppSettings.Settings[$"Max{FileName}Id"].Value);
+            config.AppSettings.Settings[$"Max{FileName}Id"].Value = $"{newId + 1}";
+            config.Save();
+            return newId;
         }
         
         public static bool ValidateAccessKey()
