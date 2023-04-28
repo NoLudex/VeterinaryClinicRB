@@ -276,6 +276,15 @@ namespace VeterinaryClinicRB
                         break;
                 }
         }
+        // Получить Максимальный ID из файла конфигурации
+        public static int GetMaxId(string FileName)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            int newId = Convert.ToInt32(config.AppSettings.Settings[$"Max{FileName}Id"].Value);
+            config.AppSettings.Settings[$"Max{FileName}Id"].Value = $"{newId + 1}";
+            config.Save();
+            return newId;
+        }
 
     }
 }
