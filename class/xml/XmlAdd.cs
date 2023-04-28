@@ -215,43 +215,83 @@ namespace VeterinaryClinicRB
                         Title.Set("Успех!");
                         Title.Wait();
                         break;
-                    case "statistic":
-                        string? date, description;
-                        do 
-                        {
-                            Console.Clear();
-                            Console.WriteLine($"Вы добавляете новое событие дня");
+                    // case "statistic":
+                    //     string? date, description;
+                    //     do 
+                    //     {
+                    //         Console.Clear();
+                    //         Console.WriteLine($"Вы добавляете новое событие дня");
 
-                            Console.Write("Напишите дату события: ");
-                            date = Console.ReadLine();
+                    //         Console.Write("Напишите дату события: ");
+                    //         date = Console.ReadLine();
 
-                            Console.Write("Напишите что произошло (Описание): ");
-                            description = Console.ReadLine();
-                        } while (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(description));
+                    //         Console.Write("Напишите что произошло (Описание): ");
+                    //         description = Console.ReadLine();
+                    //     } while (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(description));
 
-                        Element1 = document.CreateElement("date");
-                        Element2 = document.CreateElement("description");
+                    //     Element1 = document.CreateElement("date");
+                    //     Element2 = document.CreateElement("description");
 
-                        Element1.InnerText = date;
-                        Element2.InnerText = description;
+                    //     Element1.InnerText = date;
+                    //     Element2.InnerText = description;
 
-                        AddElement.AppendChild(Element1);
-                        AddElement.AppendChild(Element2);
+                    //     AddElement.AppendChild(Element1);
+                    //     AddElement.AppendChild(Element2);
 
-                        root?.AppendChild(AddElement);
-                        document.Save($"./././database/{FileName}.xml");
-                        Console.Clear();
-                        Console.WriteLine($"Новое событие было добавлено на число: {date}");
-                        XmlSort.SortByDate("./././database/statistic.xml");
-                        Title.Set("Успех!");
-                        Title.Wait();
-                        break;
+                    //     root?.AppendChild(AddElement);
+                    //     document.Save($"./././database/{FileName}.xml");
+                    //     Console.Clear();
+                    //     Console.WriteLine($"Новое событие было добавлено на число: {date}");
+                    //     XmlSort.SortByDate("./././database/statistic.xml");
+                    //     Title.Set("Успех!");
+                    //     Title.Wait();
+                    //     break;
                     default:
                         Title.Set("Ошибка");
                         Console.WriteLine("[DEBUG] Неверный файл");
                         Title.Wait();
                         break;
                 }
+        }
+
+        static void AddStatistic()
+        {
+            Title.Set("Добавление нового события");
+            XmlDocument doc = new XmlDocument();
+            doc.Load("./././database/statistic.xml");
+
+            // Создание нового элемента
+            XmlElement newElement = doc.CreateElement("data");
+            XmlElement dateElement = doc.CreateElement("date");
+            XmlElement descriptionElement = doc.CreateElement("description");
+            
+            string? date, description;
+            do 
+            {
+                Console.Clear();
+                Console.WriteLine($"Вы добавляете новое событие дня");
+
+                Console.Write("Напишите дату события: ");
+                date = Console.ReadLine();
+
+                Console.Write("Напишите что произошло (Описание): ");
+                description = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(description));
+            dateElement.InnerText = date; // ввод даты с клавиатуры
+            descriptionElement.InnerText = description; // ввод описания с клавиатуры
+
+            // Добавление новых элементов в созданный элемент
+            newElement.AppendChild(dateElement);
+            newElement.AppendChild(descriptionElement);
+
+            // Добавление нового элемента в документ
+            XmlNode rootNode = doc.DocumentElement;
+            rootNode.AppendChild(newElement);
+
+            Title.Set("Успех!");
+            Title.Wait();
+            // Сохранение изменений в файл
+            doc.Save("./././database/statistic.xml");
         }
     }
 }
