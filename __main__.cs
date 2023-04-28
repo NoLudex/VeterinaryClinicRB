@@ -12,18 +12,20 @@ namespace VeterinaryClinicRB
     {
         public static void Main(string[] args)
         {
+            string mainTitle = "Ветеринарная клиника | "; 
             Console.Clear();
             // Проверка валидности ключа
             if (!ValidateAccessKey())
-            {
+            { 
+                Console.Title = mainTitle + "Верификация";
                 Console.Clear();
-                Console.Write("|enterKey|\n|input| ");
+                Console.Write("Введите ключ доступа к программе\nВвод: ");
                 string ?key = Console.ReadLine();
                 if (!ValidateAccessKey(key))
                 {
                     Console.Clear();
-                    Console.WriteLine("|errorKey|");
-                    Console.WriteLine("|anyKey|");
+                    Console.WriteLine("Неверный ключ доступа");
+                    Console.WriteLine("Нажмите любую клавишу, чтобы продолжить...");
                     Console.ReadKey();
                     return;
                 }
@@ -36,17 +38,18 @@ namespace VeterinaryClinicRB
             {
                 while (isRunning)
                 {
+                    Console.Title = mainTitle + "Врачи";
                     Console.Clear();
                     Console.Write(
-                        "Программа [|programmName|]\n" +
-                        "|choose|\n" +
-                        "1. |showDoctors|\n" +
-                        "2. |showDocID|\n" +
-                        "3. |updInfDoc|\n" +
-                        "4. |newDoctor|\n" +
-                        "5. |delDoctor|\n" +
-                        "6. |exit|\n" +
-                        "|input| "
+                        "Меню связанное с Врачами\n" +
+                        "Выберите действие, введите номер действия\n" +
+                        "1. Открыть список Врачей\n" +
+                        "2. Показать врача, указав ID\n" +
+                        "3. Изменить информацию врача по ID\n" +
+                        "4. Добавить нового врача в список\n" +
+                        "5. Удалить врача, указав ID\n" +
+                        "6. Выйти в основное меню\n" +
+                        "Ввод: "
                     );
     
                     int choice = int.Parse(Console.ReadLine());
@@ -57,12 +60,12 @@ namespace VeterinaryClinicRB
                             ReadXML("doctors", "doctors", "doctor");
                             break;
                         case 2:
-                            Console.Write("|enterID| ");
+                            Console.Write("Введите ID: ");
                             int idToFind = int.Parse(Console.ReadLine());
                             ShowXMLByID("doctors", "doctors", "doctor", idToFind);
                             break;
                         case 3:
-                            Console.Write("|enterID| ");
+                            Console.Write("Введите ID: ");
                             int idToUpdate = int.Parse(Console.ReadLine());
                             UpdateXML("doctors", "doctors", "doctor", idToUpdate);
                             break;
@@ -70,7 +73,7 @@ namespace VeterinaryClinicRB
                             AddXML("doctors", "doctors", "doctor");
                             break;
                         case 5:
-                            Console.Write("|enterID| ");
+                            Console.Write("Введите ID: ");
                             int idToDelete = int.Parse(Console.ReadLine());
                             DeleteXML("doctors", "doctors", "doctor", idToDelete);
                             break;
@@ -78,7 +81,7 @@ namespace VeterinaryClinicRB
                             isRunning = false;
                             break;
                         default:
-                            Console.WriteLine("|errorChoise|");
+                            Console.WriteLine("Правильно введите номер действия");
                             break;
                     }
                     wait();
@@ -87,7 +90,7 @@ namespace VeterinaryClinicRB
             catch (System.FormatException)
             {
                 Console.Clear();
-                Console.WriteLine("|errorInput|");
+                Console.WriteLine("Вы указали неверный формат, запустите программу снова и повторите попытку");
                 wait();
             }
         }

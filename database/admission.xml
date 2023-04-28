@@ -1,7 +1,8 @@
 <?xml version = "1.0" encoding = "utf-8"?>
 <admission>
     <animal>
-        <id>1</id>  
+        <id>1</id>
+        <paciente-id>1</paciente-id>
         <dateTime>26.04.2023</dateTime>
         <fullname-doctor>Яковлев Максим Вадимович</fullname-doctor>
         <complaints>потеря аппетита</complaints>
@@ -10,6 +11,7 @@
     </animal>
     <animal>
         <id>2</id>  
+        <paciente-id>2</paciente-id>
         <dateTime>23.02.2023</dateTime>
         <fullname-doctor>Чиганцев Алексей Витальевич</fullname-doctor>
         <complaints>сухой нос</complaints>
@@ -18,6 +20,7 @@
     </animal>
     <animal>
         <id>3</id>  
+        <paciente-id>3</paciente-id>
         <dateTime>23.04.2023</dateTime>
         <fullname-doctor>Дюдя Остап Панасович</fullname-doctor>
         <complaints>слепота</complaints>
