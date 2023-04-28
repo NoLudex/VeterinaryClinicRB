@@ -121,7 +121,8 @@ namespace VeterinaryClinicRB
                                         "3. Изменить информацию Приёма по ID\n" +
                                         "4. Добавить новый Приём в список\n" +
                                         "5. Удалить Приём, указав ID\n" +
-                                        "6. Изменить информацию приёма, указав ID\n" +
+                                        "6. Изменить информацию Приёма, указав ID\n" +
+                                        "7. Изменить валидность Приёма, указать ID\n" +
                                         "0. Выйти в основное меню\n" +
                                         "Ввод: "
                                     );
@@ -131,25 +132,25 @@ namespace VeterinaryClinicRB
                                     switch (choice)
                                     {
                                         case 1:
-                                            XmlRead.Book("doctors", "doctors", "doctor");
+                                            XmlRead.Book("admission", "admission", "animal");
                                             break;
                                         case 2:
                                             Console.Write("Введите ID: ");
                                             int idToFind = int.Parse(Console.ReadLine());
-                                            XmlRead.ShowById("doctors", "doctors", "doctor", idToFind);
+                                            XmlRead.ShowById("admission", "admission", "animal", idToFind);
                                             break;
                                         case 3:
                                             Console.Write("Введите ID: ");
                                             int idToUpdate = int.Parse(Console.ReadLine());
-                                            XmlChange.Update("doctors", "doctors", "doctor", idToUpdate);
+                                            XmlChange.Update("admission", "admission", "animal", idToUpdate);
                                             break;
                                         case 4:
-                                            XmlAdd.New("doctors", "doctors", "doctor");
+                                            XmlAdd.New("admission", "admission", "animal");
                                             break;
                                         case 5:
                                             Console.Write("Введите ID: ");
                                             int idToDelete = int.Parse(Console.ReadLine());
-                                            XmlDelete.This("doctors", "doctors", "doctor", idToDelete);
+                                            XmlDelete.This("admission", "admission", "animal", idToDelete);
                                             break;
                                         case 0:
                                             admissionMenu = false;
