@@ -213,10 +213,12 @@ namespace VeterinaryClinicRB
         // Показать информацию об одном элементе, указав ID
         public static void ShowById(string FileName, string MainTag, string ObjectTag, int id)
         {
+            
             Title.Set($"Просмотр элемента в {FileName}.xml");
             XmlDocument document = new XmlDocument();
             document.Load($"./././database/{FileName}.xml");
 
+            // Поиск и просмотр элемента в БД по ID
             XmlNode ?FileNameNode = document.SelectSingleNode($"/{MainTag}/{ObjectTag}[id='" + id + "']");
 
             if (FileNameNode != null)
