@@ -29,6 +29,8 @@ namespace VeterinaryClinicRB
 
             // Заменяем старый "statistic" на новый
             doc.Element("statistic").ReplaceWith(statistic);
+
+            doc.Save(xmlFilePath);
         }
     }
 }
