@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq; 
 using System.Xml;
 using System.Xml.Linq;
+using System.Globalization;
 
 namespace VeterinaryClinicRB
 {
@@ -10,22 +11,24 @@ namespace VeterinaryClinicRB
     {
         public static void SortByDate(string xmlFilePath) 
         {
-            XDocument xml = XDocument.Load(xmlFilePath);
+            XDocument doc = XDocument.Load(xmlFilePath);
 
-            // Получаем список элементов "data" с датой и описание
-            List<XElement> dataList = xml.Descendants("data").ToList();
+            // Выбираем все элементы "data", сортируем их по убыванию даты
+            var sortedData = doc.Descendants("data")
+                                .OrderByDescending(e => DateTime.ParseExact(e.Element("date").Value, "dd.MM.yyyy", CultureInfo.InvariantCulture))
+                                .ToList();
 
-            // Сортируем список элементов по убыванию даты
-            dataList.Sort((a, b) => DateTime.Parse(b.Element("date").Value).CompareTo(DateTime.Parse(a.Element("date").Value)));
+            // Создаем новый элемент "statistic"
+            XElement statistic = new XElement("statistic");
 
-            // Удаляем все элементы "data" из XML-файла
-            xml.Descendants("data").Remove();
+            // Добавляем отсортированные элементы "data" в "statistic"
+            foreach (XElement data in sortedData)
+            {
+                statistic.Add(data);
+            }
 
-            // Добавляем отсортированные элементы "data" в XML-файл
-            xml.Root.Add(dataList);
-
-            // Сохраняем изменение в XML-файле
-            xml.Save(xmlFilePath);
+            // Заменяем старый "statistic" на новый
+            doc.Element("statistic").ReplaceWith(statistic);
         }
     }
 }
