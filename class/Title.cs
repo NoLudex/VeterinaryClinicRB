@@ -11,5 +11,10 @@ namespace VeterinaryClinicRB
         {
             Console.Title = "Ветеринарная клиника | " + NAME;
         }
+        public static void Wait()
+        {
+            Console.Write("Нажмите Enter, чтобы продолжить...");
+            Console.ReadKey();
+        }
     }
 }
