@@ -2,7 +2,7 @@
 <pacientes>
     <paciente>
         <id>1</id>
-        <animaltype>Кошка</animaltype>
+        <animal-type>Кошка</animal-type>
         <name>Макс</name>
         <gender>Мужской</gender>
         <age>3</Age>
@@ -12,7 +12,7 @@
     </paciente>
     <paciente>
         <id>2</id>
-        <animaltype>Собака</animaltype>
+        <animal-type>Собака</animal-type>
         <name>Олег</name>
         <gender>Женский</gender>
         <age>4</age>
@@ -22,7 +22,7 @@
     </paciente>
     <paciente>
         <id>3</id>
-        <animaltype>Ящерица</animaltype>
+        <animal-type>Ящерица</animal-type>
         <name>Алексей</name>
         <gender>Мужской</gender>
         <age>7</age>
