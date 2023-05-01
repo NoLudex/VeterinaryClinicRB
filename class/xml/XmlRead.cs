@@ -220,8 +220,9 @@ namespace VeterinaryClinicRB
 
             // Поиск и просмотр элемента в БД по ID
             XmlNode ?FileNameNode = document.SelectSingleNode($"/{MainTag}/{ObjectTag}[id='" + id + "']");
-
+            Console.Clear();
             if (FileNameNode != null)
+            {
                 switch (FileName)
                 {
                     case "doctors":
@@ -232,11 +233,11 @@ namespace VeterinaryClinicRB
                         string telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
                         Console.WriteLine("Информация об враче:");
-                        Console.WriteLine($"ФИО врача: {fullName} ID ({id})");
+                        Console.WriteLine($"ФИО врача: {fullName}");
                         Console.WriteLine("Дата рождения: " + birthday);
                         Console.WriteLine("Опыт работы " + experience + " лет");
                         Console.WriteLine("Пациентов прошло данного врача: " + animalsTreated);
-                        Console.WriteLine("Telegram ID: " + telegramID);
+                        Console.WriteLine("Telegram ID: " + telegramID + $" ({id})");
                         break; 
                     case "admission":
                         string pacienteId = FileNameNode.SelectSingleNode("paciente-id").InnerText;
@@ -249,7 +250,7 @@ namespace VeterinaryClinicRB
                         Console.WriteLine("Информация об приёме:");
                         Console.WriteLine($"ID пациента: {pacienteId}; ID приёма: ({id})");
                         Console.WriteLine("Дата приёма: " + dateTime);
-                        Console.WriteLine("ФИО врача " + fullnameDoctor);
+                        Console.WriteLine("ФИО врача: " + fullnameDoctor);
                         Console.WriteLine("Жалобы пациента: " + complaints);
                         Console.WriteLine("Диагноз: " + diagnosis);
                         Console.WriteLine($"Доп. информация: {info}");
@@ -264,7 +265,7 @@ namespace VeterinaryClinicRB
                         telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
                         Console.WriteLine("Информация об пациенте:");
-                        Console.WriteLine($"Тип животного: {animalType} ID ({id})");
+                        Console.WriteLine($"Тип животного: {animalType}; ID ({id})");
                         Console.WriteLine("Кличка животного: " + name);
                         Console.WriteLine("Пол животного: " + gender);
                         Console.WriteLine("Возраст: " + age);
@@ -275,9 +276,16 @@ namespace VeterinaryClinicRB
                     default:
                         Console.WriteLine("Ошибка вывода");
                         Title.Set("Ошибка");
-                        Title.Wait();
                         break;
                 }
+                Title.Wait();
+            }
+            else
+            {
+                Title.Set("Ошибка поиска");
+                Console.WriteLine("Ничего не найдено. Проверьте, верно ли вы указали ID");
+                Title.Wait();
+            }
         }
         // Получить Максимальный ID из файла конфигурации
         public static int GetMaxId(string FileName)
