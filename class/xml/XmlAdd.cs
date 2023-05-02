@@ -311,10 +311,10 @@ namespace VeterinaryClinicRB
                 Console.Clear();
                 Console.WriteLine($"Вы добавляете новое событие дня");
 
-                Console.Write("Напишите дату события: ");
+                Console.Write("Укажите дату события: ");
                 date = Console.ReadLine();
 
-                Console.Write("Напишите что произошло (Описание): ");
+                Console.Write("Укажите что произошло (Описание): ");
                 description = Console.ReadLine();
             } while (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(description));
             dateElement.InnerText = date; // ввод даты с клавиатуры

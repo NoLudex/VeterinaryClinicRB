@@ -87,7 +87,7 @@ namespace VeterinaryClinicRB
                                     "Индификатор пациента: ID (" + FileNameNode.SelectSingleNode("paciente-id")?.InnerText + ")\n" +
                                     "Жалобы: " + FileNameNode.SelectSingleNode("complaints")?.InnerText + "\n" +
                                     "Диагноз:  " + FileNameNode.SelectSingleNode("diagnosis")?.InnerText + "\n" +
-                                    "Дополнительная информация от доктора:  " + FileNameNode.SelectSingleNode("info")?.InnerText + "\n" +
+                                    "Рекомендации от доктора:  " + FileNameNode.SelectSingleNode("info")?.InnerText + "\n" +
                                     "-----------------------------"
                                     );
                             }
@@ -123,7 +123,7 @@ namespace VeterinaryClinicRB
                             foreach (XmlNode FileNameNode in FileNameNodes) 
                             {
                                 Console.WriteLine(
-                                    "Тип животного: " + FileNameNode.SelectSingleNode("animal-type")?.InnerText + " ID (" + FileNameNode.SelectSingleNode("id")?.InnerText + ")\n" +
+                                    "Вид животного: " + FileNameNode.SelectSingleNode("animal-type")?.InnerText + " ID (" + FileNameNode.SelectSingleNode("id")?.InnerText + ")\n" +
                                     "Кличка: " + FileNameNode.SelectSingleNode("name")?.InnerText + "\n" +
                                     "Пол: " + FileNameNode.SelectSingleNode("gender")?.InnerText + "\n" +
                                     "Возраст животного:  " + FileNameNode.SelectSingleNode("age")?.InnerText + "\n" +
@@ -255,7 +255,7 @@ namespace VeterinaryClinicRB
                         Console.WriteLine("ФИО врача: " + fullnameDoctor);
                         Console.WriteLine("Жалобы пациента: " + complaints);
                         Console.WriteLine("Диагноз: " + diagnosis);
-                        Console.WriteLine($"Доп. информация: {info}");
+                        Console.WriteLine($"Рекомендации от доктора: {info}");
                         break;     
                     case "pacientes":
                         string animalType = FileNameNode.SelectSingleNode("paciente-id").InnerText;
@@ -267,7 +267,7 @@ namespace VeterinaryClinicRB
                         telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
                         Console.WriteLine("Информация об пациенте:");
-                        Console.WriteLine($"Тип животного: {animalType}; ID ({id})");
+                        Console.WriteLine($"Вид животного: {animalType}; ID ({id})");
                         Console.WriteLine("Кличка животного: " + name);
                         Console.WriteLine("Пол животного: " + gender);
                         Console.WriteLine("Возраст: " + age);

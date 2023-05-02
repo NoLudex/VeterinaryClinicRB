@@ -113,7 +113,7 @@ namespace VeterinaryClinicRB
             string result = todayEvents + pastEvents;
             if (string.IsNullOrEmpty(result))
             {
-                result = "На сегодня нет событий.";
+                result = "Сегодня ничего не произошло.";
             }
 
             return result;

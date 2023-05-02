@@ -197,7 +197,7 @@ namespace VeterinaryClinicRB
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine($"Вы редактируете Пациента ID ({id})");
+                    Console.WriteLine($"Вы редактируете ID Пациента ({id})");
 
                     Console.WriteLine("Введите валидность Пациента [Да / Нет]: ");
                     do

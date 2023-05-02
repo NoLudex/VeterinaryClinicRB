@@ -57,7 +57,7 @@ namespace VeterinaryClinicRB
             Console.Clear();
             // Проверка наличия найденных элементов и вывод уведомления
             if (deletedCount == 0)
-                Console.WriteLine($"Не найдено элементов, связанные с данной датой");
+                Console.WriteLine($"Не найдено элементов, связанных с данной датой");
             else
                 Console.WriteLine($"Удалено элементов: {deletedCount}");
             Title.Set("Удаление завершено");
