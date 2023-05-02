@@ -6,6 +6,8 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Configuration;
+using System.Threading.Tasks;
+using System.Text;
 
 namespace VeterinaryClinicRB
 {
@@ -15,7 +17,7 @@ namespace VeterinaryClinicRB
         public static void Book(string FileName, string MainTag, string ObjectTag)
         {
             XmlDocument document = new XmlDocument();
-            document.Load($"./././database/{FileName}.xml");
+            document.Load($"./database/{FileName}.xml");
             XmlNodeList ?nodeList = document.SelectNodes($"/{MainTag}/{ObjectTag}");
             int currentPage = 1; // Текущая страница
             int pageSize = 2; // Количество записей на странице
@@ -216,7 +218,7 @@ namespace VeterinaryClinicRB
             
             Title.Set($"Просмотр элемента в {FileName}.xml");
             XmlDocument document = new XmlDocument();
-            document.Load($"./././database/{FileName}.xml");
+            document.Load($"./database/{FileName}.xml");
 
             // Поиск и просмотр элемента в БД по ID
             XmlNode ?FileNameNode = document.SelectSingleNode($"/{MainTag}/{ObjectTag}[id='" + id + "']");
@@ -296,6 +298,167 @@ namespace VeterinaryClinicRB
             config.Save();
             return newId;
         }
+        
+        public static void FindPacientByName()
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load("./database/pacientes.xml");
+            
+            Console.Clear();
+            Console.Write("Введите критерий поиска (кличка животного): ");
+            string searchCriteria = Console.ReadLine();
+            Console.Clear();
+            XmlNodeList pacientesList = xmlDoc.GetElementsByTagName("paciente");
+            int count = 0;
 
+            foreach (XmlNode pacienteNode in pacientesList)
+            {
+                XmlNode idNode = pacienteNode.SelectSingleNode("id");
+                XmlNode animalNode = pacienteNode.SelectSingleNode("animal-type");
+                XmlNode nameNode = pacienteNode.SelectSingleNode("name");
+                XmlNode ownerNode = pacienteNode.SelectSingleNode("fullname-owner");
+
+                if (nameNode != null && nameNode.InnerText.ToLower().Contains(searchCriteria.ToLower()))
+                {
+                    count++;
+                    Console.WriteLine("Найден пациент №{0}:", count);
+                    Console.WriteLine("  ID: {0}", idNode.InnerText);
+                    Console.WriteLine("  Вид: {0}", animalNode.InnerText);
+                    Console.WriteLine("  Кличка: {0}", nameNode.InnerText);
+                    Console.WriteLine("  Владелец: {0}", ownerNode != null ? ownerNode.InnerText : "Неизвестно");
+                    Console.WriteLine("-----------------");
+
+                    if (count > 1 && count % 2 == 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Нажмите Enter, чтобы продолжить...");
+                        Console.ReadLine();
+                    }
+                }
+            }
+
+            if (count == 0)
+            {
+                Console.Clear();
+                Title.Set("Результаты не найдены");
+                Console.WriteLine("Результаты не найдены.");
+                Title.Wait();
+            }
+            else if (count == 1)
+            {
+                Title.Set("Найден один пациент");
+                Console.WriteLine("Найден единственный пациент.");
+                Title.Wait();
+            }
+            else
+            {
+                Title.Set($"Найдено {count}");
+                Console.WriteLine("Найдено {0} пациентов.", count);
+                Title.Wait();
+            }
+        }
+
+        public static void PrintAdmissionData(string date = null, string startDate = null, string endDate = null)
+        {
+            // Загрузка баз данных XML в объекты XmlDocument
+            var admissionDoc = new XmlDocument();
+            admissionDoc.Load("./database/admission.xml");
+
+            var doctorsDoc = new XmlDocument();
+            doctorsDoc.Load("./database/doctors.xml");
+
+            var pacientesDoc = new XmlDocument();
+            pacientesDoc.Load("./database/pacientes.xml");
+
+            var statisticDoc = new XmlDocument();
+            statisticDoc.Load("./database/statistic.xml");
+
+            var admissionNodes = admissionDoc.SelectNodes("//admission");
+            var doctorsNodes = doctorsDoc.SelectNodes("//doctor");
+            var pacientesNodes = pacientesDoc.SelectNodes("//paciente");
+            var statisticNodes = statisticDoc.SelectNodes("//data");
+
+            int totalCount = 0;
+
+            // Проходим по всем записям приема в заданном диапазоне дат
+            foreach (XmlNode admissionNode in admissionNodes)
+            {
+                var dateTimeString = admissionNode.SelectSingleNode("date-time").InnerText;
+                var admissionDate = DateTime.ParseExact(dateTimeString, "dd.MM.yyyy", null);
+
+                if (date != null && admissionDate.ToString("dd.MM.yyyy") != date)
+                {
+                    continue;
+                }
+
+                if (startDate != null)
+                {
+                    var startDateObj = DateTime.ParseExact(startDate, "dd.MM.yyyy", null);
+                    if (admissionDate < startDateObj)
+                    {
+                        continue;
+                    }
+                }
+
+                if (endDate != null)
+                {
+                    var endDateObj = DateTime.ParseExact(endDate, "dd.MM.yyyy", null);
+                    if (admissionDate > endDateObj)
+                    {
+                        continue;
+                    }
+                }
+
+                // Получение информации о животном, враче и пациенте
+                var animalId = admissionNode.SelectSingleNode("paciente-id").InnerText;
+
+                // Перебираем все элементы пациентов для получения информации о требуемом животном
+                foreach (XmlNode pacienteNode in pacientesNodes)
+                {
+                    var pacienteId = pacienteNode.SelectSingleNode("id").InnerText;
+
+                    if (pacienteId == animalId)
+                    {
+                        var animalType = pacienteNode.SelectSingleNode("animal-type").InnerText;
+                        var animalName = pacienteNode.SelectSingleNode("name").InnerText;
+                        var animalGender = pacienteNode.SelectSingleNode("gender").InnerText;
+                        var animalAge = pacienteNode.SelectSingleNode("age").InnerText;
+                        var ownerFullName = pacienteNode.SelectSingleNode("fullname-owner").InnerText;
+
+                        var doctorFullName = admissionNode.SelectSingleNode("fullname-doctor").InnerText;
+
+                        // Перебираем все элементы врачей для получения информации о требуемом враче
+                        foreach (XmlNode doctorNode in doctorsNodes)
+                        {
+                            var doctorFullNameInXml = doctorNode.SelectSingleNode("fullname-doctor").InnerText;
+
+                            if (doctorFullNameInXml == doctorFullName)
+                            {
+                                var doctorSpecialization = doctorNode.SelectSingleNode("doctor-specialization").InnerText;
+
+                                var complaints = admissionNode.SelectSingleNode("complaints").InnerText;
+                                var diagnosis = admissionNode.SelectSingleNode("diagnosis").InnerText;
+                                var info = admissionNode.SelectSingleNode("info").InnerText;
+                                var admissionTime = admissionNode.SelectSingleNode("time").InnerText;
+
+                                // Вывод информации в заданном формате
+                                Console.WriteLine($"{admissionTime}, врач: {doctorFullName} ({doctorSpecialization}), пациент: {animalType} ({animalName}) [{animalGender}], возраст: {animalAge} лет, Владелец: {ownerFullName}, жалобы: {complaints}, диагноз: {diagnosis}, инфо: {info}.");
+
+                                totalCount++;
+                                break;
+                            }
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            // Вывод общего количества приемов
+            Console.WriteLine($"Всего приемов за день: {totalCount}");
+
+            // Разделительная линия
+            Console.WriteLine("============================");
+        }
     }
 }

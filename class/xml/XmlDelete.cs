@@ -16,9 +16,9 @@ namespace VeterinaryClinicRB
         {   
             Title.Set($"Удаление элемента в {FileName}.xml");
             XmlDocument document = new XmlDocument();
-            document.Load($"./././database/{FileName}.xml");
+            document.Load($"./database/{FileName}.xml");
             XmlNode ?FileNameNode = document.SelectSingleNode($"/{MainTag}/{ObjectTag}[id='{id}']");
-
+            Console.Clear();
             if (FileNameNode != null)
             {
                 XmlNode ?parentNode = FileNameNode.ParentNode;
@@ -27,7 +27,7 @@ namespace VeterinaryClinicRB
                 else
                     Console.WriteLine("[DEBUG] Произошла внутренняя ошибка");
                 
-                document.Save($"./././database/{FileName}");
+                document.Save($"./database/{FileName}.xml");
                 Console.WriteLine($"Успешно удалена секцая под ID: {id}, в файле {FileName}.xml");
                 Title.Set("Успех!");
                 Title.Wait();
@@ -44,8 +44,8 @@ namespace VeterinaryClinicRB
         {
             // Загрузка XML-документа 
             XmlDocument doc = new XmlDocument();
-            doc.Load("./././database/statistic.xml");
-
+            doc.Load("./database/statistic.xml");
+            
             // Выбор всех элементов, содержащих заданную дату
             XmlNodeList nodesToDelete = doc.SelectNodes($"//data[='{date}']");
 
@@ -63,7 +63,7 @@ namespace VeterinaryClinicRB
             Title.Set("Удаление завершено");
             Title.Wait();
             // Сохраняем
-            doc.Save("./././database/statistic.xml");
+            doc.Save("./database/statistic.xml");
         }
     }
 }
