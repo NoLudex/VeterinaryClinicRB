@@ -5,7 +5,7 @@
         <animal-type>Кошка</animal-type>
         <name>Макс</name>
         <gender>Мужской</gender>
-        <age>3</Age>
+        <age>3</age>
         <fullname-owner>Дегтярев Сергей Анатольевич</fullname-owner>
         <valid>Действительная анкета?</valid>     
         <telegram-id>@istung</telegram-id>
