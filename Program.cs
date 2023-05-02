@@ -26,6 +26,7 @@ namespace VeterinaryClinicRB
                 Title.Set("Верификация");
                 Console.Write("Чтобы иметь доступ к программе, нужен специальный ключ. \nВы можете обратиться к администрации для получения данного ключа.\nВвод: ");
                 key = Console.ReadLine();
+                // key = "RBWEEXLOVE";
             }
             while (true)
             {
@@ -40,12 +41,12 @@ namespace VeterinaryClinicRB
                         {
                             Title.Set("Главная");
                             Console.Clear();
-                            Console.WriteLine("Главное меню | VeterinaryClinicRB\nВыберите из списка файл, с которым желаете работать:");
+                            Console.WriteLine("Главное меню | VeterinaryClinicRB\nСделайте выбор, с каким меню работать:");
                             Console.Write(
-                                "1. doctors.xml (Врачи)\n" +
-                                "2. admission.xml (Приёмы)\n" +
-                                "3. pacientes.xml (Пациенты)\n" +
-                                "4. statistic.xml (Статистика)\n" +
+                                "1. Врачи\n" +
+                                "2. Приёмы\n" +
+                                "3. Пациенты\n" +
+                                "4. Статистика\n" +
                                 "0. Выход из программы\n" +
                                 "Ввод: "
                             );
@@ -73,6 +74,7 @@ namespace VeterinaryClinicRB
                                             "3. Изменить информацию Врача по ID\n" +
                                             "4. Добавить нового Врача в список\n" +
                                             "5. Удалить Врача, указав ID\n" +
+                                            "6. Вывести статистику Врача по ФИО\n" +
                                             "0. Выйти в основное меню\n" +
                                             "Ввод: "
                                         );
@@ -106,6 +108,14 @@ namespace VeterinaryClinicRB
                                                 Console.Write("Введите ID: ");
                                                 int idToDelete = int.Parse(Console.ReadLine());
                                                 XmlDelete.This("doctors", "doctors", "doctor", idToDelete);
+                                            break;
+                                            case 6:
+                                                string FindDoctor = Valid.FullNameUser("врача");
+                                                XmlStat.FindDoctorStats(FindDoctor);
+                                            break;
+                                            case 228:
+                                                XmlRead.PrintAdmissionData();
+                                                Title.Wait();
                                             break;
                                             case 0:
                                                 doctorMenu = false;
@@ -200,6 +210,7 @@ namespace VeterinaryClinicRB
                                             "4. Добавить нового Пациента в список\n" +
                                             "5. Удалить Пациента, указав ID\n" +
                                             "6. Изменить валидность Пациента, указать ID\n" +
+                                            "7. Найти Пациента(ов) по клички\n" +
                                             "0. Выйти в основное меню\n" +
                                             "Ввод: "
                                         );
@@ -239,6 +250,9 @@ namespace VeterinaryClinicRB
                                                 int idToChangeValid = int.Parse(Console.ReadLine());
                                                 XmlDelete.This("pacientes", "pacientes", "paciente", idToChangeValid);
                                             break;
+                                            case 7:
+                                                XmlRead.FindPacientByName();
+                                            break;
                                             case 0:
                                                 pacientesMenu = false;
                                             break;
@@ -263,6 +277,7 @@ namespace VeterinaryClinicRB
                                             "1. Открыть список/статистику по дням\n" +
                                             "2. Удалить статистику дня\n" +
                                             "3. Сделать сортировку статистики\n" +
+                                            "4. Сегодняшняя статистика\n" +
                                             "0. Выйти в основное меню\n" +
                                             "Ввод: "
                                         );
@@ -290,9 +305,16 @@ namespace VeterinaryClinicRB
                                             case 3:
                                                 Console.Clear();
                                                 Console.WriteLine("Производится сортировка...");
-                                                XmlSort.SortByDate("./././database/statistic.xml");
+                                                XmlSort.SortByDate("./database/statistic.xml");
                                                 Console.WriteLine("Успешно!");
                                                 Title.Set("Успех!");
+                                                Title.Wait();
+                                            break;
+                                            case 4:
+                                                Console.Clear();
+                                                XmlSort.SortByDate("./database/statistic.xml");
+                                                Title.Set("Все события");
+                                                Console.WriteLine(XmlStat.GetEventsToday());
                                                 Title.Wait();
                                             break;
                                             case 0:
