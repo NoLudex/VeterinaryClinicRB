@@ -2,6 +2,7 @@
 <admission>
     <animal>
         <id>1</id>
+        <time>6:04</time>
         <paciente-id>1</paciente-id>
         <date-time>26.04.2023</date-time>
         <fullname-doctor>Яковлев Максим Вадимович</fullname-doctor>
@@ -10,7 +11,8 @@
         <info>Нужно принимать такие-то лекарства</info>
     </animal>
     <animal>
-        <id>2</id>  
+        <id>2</id> 
+        <time>23:10</time> 
         <paciente-id>2</paciente-id>
         <date-time>23.02.2023</date-time>
         <fullname-doctor>Чиганцев Алексей Витальевич</fullname-doctor>
@@ -19,7 +21,8 @@
         <info>что то про прием</info>
     </animal>
     <animal>
-        <id>3</id>  
+        <id>3</id> 
+        <time>10:40</time>
         <paciente-id>3</paciente-id>
         <date-time>23.04.2023</date-time>
         <fullname-doctor>Дюдя Остап Панасович</fullname-doctor>
