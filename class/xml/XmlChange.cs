@@ -16,7 +16,7 @@ namespace VeterinaryClinicRB
         {
             Title.Set($"Редактируется: {FileName}.xml ({id})");
             XmlDocument document = new XmlDocument();
-            document.Load($"./././database/{FileName}.xml");
+            document.Load($"./database/{FileName}.xml");
             XmlNode ?FileNameNode = document.SelectSingleNode($"/{MainTag}/{ObjectTag}" + "[id='" + id + "']");
 
             if (FileNameNode != null)
@@ -56,7 +56,7 @@ namespace VeterinaryClinicRB
                         FileNameNode.SelectSingleNode("animals-treated").InnerText = animalsTreated;
                         FileNameNode.SelectSingleNode("telegram-id").InnerText = telegramID;
 
-                        document.Save("./././database/doctors.xml");
+                        document.Save("./database/doctors.xml");
                         Console.Clear();
                         Title.Set($"Успех!");
                         Console.WriteLine($"Доктор изменён в базе данных под ID ({id})");
@@ -91,7 +91,7 @@ namespace VeterinaryClinicRB
                         FileNameNode.SelectSingleNode("complaints").InnerText = complaints;
                         FileNameNode.SelectSingleNode("diagnosis").InnerText = diagnosis;
 
-                        document.Save("./././database/admission.xml");
+                        document.Save("./database/admission.xml");
                         Console.Clear();
                         Console.WriteLine($"Приём изменен в базе данных под ID ({id})");
                         Title.Set("Успех!");
@@ -134,7 +134,7 @@ namespace VeterinaryClinicRB
                         FileNameNode.SelectSingleNode("fullnameOwner").InnerText = fullnameOwner;
                         FileNameNode.SelectSingleNode("telegram-id").InnerText = telegramID;
 
-                        document.Save("./././database/paciente.xml");
+                        document.Save("./database/paciente.xml");
                         Console.Clear();
                         Console.WriteLine($"Пациент изменён базе данных под ID ({id})");
                         Title.Set("Успех!");
@@ -160,7 +160,7 @@ namespace VeterinaryClinicRB
         {
             Title.Set($"Редактируется: admission.xml ({id})");
             XmlDocument document = new XmlDocument();
-            document.Load($"./././database/admission.xml");
+            document.Load($"./database/admission.xml");
             XmlNode ?admissionNode = document.SelectSingleNode($"/admission/animal[id='{id}']");
 
             if (admissionNode != null)
@@ -177,7 +177,7 @@ namespace VeterinaryClinicRB
                     info = Console.ReadLine();
                 } while (string.IsNullOrWhiteSpace(info));
                 admissionNode.SelectSingleNode("info").InnerText = info;
-                document.Save("./././database/admission.xml");
+                document.Save("./database/admission.xml");
                 Console.Clear();
                 Console.WriteLine($"Информация об приёме изменена в базе данных под ID ({id})");
                 Title.Set("Успех!");
@@ -188,7 +188,7 @@ namespace VeterinaryClinicRB
         {
             Title.Set($"Редактируется: pacientes.xml ({id})");
             XmlDocument document = new XmlDocument();
-            document.Load($"./././database/pacientes.xml");
+            document.Load($"./database/pacientes.xml");
             XmlNode ?admissionNode = document.SelectSingleNode($"/pacientes/paciente[id='{id}']");
 
             if (admissionNode != null)
@@ -206,7 +206,7 @@ namespace VeterinaryClinicRB
                 } while (string.IsNullOrWhiteSpace(valid));
 
                 XmlDocument doctor = new XmlDocument();
-                doctor.Load($"./././database/doctors.xml");
+                doctor.Load($"./database/doctors.xml");
                 XmlNode ?doctorNode = document.SelectSingleNode($"/doctors/doctor[fullname-doctor='{admissionNode.SelectSingleNode("fullname-doctor").InnerText}']");
                 if (doctorNode != null)
                 {
@@ -223,8 +223,8 @@ namespace VeterinaryClinicRB
                 }
 
                 admissionNode.SelectSingleNode("valid").InnerText = valid;
-                document.Save("./././database/pacientes.xml");
-                doctor.Save("./././database/doctors.xml");
+                document.Save("./database/pacientes.xml");
+                doctor.Save("./database/doctors.xml");
                 Console.Clear();
                 Console.WriteLine($"Информация об приёме изменена в базе данных под ID ({id})");
                 Title.Set("Успех!");

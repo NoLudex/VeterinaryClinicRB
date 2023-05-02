@@ -29,7 +29,7 @@ namespace VeterinaryClinicRB
 
             // Загружаем конфигурацию из файла XML
             XmlDocument doc = new XmlDocument();
-            doc.Load("./././database/accessKey.xml");
+            doc.Load("./database/accessKey.xml");
 
             // Получаем список всех ключей доступа
             XmlNodeList ?keyNodes = doc.SelectNodes("/database/accessKeys/accessKey");
@@ -44,7 +44,7 @@ namespace VeterinaryClinicRB
         public static bool Update(string oldKey, string newKey)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load("./././database/accessKey.xml");
+            doc.Load("./database/accessKey.xml");
             XmlNode ?oldKeyNode = doc.SelectSingleNode($"//accessKey[text()='{oldKey}']");
 
             if (oldKeyNode == null)
@@ -56,7 +56,7 @@ namespace VeterinaryClinicRB
                     return false;
                 
                 oldKeyNode.InnerText = newKey;
-                doc.Save("./././database/accessKey.xml");
+                doc.Save("./database/accessKey.xml");
 
                 return true;
             }
