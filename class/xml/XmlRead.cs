@@ -221,10 +221,11 @@ namespace VeterinaryClinicRB
             document.Load($"./database/{FileName}.xml");
 
             // Поиск и просмотр элемента в БД по ID
-            XmlNode ?FileNameNode = document.SelectSingleNode($"/{MainTag}/{ObjectTag}[id='" + id + "']");
+            XmlNode FileNameNode = document.SelectSingleNode($"/{MainTag}/{ObjectTag}[id='" + id + "']");
             Console.Clear();
             if (FileNameNode != null)
             {
+                string telegramID = "";
                 switch (FileName)
                 {
                     case "doctors":
@@ -232,7 +233,7 @@ namespace VeterinaryClinicRB
                         string birthday = FileNameNode.SelectSingleNode("birthday").InnerText;
                         string experience = FileNameNode.SelectSingleNode("experience").InnerText;
                         string animalsTreated = FileNameNode.SelectSingleNode("animals-treated").InnerText;
-                        string telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
+                        telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
                         Console.WriteLine("Информация об враче:");
                         Console.WriteLine($"ФИО врача: {fullName}");
@@ -258,12 +259,12 @@ namespace VeterinaryClinicRB
                         Console.WriteLine($"Рекомендации от доктора: {info}");
                         break;     
                     case "pacientes":
-                        string animalType = FileNameNode.SelectSingleNode("paciente-id").InnerText;
-                        string name = FileNameNode.SelectSingleNode("date-time").InnerText;
-                        string gender = FileNameNode.SelectSingleNode("fullname-doctor").InnerText;
-                        string age = FileNameNode.SelectSingleNode("complaints").InnerText;
-                        string fullnameOwner = FileNameNode.SelectSingleNode("diagnosis").InnerText;
-                        string valid = FileNameNode.SelectSingleNode("info").InnerText;
+                        string animalType = FileNameNode.SelectSingleNode("animal-type").InnerText;
+                        string name = FileNameNode.SelectSingleNode("name").InnerText;
+                        string gender = FileNameNode.SelectSingleNode("gender").InnerText;
+                        string age = FileNameNode.SelectSingleNode("age").InnerText;
+                        string fullnameOwner = FileNameNode.SelectSingleNode("fullname-owner").InnerText;
+                        string valid = FileNameNode.SelectSingleNode("valid").InnerText;
                         telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
                         Console.WriteLine("Информация об пациенте:");
