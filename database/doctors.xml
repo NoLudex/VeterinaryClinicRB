@@ -48,4 +48,12 @@
     <animals-treated>100</animals-treated>
     <telegram-id>@Jeronimo</telegram-id>
   </doctor>
+  <doctor>
+    <id>8</id>
+    <fullname-doctor>Олежек Павлов Герасимов</fullname-doctor>
+    <birthday>23.12.2000</birthday>
+    <experience>5</experience>
+    <animals-treated>5</animals-treated>
+    <telegram-id>@FEKF</telegram-id>
+  </doctor>
 </doctors>
