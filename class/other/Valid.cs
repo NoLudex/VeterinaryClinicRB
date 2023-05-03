@@ -64,6 +64,7 @@ namespace VeterinaryClinicRB
             DateTime birthDate;
             string ?inputDate = "";
             
+            Console.Clear();
             Console.Write($"Введите дату {NAME} в формате (ДД.ММ.ГГГГ)\nВвод: ");
             while (!validInput)
             {
@@ -92,6 +93,7 @@ namespace VeterinaryClinicRB
 
         public static string Number(string TEXT)
         {
+            Console.Clear();
             double number = -1;
             while (number < 0)
             {
