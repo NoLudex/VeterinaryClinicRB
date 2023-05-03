@@ -40,30 +40,28 @@ namespace VeterinaryClinicRB
             }
         }
         // Отдельное удаление элементов для статистики
-        public static void DeleteStatistic(string date)
+        public static void StatisticsByDate(string date)
         {
             // Загрузка XML-документа 
+            string path = "./database/statistic.xml";
             XmlDocument doc = new XmlDocument();
-            doc.Load("./database/statistic.xml");
-            
-            // Выбор всех элементов, содержащих заданную дату
-            XmlNodeList nodesToDelete = doc.SelectNodes($"//data[='{date}']");
+            doc.Load(path);
 
-            // Удаление выбранных элементов
-            int deletedCount = nodesToDelete.Count;
+            // Выбираем все элементы, содержащие заданную дату
+            XmlNodeList nodesToDelete = doc.SelectNodes($"//data[date='{date}']");
+
+            // Удаляем все найденные элементы
             foreach (XmlNode node in nodesToDelete)
+            {
                 node.ParentNode.RemoveChild(node);
-            
+            }
+
+            // Сообщаем пользователю, сколько элементов было удалено
             Console.Clear();
-            // Проверка наличия найденных элементов и вывод уведомления
-            if (deletedCount == 0)
-                Console.WriteLine($"Не найдено элементов, связанных с данной датой");
-            else
-                Console.WriteLine($"Удалено элементов: {deletedCount}");
-            Title.Set("Удаление завершено");
+            Console.WriteLine($"Удалено элементов: {nodesToDelete.Count}");
             Title.Wait();
-            // Сохраняем
-            doc.Save("./database/statistic.xml");
+            // Сохраняем изменения в xml-файле
+            doc.Save(path);
         }
     }
 }
