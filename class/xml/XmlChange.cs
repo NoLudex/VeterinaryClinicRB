@@ -29,25 +29,14 @@ namespace VeterinaryClinicRB
                         {
                             Console.Clear();
                             Console.WriteLine($"Вы редактируете врача с ID ({id}).");
+                            Title.Wait();
 
-                            Console.Write("Введите ФИО доктора: ");
-                            fullName = Console.ReadLine();
+                            fullName = Valid.FullNameUser("врача");
+                            birthday = Valid.Date("рождения врача");
+                            experience = Valid.Number("Введите стаж работы: ");
+                            animalsTreated = Valid.Number("Введите количество пройденных клиентов у врача: ");
+                            telegramID = Valid.TelegramID("Введите Telegram врача: ");
 
-                            Console.Write("Введите дату рождения (ДД.ММ.ГГГГ): ");
-                            birthday = Console.ReadLine();
-
-                            Console.Write("Введите стаж работы врача: ");
-                            experience = Console.ReadLine();
-                            
-                            Console.Write("Введите количество пройденных клиентов у врача\nВвод: ");
-                            animalsTreated = Console.ReadLine();
-
-                            Console.Write("Введите Telegram ID врача: ");
-                            telegramID = Console.ReadLine();
-                            if (string.IsNullOrWhiteSpace(telegramID))
-                                telegramID = "@" + telegramID;
-                            else if (!telegramID.StartsWith("@"))
-                                telegramID = "@" + telegramID;
                         } while (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(birthday) || string.IsNullOrWhiteSpace(experience) || string.IsNullOrWhiteSpace(animalsTreated) || string.IsNullOrWhiteSpace(telegramID));
                         
                         FileNameNode.SelectSingleNode("fullname-doctor").InnerText = fullName;
@@ -63,26 +52,64 @@ namespace VeterinaryClinicRB
                         Title.Wait();
                         break;
                     case "admission":
-                        string? pacienteId, dateTime, fullnameDoctor, complaints, diagnosis;
+                        string? pacienteId, dateTime, fullnameDoctor, complaints, diagnosis, time;
                         do 
                         {
                             Console.Clear();
                             Console.WriteLine($"Вы редактируете приём с ID ({id}).");
+                            Title.Wait();
 
-                            Console.Write("Введите ID пациента: ");
-                            pacienteId = Console.ReadLine();
+                            while (true)
+                            {
+                                pacienteId = Valid.Number("Введите ID пациента: ");
+                                // Поиск и просмотр элемента в БД по ID
+                                XmlNode ?PacientesNode = document.SelectSingleNode($"/pacientes/paciente[id='" + pacienteId + "']");
+                                if (PacientesNode != null)
+                                    break;
+                                else
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("Данный пациент отсутствует в базе данных. (Вы желаете попробовать снова ('y' - да, 'другой ответ' - нет)?)");
+                                    string answer = Console.ReadLine();
+                                    if (answer.ToLower() != "y")
+                                        return;
+                                }
+                            }
+                            dateTime = Valid.Date("приёма");
 
-                            Console.Write("Введите дату приёма (ДД.ММ.ГГГГ): ");
-                            dateTime = Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("Введите время приёма (ЧЧ:ММ): ");
+                            time = Console.ReadLine();
+                            if (string.IsNullOrWhiteSpace(time))
+                                time = "00:00";
 
-                            Console.Write("Введите ФИО врача: ");
-                            fullnameDoctor = Console.ReadLine();
-                            
+                            while (true)
+                            {
+                                fullnameDoctor = Valid.FullNameUser("доктора");
+                                // Поиск и просмотр элемента в БД по ID
+                                XmlNode ?DoctorNode = document.SelectSingleNode($"/doctros/doctor[fullname-doctor='" + fullnameDoctor + "']");
+                                if (DoctorNode != null)
+                                    break;
+                                else
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("Данный врач отсутствует в базе данных. (Вы желаете попробовать снова ('y' - да, 'другой ответ' - нет)?)");
+                                    string answer = Console.ReadLine();
+                                    if (answer.ToLower() != "y")
+                                        return;
+                                }
+                            }
+                            Console.Clear();
                             Console.Write("Введите жалобы пациента: ");
                             complaints = Console.ReadLine();
 
+                            Console.Clear();
                             Console.Write("Введите диагноз: ");
                             diagnosis = Console.ReadLine();
+                            
+                            Console.Clear();
+                            Console.WriteLine("Чтобы изменить информацию о приёме, используйте соответствующий пункт программы");
+                            Title.Wait();
                         } while (string.IsNullOrWhiteSpace(pacienteId) || string.IsNullOrWhiteSpace(dateTime) || string.IsNullOrWhiteSpace(fullnameDoctor) || string.IsNullOrWhiteSpace(complaints) || string.IsNullOrWhiteSpace(diagnosis));
                         
                         FileNameNode.SelectSingleNode("paciente-id").InnerText = pacienteId;
@@ -90,6 +117,7 @@ namespace VeterinaryClinicRB
                         FileNameNode.SelectSingleNode("fullname-doctor").InnerText = fullnameDoctor;
                         FileNameNode.SelectSingleNode("complaints").InnerText = complaints;
                         FileNameNode.SelectSingleNode("diagnosis").InnerText = diagnosis;
+                        FileNameNode.SelectSingleNode("time").InnerText = time;
 
                         document.Save("./database/admission.xml");
                         Console.Clear();
@@ -97,34 +125,29 @@ namespace VeterinaryClinicRB
                         Title.Set("Успех!");
                         Title.Wait();
                         break;
-                    case "paciente":
+                    case "pacientes":
                         string? animalType, name, gender, age, fullnameOwner;
                         do 
                         {
                             Console.Clear();
                             Console.WriteLine($"Вы редактируете пациента с ID ({id}).");
+                            Title.Wait();
 
+                            Console.Clear();
                             Console.Write("Введите тип животного: ");
                             animalType = Console.ReadLine();
 
+                            Console.Clear();
                             Console.Write("Введите кличку животного: ");
                             name = Console.ReadLine();
                             
+                            Console.Clear();
                             Console.Write("Введите пол животного: ");
                             gender = Console.ReadLine();
 
-                            Console.Write("Введите возраст животного: ");
-                            age = Console.ReadLine();
-
-                            Console.Write("Введите ФИО владельца животного: ");
-                            fullnameOwner = Console.ReadLine();
-
-                            Console.Write("Введите Telegram владельца: ");
-                            telegramID = Console.ReadLine();
-                            if (string.IsNullOrWhiteSpace(telegramID))
-                                telegramID = "@" + telegramID;
-                            else if (!telegramID.StartsWith("@"))
-                                telegramID = "@" + telegramID;
+                            age = Valid.Number("Введите возраст животного: ");
+                            fullnameOwner = Valid.FullNameUser("владельца");
+                            telegramID = Valid.TelegramID("Введите Telegram владельца: ");
                         } while (string.IsNullOrWhiteSpace(animalType) || string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(gender) || string.IsNullOrWhiteSpace(age) || string.IsNullOrWhiteSpace(fullnameOwner) || string.IsNullOrWhiteSpace(telegramID));
                         
                         FileNameNode.SelectSingleNode("animal-type").InnerText = animalType;
@@ -161,7 +184,7 @@ namespace VeterinaryClinicRB
             Title.Set($"Редактируется: admission.xml ({id})");
             XmlDocument document = new XmlDocument();
             document.Load($"./database/admission.xml");
-            XmlNode ?admissionNode = document.SelectSingleNode($"/admission/animal[id='{id}']");
+            XmlNode admissionNode = document.SelectSingleNode($"/admission/animal[id='{id}']");
 
             if (admissionNode != null)
             {
@@ -172,7 +195,7 @@ namespace VeterinaryClinicRB
                     Console.WriteLine($"Вы редактируете Приём ID ({id})");
 
                     Console.WriteLine("Введите изменённую информацию об данном приёме, информация полностью переписывается\nЕсли нужно, то стоит написать предыдущую информацию, чтобы её дополнить.");
-                    Console.WriteLine("-----------------\nПредыдущая информация:\n" + admissionNode.SelectSingleNode("fullname-doctor").InnerText + "\n-----------------");
+                    Console.WriteLine("-----------------\nПредыдущая информация:\n" + admissionNode.SelectSingleNode("info").InnerText + "\n-----------------");
                     Console.Write("Начните ввод здесь: ");
                     info = Console.ReadLine();
                 } while (string.IsNullOrWhiteSpace(info));
