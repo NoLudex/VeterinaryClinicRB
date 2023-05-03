@@ -18,7 +18,7 @@ namespace VeterinaryClinicRB
             XmlDocument document = new XmlDocument();
             document.Load($"./database/{FileName}.xml");
             
-            XmlNode ?root = document.SelectSingleNode($"/{MainTag}");
+            XmlNode root = document.SelectSingleNode($"/{MainTag}");
             XmlElement AddElement = document.CreateElement($"{ObjectTag}");
 
             switch (FileName)
