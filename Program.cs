@@ -242,8 +242,8 @@ namespace VeterinaryClinicRB
                                             break;
                                             case 5:
                                                 Console.Write("Введите ID: ");
-                                                int idToDelete = int.Parse(Console.ReadLine());
-                                                XmlDelete.This("pacientes", "pacientes", "paciente", idToDelete);
+                                                string idToDelete = Console.ReadLine();
+                                                XmlChange.UpdateValid(idToDelete);
                                             break;
                                             case 6:
                                                 Console.Write("Введите ID: ");
@@ -277,7 +277,7 @@ namespace VeterinaryClinicRB
                                             "1. Открыть список/статистику по дням\n" +
                                             "2. Удалить статистику дня\n" +
                                             "3. Сделать сортировку статистики\n" +
-                                            "4. Сегодняшняя статистика\n" +
+                                            "4. Статистика с количеством событий\n" +
                                             "0. Выйти в основное меню\n" +
                                             "Ввод: "
                                         );
@@ -295,12 +295,18 @@ namespace VeterinaryClinicRB
                                                 XmlRead.Book("statistic", "statistic", "data");
                                             break;
                                             case 2:
+                                                Console.Clear();
                                                 Console.Write("Введите дату (ДД.ММ.ГГГГ): ");
                                                 string data = Console.ReadLine();
                                                 if (string.IsNullOrWhiteSpace(data))
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("Вы ввели дату неверно.");
+                                                    Title.Wait();
                                                     break;
+                                                }
                                                 else
-                                                    XmlDelete.DeleteStatistic(data);
+                                                    XmlDelete.StatisticsByDate(data);
                                             break;
                                             case 3:
                                                 Console.Clear();
@@ -369,7 +375,7 @@ namespace VeterinaryClinicRB
                                     }
                                 break;
                                 case 0:
-
+                                    Environment.Exit(0);
                                 break;
                                 default:
                                     Console.WriteLine("Правильно введите номер действия");
