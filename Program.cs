@@ -39,9 +39,11 @@ namespace VeterinaryClinicRB
                         bool globalMenu = true;
                         while (globalMenu)
                         {
+                            Statistic statistic = new Statistic("./database/statistic.xml");
+                            int todayCount = statistic.GetTodayCount();
                             Title.Set("Главная");
-                            Console.Clear();
-                            Console.WriteLine("Главное меню | VeterinaryClinicRB\nСделайте выбор, с каким меню работать:");
+                            Console.Clear(); 
+                            Console.WriteLine($"Главное меню | VeterinaryClinicRB\nСегодня было совершено {todayCount} приёмов.\nСделайте выбор, с каким меню работать:");
                             Console.Write(
                                 "1. Врачи\n" +
                                 "2. Приёмы\n" +
