@@ -180,8 +180,6 @@ namespace VeterinaryClinicRB
                             Console.Clear();
                             Console.Write("Введите кличку животного: ");
                             name = Console.ReadLine();
-
-                            fullnameOwner = Valid.FullNameUser("владельца");
                             
                             Console.Clear();
                             Console.Write("Введите пол животного: ");
@@ -190,14 +188,15 @@ namespace VeterinaryClinicRB
                             age = Valid.Number("Введите возраст животного: ");
                             fullnameOwner = Valid.FullNameUser("владельца");
 
-                            Console.Clear();
-                            Console.Write("Валиден ли данный пациент(?) [Да / Нет]: ");
-                            do
-                                valid = Console.ReadLine();
-                            while (valid == null || valid.ToLower() != "да" || valid.ToLower() != "нет");
+                            // do
+                            // {
+                            //     Console.Clear();
+                            //     Console.Write("Валиден ли данный пациент(?) [Да / Нет]: ");
+                            //     valid = Console.ReadLine();
+                            // } while (valid == null || valid.ToLower() != "да" || valid.ToLower() != "нет");
 
                             telegramID = Valid.TelegramID("Введите Telegram владельца: ");
-                        } while (string.IsNullOrWhiteSpace(animalType) || string.IsNullOrWhiteSpace(name)  || string.IsNullOrWhiteSpace(gender) || string.IsNullOrWhiteSpace(age) || string.IsNullOrWhiteSpace(fullnameOwner) || string.IsNullOrWhiteSpace(valid) || string.IsNullOrWhiteSpace(telegramID));
+                        } while (string.IsNullOrWhiteSpace(animalType) || string.IsNullOrWhiteSpace(name)  || string.IsNullOrWhiteSpace(gender) || string.IsNullOrWhiteSpace(age) || string.IsNullOrWhiteSpace(fullnameOwner) || string.IsNullOrWhiteSpace(telegramID));
 
                         Element1 = document.CreateElement("id");
                         Element2 = document.CreateElement("animal-type");
@@ -214,7 +213,7 @@ namespace VeterinaryClinicRB
                         Element4.InnerText = gender;
                         Element5.InnerText = age;
                         Element6.InnerText = fullnameOwner;
-                        Element7.InnerText = valid;
+                        Element7.InnerText = "Да";
                         Element8.InnerText = telegramID;
 
                         AddElement.AppendChild(Element1);
