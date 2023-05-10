@@ -2,21 +2,21 @@
 <doctors>
   <doctor>
     <id>1</id>
-    <fullname-doctor>Иванов Олег Григорьевич</fullname-doctor>
+    <fullname-doctor>Яковлев Максим Вадимович</fullname-doctor>
     <birthday>01.01.1970</birthday>
     <animals-treated>100</animals-treated>
     <telegram-id>@telegram</telegram-id>
   </doctor>
   <doctor>
     <id>2</id>
-    <fullname-doctor>Колотушкин Сергей Сергеевич</fullname-doctor>
+    <fullname-doctor>Чиганцев Алексей Витальевич</fullname-doctor>
     <birthday>01.01.1970</birthday>
     <animals-treated>100</animals-treated>
     <telegram-id>@ystenk</telegram-id>
   </doctor>
   <doctor>
     <id>3</id>
-    <fullname-doctor>Морковкин Андрей Иванович</fullname-doctor>
+    <fullname-doctor>Запупин Роман Алексеевич</fullname-doctor>
     <birthday>01.01.1970</birthday>
     <animals-treated>100</animals-treated>
     <telegram-id>@telegram-id</telegram-id>
