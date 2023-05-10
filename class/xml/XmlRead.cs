@@ -288,13 +288,23 @@ namespace VeterinaryClinicRB
             }
         }
         // Получить Максимальный ID из файла конфигурации
-        public static int GetMaxId(string FileName)
+        public static int GetFreeID(string FileName)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            int newId = Convert.ToInt32(config.AppSettings.Settings[$"Max{FileName}Id"].Value);
-            config.AppSettings.Settings[$"Max{FileName}Id"].Value = $"{newId + 1}";
-            config.Save();
-            return newId;
+            XDocument doc = XDocument.Load($"./database/{FileName}.xml");
+            int ID = 1;
+
+            while (true)
+            {
+                bool idExists = doc.Descendants("id").Any(x => (int)x == ID);
+                if (!idExists)
+                    return ID;
+                ID++;
+            }
+            // Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            // int newId = Convert.ToInt32(config.AppSettings.Settings[$"Max{FileName}Id"].Value);
+            // config.AppSettings.Settings[$"Max{FileName}Id"].Value = $"{newId + 1}";
+            // config.Save();
+            // return newId;
         }
         
         public static void FindPacientByName()
