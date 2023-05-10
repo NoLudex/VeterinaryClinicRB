@@ -181,22 +181,7 @@ namespace VeterinaryClinicRB
                             Console.Write("Введите кличку животного: ");
                             name = Console.ReadLine();
 
-                            while (true)
-                            {
-                                fullnameDoctor = Valid.FullNameUser("доктора");
-                                // Поиск и просмотр элемента в БД по ID
-                                XmlNode ?FileNameNode = document.SelectSingleNode($"/doctros/doctor[fullname-doctor='" + fullnameDoctor + "']");
-                                if (FileNameNode != null)
-                                    break;
-                                else
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine("Данный врач отсутствует в базе данных. (Вы желаете попробовать снова ('y' - да, 'другой ответ' - нет)?)");
-                                    string answer = Console.ReadLine();
-                                    if (answer.ToLower() != "y")
-                                        return;
-                                }
-                            }
+                            fullnameOwner = Valid.FullNameUser("владельца");
                             
                             Console.Clear();
                             Console.Write("Введите пол животного: ");
