@@ -44,7 +44,6 @@ namespace VeterinaryClinicRB
                                 Console.WriteLine(
                                     "ФИО доктора: " + FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText + "\n" +
                                     "Дата рождения: " + FileNameNode.SelectSingleNode("birthday")?.InnerText + "\n" +
-                                    "Опыт работы " + FileNameNode.SelectSingleNode("experience")?.InnerText + " лет" + "\n" +
                                     "Пациентов прошло данного врача:  " + FileNameNode.SelectSingleNode("animals-treated")?.InnerText + "\n" +
                                     "Telegram ID:  " + FileNameNode.SelectSingleNode("telegram-id")?.InnerText + " (" + FileNameNode.SelectSingleNode("id")?.InnerText + ")\n" +
                                     "-----------------------------"
@@ -231,14 +230,12 @@ namespace VeterinaryClinicRB
                     case "doctors":
                         string fullName = FileNameNode.SelectSingleNode("fullname-doctor").InnerText;
                         string birthday = FileNameNode.SelectSingleNode("birthday").InnerText;
-                        string experience = FileNameNode.SelectSingleNode("experience").InnerText;
                         string animalsTreated = FileNameNode.SelectSingleNode("animals-treated").InnerText;
                         telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
                         Console.WriteLine("Информация об враче:");
                         Console.WriteLine($"ФИО врача: {fullName}");
                         Console.WriteLine("Дата рождения: " + birthday);
-                        Console.WriteLine("Опыт работы " + experience + " лет");
                         Console.WriteLine("Пациентов прошло данного врача: " + animalsTreated);
                         Console.WriteLine("Telegram ID: " + telegramID + $" ({id})");
                         break; 

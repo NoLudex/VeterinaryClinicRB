@@ -24,7 +24,7 @@ namespace VeterinaryClinicRB
             switch (FileName)
                 {
                     case "doctors":
-                        string? id, fullName, birthday, experience, animalsTreated, telegramID;
+                        string? id, fullName, birthday, animalsTreated, telegramID;
                         id = XmlRead.GetMaxId(FileName).ToString();
                         do 
                         {
@@ -35,30 +35,25 @@ namespace VeterinaryClinicRB
 
                             fullName = Valid.FullNameUser("врача");
                             birthday = Valid.Date("рождения врача");
-                            experience = Valid.Number("Введите опыт работы врача: ");
-                            animalsTreated = Valid.Number("Введите количество пройденных клиентов у врача\nВвод: ");
                             telegramID = Valid.TelegramID("Введите Telegram врача: ");
 
-                        } while (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(birthday) || string.IsNullOrWhiteSpace(experience) || string.IsNullOrWhiteSpace(animalsTreated) || string.IsNullOrWhiteSpace(telegramID));
+                        } while (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(birthday) || string.IsNullOrWhiteSpace(telegramID));
 
                         XmlElement idElement = document.CreateElement("id");
                         XmlElement fullNameElement = document.CreateElement("fullname-doctor");
                         XmlElement birthdayElement = document.CreateElement("birthday");
-                        XmlElement experienceElement = document.CreateElement("experience");
                         XmlElement animalsTreatedElement = document.CreateElement("animals-treated");
                         XmlElement telegramIDElement = document.CreateElement("telegram-id");
 
                         idElement.InnerText = id;
                         fullNameElement.InnerText = fullName;
                         birthdayElement.InnerText = birthday;
-                        experienceElement.InnerText = experience;
-                        animalsTreatedElement.InnerText = animalsTreated;
+                        animalsTreatedElement.InnerText = "0";
                         telegramIDElement.InnerText = telegramID;
 
                         AddElement.AppendChild(idElement);
                         AddElement.AppendChild(fullNameElement);
                         AddElement.AppendChild(birthdayElement);
-                        AddElement.AppendChild(experienceElement);
                         AddElement.AppendChild(animalsTreatedElement);
                         AddElement.AppendChild(telegramIDElement);
 

@@ -24,7 +24,7 @@ namespace VeterinaryClinicRB
                 switch (FileName)
                 {
                     case "doctors":
-                        string? fullName, birthday, experience, animalsTreated, telegramID;
+                        string? fullName, birthday, animalsTreated, telegramID;
                         do 
                         {
                             Console.Clear();
@@ -33,15 +33,13 @@ namespace VeterinaryClinicRB
 
                             fullName = Valid.FullNameUser("врача");
                             birthday = Valid.Date("рождения врача");
-                            experience = Valid.Number("Введите стаж работы: ");
                             animalsTreated = Valid.Number("Введите количество пройденных клиентов у врача: ");
                             telegramID = Valid.TelegramID("Введите Telegram врача: ");
 
-                        } while (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(birthday) || string.IsNullOrWhiteSpace(experience) || string.IsNullOrWhiteSpace(animalsTreated) || string.IsNullOrWhiteSpace(telegramID));
+                        } while (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(birthday) || string.IsNullOrWhiteSpace(animalsTreated) || string.IsNullOrWhiteSpace(telegramID));
                         
                         FileNameNode.SelectSingleNode("fullname-doctor").InnerText = fullName;
                         FileNameNode.SelectSingleNode("birthday").InnerText = birthday;
-                        FileNameNode.SelectSingleNode("experience").InnerText = experience;
                         FileNameNode.SelectSingleNode("animals-treated").InnerText = animalsTreated;
                         FileNameNode.SelectSingleNode("telegram-id").InnerText = telegramID;
 
