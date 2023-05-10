@@ -60,16 +60,18 @@ namespace VeterinaryClinicRB
                             while (true)
                             {
                                 pacienteId = Valid.Number("Введите ID пациента: ");
+                                XDocument doc = XDocument.Load("./database/pacientes.xml");
                                 // Поиск и просмотр элемента в БД по ID
-                                XmlNode ?PacientesNode = document.SelectSingleNode($"/pacientes/paciente[id='" + pacienteId + "']");
-                                if (PacientesNode != null)
+                                bool idExists = doc.Descendants("id").Any(x => (string)x == pacienteId);
+
+                                if (idExists)
                                     break;
                                 else
                                 {
                                     Console.Clear();
-                                    Console.WriteLine("Данный пациент отсутствует в базе данных. (Вы желаете попробовать снова ('y' - да, 'другой ответ' - нет)?)");
+                                    Console.Write("Данный пациент отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
                                     string answer = Console.ReadLine();
-                                    if (answer.ToLower() != "y")
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да")
                                         return;
                                 }
                             }
@@ -84,19 +86,22 @@ namespace VeterinaryClinicRB
                             while (true)
                             {
                                 fullnameDoctor = Valid.FullNameUser("доктора");
+                                XDocument doc = XDocument.Load("./database/pacientes.xml");
                                 // Поиск и просмотр элемента в БД по ID
-                                XmlNode ?DoctorNode = document.SelectSingleNode($"/doctros/doctor[fullname-doctor='" + fullnameDoctor + "']");
-                                if (DoctorNode != null)
+                                bool idExists = doc.Descendants("fullname-doctor").Any(x => (string)x == fullnameDoctor);
+
+                                if (idExists)
                                     break;
                                 else
                                 {
                                     Console.Clear();
-                                    Console.WriteLine("Данный врач отсутствует в базе данных. (Вы желаете попробовать снова ('y' - да, 'другой ответ' - нет)?)");
+                                    Console.Write("Данный врач отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
                                     string answer = Console.ReadLine();
-                                    if (answer.ToLower() != "y")
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да")
                                         return;
                                 }
                             }
+                            
                             Console.Clear();
                             Console.Write("Введите жалобы пациента: ");
                             complaints = Console.ReadLine();
@@ -124,7 +129,7 @@ namespace VeterinaryClinicRB
                         Title.Wait();
                         break;
                     case "pacientes":
-                        string? animalType, name, gender, age, fullnameOwner;
+                        string? name, age;
                         do 
                         {
                             Console.Clear();
@@ -132,28 +137,14 @@ namespace VeterinaryClinicRB
                             Title.Wait();
 
                             Console.Clear();
-                            Console.Write("Введите тип животного: ");
-                            animalType = Console.ReadLine();
-
-                            Console.Clear();
                             Console.Write("Введите кличку животного: ");
                             name = Console.ReadLine();
-                            
-                            Console.Clear();
-                            Console.Write("Введите пол животного: ");
-                            gender = Console.ReadLine();
 
                             age = Valid.Number("Введите возраст животного: ");
-                            fullnameOwner = Valid.FullNameUser("владельца");
-                            telegramID = Valid.TelegramID("Введите Telegram владельца: ");
-                        } while (string.IsNullOrWhiteSpace(animalType) || string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(gender) || string.IsNullOrWhiteSpace(age) || string.IsNullOrWhiteSpace(fullnameOwner) || string.IsNullOrWhiteSpace(telegramID));
+                        } while (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(age));
                         
-                        FileNameNode.SelectSingleNode("animal-type").InnerText = animalType;
                         FileNameNode.SelectSingleNode("name").InnerText = name;
-                        FileNameNode.SelectSingleNode("gender").InnerText = gender;
                         FileNameNode.SelectSingleNode("age").InnerText = age;
-                        FileNameNode.SelectSingleNode("fullnameOwner").InnerText = fullnameOwner;
-                        FileNameNode.SelectSingleNode("telegram-id").InnerText = telegramID;
 
                         document.Save("./database/paciente.xml");
                         Console.Clear();
