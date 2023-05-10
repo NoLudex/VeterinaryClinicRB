@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
+using System.Globalization;
 
 namespace VeterinaryClinicRB
 {
@@ -49,6 +50,7 @@ namespace VeterinaryClinicRB
                                 "2. Приёмы\n" +
                                 "3. Пациенты\n" +
                                 "4. Статистика\n" +
+                                "5. Новые функции\n" +
                                 "0. Выход из программы\n" +
                                 "Ввод: "
                             );
@@ -114,10 +116,6 @@ namespace VeterinaryClinicRB
                                             case 6:
                                                 string FindDoctor = Valid.FullNameUser("врача");
                                                 XmlStat.FindDoctorStats(FindDoctor);
-                                            break;
-                                            case 228:
-                                                XmlRead.PrintAdmissionData();
-                                                Title.Wait();
                                             break;
                                             case 0:
                                                 doctorMenu = false;
@@ -212,7 +210,7 @@ namespace VeterinaryClinicRB
                                             "4. Добавить нового Пациента в список\n" +
                                             "5. Удалить Пациента, указав ID\n" +
                                             "6. Изменить валидность Пациента, указать ID\n" +
-                                            "7. Найти Пациента(ов) по клички\n" +
+                                            "7. Найти Пациента(ов) по кличке\n" +
                                             "0. Выйти в основное меню\n" +
                                             "Ввод: "
                                         );
@@ -280,6 +278,7 @@ namespace VeterinaryClinicRB
                                             "2. Удалить статистику дня\n" +
                                             "3. Сделать сортировку статистики\n" +
                                             "4. Статистика с количеством событий\n" +
+                                            "5. Другие параметры просмотра статистики\n" +
                                             "0. Выйти в основное меню\n" +
                                             "Ввод: "
                                         );
@@ -325,6 +324,39 @@ namespace VeterinaryClinicRB
                                                 Console.WriteLine(XmlStat.GetEventsToday());
                                                 Title.Wait();
                                             break;
+                                            case 5:
+                                                Console.Clear();
+                                                Console.WriteLine("Введите фильтр для просмотра статистики");
+                                                Console.WriteLine("1. Просмотреть все приёмы");
+                                                Console.WriteLine("2. По диапазону дат");
+                                                Console.WriteLine("3. По дате");
+                                                int filter = int.Parse(Console.ReadLine());
+                                                switch (filter)
+                                                {
+                                                    case 1:
+                                                        XmlRead.Book("admission", "admission", "animal");
+                                                    break;
+                                                    case 2:
+                                                        Console.Clear();
+                                                        string startTimeSrt = Valid.Date("(начальную)");
+                                                        string endTimeSrt = Valid.Date("(конечную)");
+                                                        DateTime startTime = DateTime.ParseExact(startTimeSrt, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                                                        DateTime endTime = DateTime.ParseExact(endTimeSrt, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                                                        XmlStat.FindAdmissions(startTime, endTime);
+                                                    break;
+                                                    case 3:
+                                                        Console.Clear();
+                                                        Title.Set("Просмотр приёма по дате");
+                                                        string date = Valid.Date("");
+                                                        Title.Set($"Просмотр приёмов {date}");
+                                                        XmlStat.SearchByDate(date);
+                                                    break;
+                                                    default:
+                                                    break;
+                                                }
+                                                
+                                                Title.Wait();
+                                            break;
                                             case 0:
                                                 statisticMenu = false;
                                             break;
@@ -334,6 +366,47 @@ namespace VeterinaryClinicRB
                                                 Title.Set("Ошибка");
                                                 Title.Wait();
                                             break;
+                                        }
+                                    }
+                                break;
+                                case 5:
+                                    bool fignya = true;
+                                    while (fignya)
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Новые функции программы");
+                                        Console.Write(
+                                            "1. Вывод статистики по виду животного (1.0.1)\n" +
+                                            "0. Вернуться на главную\n" +
+                                            "Ввод: "
+                                        );
+
+                                        int choice;
+                                        input = Console.ReadLine();
+                                        if (string.IsNullOrWhiteSpace(input))
+                                            break;
+                                        else
+                                            choice = Convert.ToInt32(input);
+                        
+                                        switch (choice)
+                                        {
+                                            case 1:
+                                                Console.Clear();
+                                                Console.Write("Введите тип животного: ");
+                                                string animalType = Console.ReadLine();
+                                                if (!string.IsNullOrWhiteSpace(animalType))
+                                                    XmlStat.GetStatsByAnimalType(animalType);
+                                                else
+                                                {
+                                                    Console.Clear();
+                                                    Title.Set("Ошибка ввода");
+                                                    Console.WriteLine("Неверный формат, попробуйте снова");
+                                                    Title.Wait();
+                                                }
+                                                break;
+                                            default:
+                                                fignya = false;
+                                                break;
                                         }
                                     }
                                 break;
