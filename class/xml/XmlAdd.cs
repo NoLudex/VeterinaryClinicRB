@@ -25,7 +25,7 @@ namespace VeterinaryClinicRB
                 {
                     case "doctors":
                         string? id, fullName, birthday, animalsTreated, telegramID;
-                        id = XmlRead.GetMaxId(FileName).ToString();
+                        id = XmlRead.GetFreeID(FileName).ToString();
                         do 
                         {
                             Title.Set($"Добавление врача ID ({id})");
@@ -67,7 +67,7 @@ namespace VeterinaryClinicRB
                         break;
                     case "admission":
                         string? pacienteId, time, dateTime, fullnameDoctor, complaints, diagnosis, info;
-                        id = XmlRead.GetMaxId(FileName).ToString();
+                        id = XmlRead.GetFreeID(FileName).ToString();
                         XmlDocument doctor = new XmlDocument();
                         document.Load($"./database/doctors.xml");
                         Title.Set($"Добавление приёма ID ({id})");
@@ -165,7 +165,7 @@ namespace VeterinaryClinicRB
                         break;
                     case "pacientes":
                         string? animalType, name, gender, age, fullnameOwner, valid;
-                        id = XmlRead.GetMaxId(FileName).ToString();
+                        id = XmlRead.GetFreeID(FileName).ToString();
                         do 
                         {
                             Title.Set($"Добавление пациента ID ({id})");
