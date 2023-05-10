@@ -28,7 +28,7 @@ namespace VeterinaryClinicRB
                     Console.WriteLine("[DEBUG] Произошла внутренняя ошибка");
                 
                 document.Save($"./database/{FileName}.xml");
-                Console.WriteLine($"Успешно удалена секцая под ID: {id}, в файле {FileName}.xml");
+                Console.WriteLine($"Успешно удалена секция под ID: {id}, в файле {FileName}.xml");
                 Title.Set("Успех!");
                 Title.Wait();
             }
