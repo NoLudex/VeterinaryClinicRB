@@ -2,27 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace VeterinaryClinicRB
 {
-    public class Statistic
-    {
-        public string date {get; set;}
-        public string description {get; set;}
+    public class Statistic { 
+        private XDocument xmlDocument;
 
-        // Конструктор класса
-        public Statistic(string date, string description)
+        public Statistic(string xmlFilePath)
         {
-            // Присвоение значений
-            this.date = date;
-            this.description = description;
+            xmlDocument = XDocument.Load(xmlFilePath);
         }
-        public Statistic()
+
+        public int GetTodayCount()
         {
-            // Присвоение значений, если их нет
-            this.date = "Дата неизвестна";
-            this.description = "Сведения о дне отсутствуют";
+            string today = DateTime.Today.ToString(xmlDocument.Element("statistic").Attribute("dateformat").Value);
+            
+            var todayData = xmlDocument.Descendants("data")
+                .Where(d => d.Element("date").Value == today);
+            
+            return todayData.Count();
         }
-    } 
-       
+    }
 }
