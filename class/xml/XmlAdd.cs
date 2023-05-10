@@ -80,16 +80,18 @@ namespace VeterinaryClinicRB
                             while (true)
                             {
                                 pacienteId = Valid.Number("Введите ID пациента: ");
+                                XDocument doc = XDocument.Load("./database/pacientes.xml");
                                 // Поиск и просмотр элемента в БД по ID
-                                XmlNode ?FileNameNode = document.SelectSingleNode($"/pacientes/paciente[id='" + pacienteId + "']");
-                                if (FileNameNode != null)
+                                bool idExists = doc.Descendants("id").Any(x => (string)x == pacienteId);
+
+                                if (idExists)
                                     break;
                                 else
                                 {
                                     Console.Clear();
-                                    Console.WriteLine("Данный пациент отсутствует в базе данных. (Вы желаете попробовать снова ('y' - да, 'другой ответ' - нет)?)");
+                                    Console.Write("Данный пациент отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
                                     string answer = Console.ReadLine();
-                                    if (answer.ToLower() != "y")
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да")
                                         return;
                                 }
                             }
@@ -97,22 +99,25 @@ namespace VeterinaryClinicRB
                             Console.Clear();
                             Console.WriteLine("Введите время приёма (ЧЧ:ММ): ");
                             time = Console.ReadLine();
+                            if (string.IsNullOrWhiteSpace(time))
+                                time = "00:00";
 
                             dateTime = Valid.Date("приёма");
-                            
                             while (true)
                             {
                                 fullnameDoctor = Valid.FullNameUser("доктора");
+                                XDocument doc = XDocument.Load("./database/pacientes.xml");
                                 // Поиск и просмотр элемента в БД по ID
-                                XmlNode ?FileNameNode = document.SelectSingleNode($"/doctros/doctor[fullname-doctor='" + fullnameDoctor + "']");
-                                if (FileNameNode != null)
+                                bool idExists = doc.Descendants("fullname-doctor").Any(x => (string)x == fullnameDoctor);
+
+                                if (idExists)
                                     break;
                                 else
                                 {
                                     Console.Clear();
-                                    Console.WriteLine("Данный врач отсутствует в базе данных. (Вы желаете попробовать снова ('y' - да, 'другой ответ' - нет)?)");
+                                    Console.Write("Данный врач отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
                                     string answer = Console.ReadLine();
-                                    if (answer.ToLower() != "y")
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да")
                                         return;
                                 }
                             }
