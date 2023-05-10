@@ -2,41 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.Configuration;
 
 namespace VeterinaryClinicRB
 {
-    public class Pacientes
+    public class Paciente
     {
-        public string id {get; set;}
-        public string name {get; set;}
-        public string gender {get; set;}
-        public string age {get; set;}
-        public string fullnameOwner {get; set;}
-        public string valid {get; set;}
-        public string telegramId { get; set;}
-
-        // Конструктор класса
-        public Pacientes(string id, string name, string gender, string age, string fullnameOwner, string valid, string telegramId)
+        public int Id { get; set; }
+        public string AnimalType { get; set; }
+        public string Name { get; set; }
+        public string Gender { get; set; }
+        public int Age { get; set; }
+        public string FullnameOwner { get; set; }
+        public string IsValid { get; set; }
+        public string TelegramId { get; set; }
+        public static List<Paciente> Get()
         {
-            // Присвоение значений
-            this.id = id;
-            this.name = name;
-            this.gender = gender;
-            this.age = age;
-            this.fullnameOwner = fullnameOwner;
-            this.valid = valid;
-            this.telegramId = telegramId;
-        }
-        public Pacientes()
-        {
-            // Присвоение значений, если их нет
-            this.id = "0";
-            this.name = "Неизвестная Кличка";
-            this.gender = "Неопределенный пол";
-            this.age = "Неопределенный возраст" ;
-            this.fullnameOwner = "Неизвестно";
-            this.valid = "Неопределено" ;
-            this.telegramId = "TG: ID не задан";
+            XDocument document = XDocument.Load("./database/pacientes.xml");
+            return document.Descendants("paciente").Select(p => new Paciente
+            {
+                Id = (int)p.Element("id"),
+                AnimalType = p.Element("animal-type").Value,
+                Name = p.Element("name").Value,
+                Gender = p.Element("gender").Value,
+                Age = (int)p.Element("age"),
+                FullnameOwner = p.Element("fullname-owner").Value,
+                IsValid = p.Element("valid").Value,
+                TelegramId = p.Element("telegram-id").Value
+            }).ToList();
         }
     }
 }
