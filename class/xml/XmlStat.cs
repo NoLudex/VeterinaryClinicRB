@@ -6,6 +6,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Configuration;
+using System.Globalization;
 
 namespace VeterinaryClinicRB
 {
@@ -121,8 +122,6 @@ namespace VeterinaryClinicRB
 
         public static void FindDoctorStats(string fullName)
         {
-            Console.WriteLine($"Статистика приемов врача {fullName}:");
-
             // Загружаем базу данных врачей из файла
             XmlDocument doctorsDoc = new XmlDocument();
             doctorsDoc.Load("./database/doctors.xml");
@@ -143,21 +142,25 @@ namespace VeterinaryClinicRB
             admissionsDoc.Load("./database/admission.xml");
 
             // Фильтрация приемов по ФИО врача
-            XmlNodeList admissionNodes = admissionsDoc.SelectNodes($"admissions/animal[fullname-doctor='{fullName}']");
+            XmlNodeList admissionNodes = admissionsDoc.SelectNodes($"admission/animal[fullname-doctor='{fullName}']");
 
             // Вывод результатов поиска
             if (admissionNodes.Count > 0)
             {
+                int i = 1;
+                Console.Clear();
                 foreach (XmlNode admissionNode in admissionNodes)
                 {
+                    Title.Set($"Приём {i} / {admissionNodes.Count}");
+                    Console.WriteLine($"Статистика приемов врача {fullName}:");
                     Console.WriteLine($"Пациент: {admissionNode.SelectSingleNode("paciente-id").InnerText}");
-                    Console.WriteLine($"Дата и время приема: {admissionNode.SelectSingleNode("date-time").InnerText}");
+                    Console.WriteLine($"Дата и время приема: {admissionNode.SelectSingleNode("date-time").InnerText} в {admissionNode.SelectSingleNode("time").InnerText}");
                     Console.WriteLine($"Жалобы: {admissionNode.SelectSingleNode("complaints").InnerText}");
                     Console.WriteLine($"Диагноз: {admissionNode.SelectSingleNode("diagnosis").InnerText}");
                     Console.WriteLine($"Рекомендации: {admissionNode.SelectSingleNode("info").InnerText}");
                     Console.WriteLine("----------------------------");
+                    Title.Wait();
                 }
-                Title.Wait();
             }
             else
             {
@@ -166,6 +169,215 @@ namespace VeterinaryClinicRB
                 Console.WriteLine("У данного врача нет истории приёмов");
                 Title.Wait();
             }
+        }
+
+        public static void SearchByDate(string inputDate, int pageSize = 2)
+        {
+            XDocument admissionXml = XDocument.Load("./database/admission.xml");
+
+            // Выполняем поиск по дате, используя LINQ to XML
+            var result = from admission in admissionXml.Descendants("animal")
+                        where admission.Element("date-time").Value == inputDate
+                        select new
+                        {
+                            Id = admission.Element("id").Value,
+                            Time = admission.Element("time").Value,
+                            PacienteId = admission.Element("paciente-id").Value,
+                            DateTime = admission.Element("date-time").Value,
+                            FullNameDoctor = admission.Element("fullname-doctor").Value,
+                            Complaints = admission.Element("complaints").Value,
+                            Diagnosis = admission.Element("diagnosis").Value,
+                            Info = admission.Element("info").Value
+                        };
+
+            int totalRecords = result.Count();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            int currentPage = 1;
+
+            while(true)
+            {
+                Console.Clear();
+                
+                // Получаем результаты по текущей странице
+                var pagedResult = result.Skip((currentPage - 1) * pageSize).Take(pageSize);
+
+                foreach (var admission in pagedResult)
+                {
+                    Console.WriteLine($"ID: {admission.Id}");
+                    Console.WriteLine($"Время: {admission.Time}");
+                    Console.WriteLine($"Идентификатор пациента: {admission.PacienteId}");
+                    Console.WriteLine($"Дата и время приема: {admission.DateTime}");
+                    Console.WriteLine($"ФИО врача: {admission.FullNameDoctor}");
+                    Console.WriteLine($"Жалобы: {admission.Complaints}");
+                    Console.WriteLine($"Диагноз: {admission.Diagnosis}");
+                    Console.WriteLine($"Дополнительная информация: {admission.Info}");
+                    Console.WriteLine();
+                }
+                if (totalRecords == 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("В данную дату нет приёмов");
+                    Title.Set("Приёмов не найдено");
+                    Title.Wait();
+                    return;
+                }
+                // Выводим информацию о количестве записей, текущей странице и общем количестве страниц
+                Console.WriteLine($"Всего записей: {totalRecords}, Текущая страница: {currentPage}, Всего страниц: {totalPages}");
+
+                // Получаем команду от пользователя
+                Console.Write("Введите команду (n - следующая страница, p - предыдущая страница, что-то другое - выход): ");
+                string command = Console.ReadLine();
+
+                // Обрабатываем команду пользователя
+                if(command.ToLower() == "n")
+                {
+                    if(currentPage < totalPages)
+                    {
+                        currentPage++;
+                    }
+                }
+                else if(command.ToLower() == "p")
+                {
+                    if(currentPage > 1)
+                    {
+                    currentPage--;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        public static void FindAdmissions(DateTime startTime, DateTime endTime)
+        {
+            XDocument document = XDocument.Load("./database/admission.xml");
+            var admissions = document.Descendants("animal").Where(a =>
+            {
+                DateTime time = DateTime.ParseExact(a.Element("time").Value, "H:mm", null);
+                DateTime date = DateTime.ParseExact(a.Element("date-time").Value, "dd.MM.yyyy", null);
+                DateTime admissionTime = date + time.TimeOfDay;
+                return admissionTime >= startTime && admissionTime <= endTime;
+            }).ToList();
+            int count = admissions.Count;
+
+            if (count > 0)
+            {
+                Title.Set("Найдено приемов: " + count);
+
+                int index = 0;
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Прием #" + (index + 1) + ":");
+                    Console.WriteLine("Время: " + admissions[index].Element("time").Value);
+                    Console.WriteLine("ID пациента: " + admissions[index].Element("paciente-id").Value);
+                    Console.WriteLine("Дата: " + admissions[index].Element("date-time").Value);
+                    Console.WriteLine("ФИО врача: " + admissions[index].Element("fullname-doctor").Value);
+                    Console.WriteLine("Жалобы: " + admissions[index].Element("complaints").Value);
+                    Console.WriteLine("Диагноз: " + admissions[index].Element("diagnosis").Value);
+                    Console.WriteLine("Информация: " + admissions[index].Element("info").Value);
+
+                    Console.WriteLine("\nНажмите n для перехода к следующему приему, p - к предыдущему, любую другую клавишу для выхода");
+                    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                    if (keyInfo.Key == ConsoleKey.N)
+                    {
+                        index++;
+                        if (index == count) index = 0;
+                    }
+                    else if (keyInfo.Key == ConsoleKey.P)
+                    {
+                        index--;
+                        if (index < 0) index = count - 1;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ничего не найдено");
+            }
+        }
+        public static void GetStatsByAnimalType(string animalType)
+        {
+            List<Paciente> pacientes = Paciente.Get();
+            List<Admission> admissions = Admission.Get();
+            var filteredPacientes = pacientes.Where(p => string.Equals(p.AnimalType, animalType, StringComparison.OrdinalIgnoreCase)).ToList();
+            int pageSize = 1; // размер страницы
+            int pageCount = (int)Math.Ceiling((double)filteredPacientes.Count / pageSize);
+            Console.Clear();
+            int pageIndex = 0;
+            if (pageCount == 0)
+            {
+                Console.Clear();
+                Title.Set("Ошибка поиска");
+                Console.WriteLine("Данный тип животного отсутствует в базе данных");
+            }
+            else
+            {
+                while (pageIndex < pageCount)
+                {
+                    Console.Clear();
+                    Title.Set($"Категория: {animalType}");
+                    Console.WriteLine("===============");
+                    Console.WriteLine("Категория: {0}", animalType);
+                    Console.WriteLine("Страница {0} из {1}", pageIndex + 1, pageCount);
+                    Console.WriteLine("Всего пациентов: {0}", filteredPacientes.Count);
+                    Console.WriteLine("===============");
+
+                    var pagePacientes = filteredPacientes.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                    int admissionsCount = 0;
+
+                    foreach (var paciente in pagePacientes)
+                    {
+                        Console.WriteLine("Пациент: {0} ({1}), возраст: {2}", paciente.Name, paciente.Gender, paciente.Age);
+
+                        var pacienteAdmissions = admissions.Where(a => a.PacienteId == paciente.Id).ToList();
+                        admissionsCount += pacienteAdmissions.Count;
+
+                        if (pacienteAdmissions.Count > 0)
+                        {
+                            Console.WriteLine("Приемы:");
+                            foreach (var admission in pacienteAdmissions)
+                            {
+                                Console.WriteLine("  Дата и время: {0}, врач: {1}, жалобы: {2}, диагноз: {3}, информация: {4}",
+                                    admission.DateTime.ToString("dd.MM.yyyy H:mm"), admission.FullnameDoctor, admission.Complaints, admission.Diagnosis, admission.Info);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Приемы отсутствуют");
+                        }
+
+                        Console.WriteLine();
+                    }
+
+                    Console.WriteLine("Количество приемов: {0}", admissionsCount);
+
+                    double avgAge = pagePacientes.Average(p => p.Age);
+                    Console.WriteLine("Средний возраст: {0}", avgAge);
+
+                    Console.WriteLine();
+                    Console.WriteLine("Введите 'n' для просмотра следующей страницы, 'p' для предыдущей или любую другую клавишу для выхода");
+                    string choice = Console.ReadLine().ToLower();
+                    if (choice == "n" && pageIndex < pageCount)
+                    {
+                        pageIndex++;
+                    }
+                    if (choice == "p" && pageIndex > pageCount)
+                    {
+                        pageIndex--;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            Title.Wait();
         }
     }
 }
