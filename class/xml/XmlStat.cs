@@ -315,6 +315,8 @@ namespace VeterinaryClinicRB
                 Console.Clear();
                 Title.Set("Ошибка поиска");
                 Console.WriteLine("Данный тип животного отсутствует в базе данных");
+                Title.Wait();
+                return;
             }
             else
             {
@@ -363,13 +365,9 @@ namespace VeterinaryClinicRB
                     Console.WriteLine();
                     Console.WriteLine("Введите 'n' для просмотра следующей страницы, 'p' для предыдущей или любую другую клавишу для выхода");
                     string choice = Console.ReadLine().ToLower();
-                    if (choice == "n" && pageIndex < pageCount)
+                    if (choice == "n")
                     {
                         pageIndex++;
-                    }
-                    if (choice == "p" && pageIndex > pageCount)
-                    {
-                        pageIndex--;
                     }
                     else
                     {
@@ -377,6 +375,8 @@ namespace VeterinaryClinicRB
                     }
                 }
             }
+            Console.Clear();
+            System.Console.WriteLine("Это были все приёмы, которые относятся к типу: {0}", animalType);
             Title.Wait();
         }
     }
