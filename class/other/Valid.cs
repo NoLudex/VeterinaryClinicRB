@@ -7,6 +7,7 @@ namespace VeterinaryClinicRB
 {
     public class Valid
     {
+        // Обычный обработчик на проверку вводимых данных ФИО пользователя
         public static string FullNameUser(string NAME)
         {   
             bool validInput = false;
@@ -21,6 +22,7 @@ namespace VeterinaryClinicRB
                 Console.Write($"Введите ФИО {NAME} на русском языке (Фамилия Имя отчество)\nВвод: ");
                 string ?inputString = Console.ReadLine();
 
+                // Разделяет текст на слова
                 string[] inputArray = inputString.Split(new char[] { ' '}, StringSplitOptions.RemoveEmptyEntries);
 
                 // Проверяем, что введены три слова
@@ -34,22 +36,24 @@ namespace VeterinaryClinicRB
                         middleName = inputArray[2];
                         validInput = true;
                     }
-                    else
+                    else // Ошибка
                     {
                         Console.Clear();
                         Console.WriteLine("[Внимание!] Неверный ввод. ФИО должно быть написано на русском языке и без доп. знаков, повторите ввод");
                     }
                 }
-                else
+                else // Ошибка
                 {
                     Console.Clear();
                     Console.WriteLine("[Внимание!] Неверный ввод. Введите полное ФИО через пробелы");
                 }
             }
 
+            // Возвращает ФИО
             return $"{lastName} {firstName} {middleName}";
         }
 
+        // Проверка, это русский текст без экстра-символов
         static bool IsRussianWithoutExtraSymbols(string text)
         {
             foreach (char c in text)
@@ -57,7 +61,8 @@ namespace VeterinaryClinicRB
                     return false;
             return true;
         }
-
+        
+        // Обработчик ввода даты
         public static string Date(string NAME)
         {
             bool validInput = false;
@@ -91,6 +96,7 @@ namespace VeterinaryClinicRB
             return inputDate;
         } 
 
+        // Обработчик чисел в string значении!
         public static string Number(string TEXT)
         {
             Console.Clear();
@@ -109,6 +115,7 @@ namespace VeterinaryClinicRB
             return "";
         }
 
+        // Обработчик TelegramID
         public static string TelegramID(string TEXT)
         {
             bool validInput = false;
@@ -139,12 +146,26 @@ namespace VeterinaryClinicRB
             return id;
         }
 
+        // Проверка текста, что написано на английском языке, без использования лишней символики
         static bool IsEnglishWithoutExtraSymbols(string TEXT)
         {
             foreach (char c in TEXT)
                 if (!(Char.IsLetter(c) && "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-".Contains(c)))
                     return false;
             return true;
+        }
+
+        public static bool Accept(string NAME)
+        {
+            Console.WriteLine("=-=-= Предупреждение! =-=-=");
+            Console.WriteLine($"Данное действие удалит безвозвратно данные, вы согласны продолжить? ({NAME}) (да / нет <= (другой ответ))\nВвод:");
+            string? choice = Console.ReadLine();
+            if (string.IsNullOrEmpty(choice) || string.IsNullOrWhiteSpace(choice))
+                return false;
+            else if (choice.ToLower() == "да" || choice.ToLower() == "д" || choice.ToLower() == "y" || choice.ToLower() == "yes" )
+                return true;
+            else
+                return false;
         }
     }
 }
