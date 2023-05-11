@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace VeterinaryClinicRB
 {
-    public class Admission
+    public partial class Admission
     {
         public int Id { get; set; }
         public DateTime DateTime { get; set; }

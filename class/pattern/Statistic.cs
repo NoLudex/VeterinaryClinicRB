@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace VeterinaryClinicRB
 {
-    public class Statistic { 
+    public partial class Statistic { 
         private XDocument xmlDocument;
 
         public Statistic(string xmlFilePath)

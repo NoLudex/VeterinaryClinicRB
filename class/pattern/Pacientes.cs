@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace VeterinaryClinicRB
 {
-    public class Paciente
+    public partial class Paciente
     {
         public int Id { get; set; }
         public string AnimalType { get; set; }
