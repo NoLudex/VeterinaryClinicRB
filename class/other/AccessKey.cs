@@ -8,61 +8,12 @@ using System.Xml;
 
 namespace VeterinaryClinicRB
 {
-    public class AccessKey
+    public partial class AccessKey
     {
-        public static bool Validate()
-        {
-            string ?key = ConfigurationManager.AppSettings["AccessKey"];
-            return !string.IsNullOrEmpty(key) && Validate(key);
-        }
-
-        public static bool Validate(string key)
-        {
-            // Проверяем длину ключа
-            if (key.Length != 10)
-                return false;
-
-            // Проверяем, что ключ содержит только символы A-Z и 0-9
-            Regex regex = new Regex("^[a-zA-Z0-9]*$");
-            if (!regex.IsMatch(key))
-                return false;
-
-            // Загружаем конфигурацию из файла XML
-            XmlDocument doc = new XmlDocument();
-            doc.Load("./database/accessKey.xml");
-
-            // Получаем список всех ключей доступа
-            XmlNodeList ?keyNodes = doc.SelectNodes("/database/accessKeys/accessKey");
-
-            // Проверяем, есть ли данный ключ доступа в БД
-            if (keyNodes != null)
-                foreach (XmlNode node in keyNodes)
-                    if (node.InnerText == key)
-                        return true;
-            return false;
-        }
-        public static bool Update(string oldKey, string newKey)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load("./database/accessKey.xml");
-            XmlNode ?oldKeyNode = doc.SelectSingleNode($"//accessKey[text()='{oldKey}']");
-
-            if (oldKeyNode == null)
-                return false;
-            else
-            {
-                XmlNode ?newKeyNode = doc.SelectSingleNode($"//accessKey[text()='{newKey}']");
-                if (newKeyNode != null)
-                    return false;
-                
-                oldKeyNode.InnerText = newKey;
-                doc.Save("./database/accessKey.xml");
-
-                return true;
-            }
-        }
+        // Проверка ключа на валидность из массива ключей
         public static bool CheckAccess(string key)
         {
+            // Ключи в кавычках
             string[] keys = new string[] 
             {
                 "761QACA2MP", "WEMF8S5S5H", "SGE9X9YH67", "GB4L4P4YYA", "LADVNK26ES", "B412JP098F", 
@@ -72,6 +23,7 @@ namespace VeterinaryClinicRB
                 "OHCAHERDAU", "I1IWV57XJ4", "R8GYM4Q4LL", "OLEGTOP4IK", "ILKVMOM228", "RBWEEXLOVE"
             };
             
+            // Возвращает, есть ли ключ (true || false)
             return keys.Contains(key);
         }
     }
