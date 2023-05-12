@@ -83,7 +83,7 @@ namespace VeterinaryClinicRB
                                 Console.WriteLine(
                                     "Дата: " + FileNameNode.SelectSingleNode("date-time")?.InnerText + " ID (" + FileNameNode.SelectSingleNode("id")?.InnerText + ")\n" +
                                     "ФИО доктора: " + FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText + "\n" +
-                                    "Индификатор пациента: ID (" + FileNameNode.SelectSingleNode("paciente-id")?.InnerText + ")\n" +
+                                    "Идентификатор пациента: ID (" + FileNameNode.SelectSingleNode("paciente-id")?.InnerText + ")\n" +
                                     "Жалобы: " + FileNameNode.SelectSingleNode("complaints")?.InnerText + "\n" +
                                     "Диагноз:  " + FileNameNode.SelectSingleNode("diagnosis")?.InnerText + "\n" +
                                     "Рекомендации от доктора:  " + FileNameNode.SelectSingleNode("info")?.InnerText + "\n" +
@@ -126,7 +126,7 @@ namespace VeterinaryClinicRB
                                     "Кличка: " + FileNameNode.SelectSingleNode("name")?.InnerText + "\n" +
                                     "Пол: " + FileNameNode.SelectSingleNode("gender")?.InnerText + "\n" +
                                     "Возраст животного:  " + FileNameNode.SelectSingleNode("age")?.InnerText + "\n" +
-                                    "ФИО владельца:  " + FileNameNode.SelectSingleNode("info")?.InnerText + "\n" +
+                                    "ФИО владельца:  " + FileNameNode.SelectSingleNode("fullname-owner")?.InnerText + "\n" +
                                     "Валидно ли животное (?):  " + FileNameNode.SelectSingleNode("valid")?.InnerText + "\n" +
                                     "Телеграм владельца: " + FileNameNode.SelectSingleNode("telegram-id")?.InnerText + "\n" +
                                     "-----------------------------"

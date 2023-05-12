@@ -89,7 +89,7 @@ namespace VeterinaryClinicRB
                                 else
                                 {
                                     Console.Clear();
-                                    Console.Write("Данный пациент отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
+                                    Console.Write("Данный пациент отсутствует в базе данных. \n(Вы желаете попробовать снова? (да / 'другой ответ' - нет)\nВвод: ");
                                     string answer = Console.ReadLine();
                                     if (answer.ToLower() != "д" || answer.ToLower() != "да")
                                         return;
@@ -106,7 +106,7 @@ namespace VeterinaryClinicRB
                             while (true)
                             {
                                 fullnameDoctor = Valid.FullNameUser("доктора");
-                                XDocument doc = XDocument.Load("./database/pacientes.xml");
+                                XDocument doc = XDocument.Load("./database/doctors.xml");
                                 // Поиск и просмотр элемента в БД по ID
                                 bool idExists = doc.Descendants("fullname-doctor").Any(x => (string)x == fullnameDoctor);
 
@@ -115,7 +115,7 @@ namespace VeterinaryClinicRB
                                 else
                                 {
                                     Console.Clear();
-                                    Console.Write("Данный врач отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
+                                    Console.Write("Данный врач отсутствует в базе данных. \n(Вы желаете попробовать снова? (да / 'другой ответ' => нет)\nВвод: ");
                                     string answer = Console.ReadLine();
                                     if (answer.ToLower() != "д" || answer.ToLower() != "да")
                                         return;

@@ -86,7 +86,7 @@ namespace VeterinaryClinicRB
                             while (true)
                             {
                                 fullnameDoctor = Valid.FullNameUser("доктора");
-                                XDocument doc = XDocument.Load("./database/pacientes.xml");
+                                XDocument doc = XDocument.Load("./database/doctors.xml");
                                 // Поиск и просмотр элемента в БД по ID
                                 bool idExists = doc.Descendants("fullname-doctor").Any(x => (string)x == fullnameDoctor);
 
@@ -95,7 +95,7 @@ namespace VeterinaryClinicRB
                                 else
                                 {
                                     Console.Clear();
-                                    Console.Write("Данный врач отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
+                                    Console.Write("Данный врач отсутствует в базе данных. \n(Вы желаете попробовать снова? (да / 'другой ответ' => нет)\nВвод: ");
                                     string answer = Console.ReadLine();
                                     if (answer.ToLower() != "д" || answer.ToLower() != "да")
                                         return;
@@ -148,7 +148,7 @@ namespace VeterinaryClinicRB
 
                         document.Save("./database/paciente.xml");
                         Console.Clear();
-                        Console.WriteLine($"Пациент изменён базе данных под ID ({id})");
+                        Console.WriteLine($"Пациент изменён в базе данных под ID ({id})");
                         Title.Set("Успех!");
                         Title.Wait();
                         break;
@@ -162,7 +162,7 @@ namespace VeterinaryClinicRB
             else
             {
                 Title.Set("Ошибка");
-                Console.WriteLine("Программа не нашла данного врада, возможно под данным ID нет врача.");
+                Console.WriteLine("Ничего не найдено, возможно под данным ID нечего нет.");
                 Title.Wait();
             }
         }
@@ -195,6 +195,13 @@ namespace VeterinaryClinicRB
                 Title.Set("Успех!");
                 Title.Wait();
             }
+            else
+            {
+                Console.Clear();
+                Title.Set("Ничего не найдено");
+                Console.WriteLine("По данному ID не найден приём, попробуйте снова");
+                Title.Wait();
+            }
         }
         public static void UpdateValid(string id) 
         {
@@ -205,18 +212,38 @@ namespace VeterinaryClinicRB
 
             if (admissionNode != null)
             {
-                string? valid;
-                do
+                string? valid, check, result;
+                valid = "";
+                result = "";
+                check = admissionNode.SelectSingleNode("valid").InnerText;
+                
+                Console.Clear();
+                Console.WriteLine($"Вы редактируете ID Пациента ({id})");
+
+                Console.WriteLine("Валидность данного пациента: " + check);
+
+                Console.WriteLine("Изменить валидность? (1 - да / другой ответ - нет): ");
+                switch (Choice.Get())
                 {
-                    Console.Clear();
-                    Console.WriteLine($"Вы редактируете ID Пациента ({id})");
-
-                    Console.WriteLine("Введите валидность Пациента [Да / Нет]: ");
-                    do
-                        valid = Console.ReadLine();
-                    while (valid == null || valid.ToLower() != "да" || valid.ToLower() != "нет");
-                } while (string.IsNullOrWhiteSpace(valid));
-
+                    case 1:
+                        if (check == "Действительная")
+                        {
+                            result = "Не действительная";
+                            valid = "Нет";
+                        }
+                        else
+                        {
+                            result = "Действительная";
+                            valid = "Да";
+                        }
+                        break;
+                    default:
+                        Console.Clear();
+                        Title.Set("Отмена действия");
+                        Console.WriteLine("Вы отменили изменение валидности пациента");
+                        Title.Wait();
+                        return;
+                }
                 XmlDocument doctor = new XmlDocument();
                 doctor.Load($"./database/doctors.xml");
                 XmlNode ?doctorNode = document.SelectSingleNode($"/doctors/doctor[fullname-doctor='{admissionNode.SelectSingleNode("fullname-doctor").InnerText}']");
@@ -230,11 +257,10 @@ namespace VeterinaryClinicRB
                     else if (valid.ToLower() == "нет")
                     {
                         valid = "Нет";
-                        doctorNode.SelectSingleNode("animals-treated").InnerText = (Convert.ToInt32(doctorNode.SelectSingleNode("animals-treated").InnerText) + 1).ToString();
                     }
                 }
 
-                admissionNode.SelectSingleNode("valid").InnerText = valid;
+                admissionNode.SelectSingleNode("valid").InnerText = result;
                 document.Save("./database/pacientes.xml");
                 doctor.Save("./database/doctors.xml");
                 Console.Clear();
