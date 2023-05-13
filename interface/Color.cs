@@ -30,59 +30,28 @@ namespace VeterinaryClinicRB
                 switch (Choice.Get())
                 {
                     case 1:
-                        Console.BackgroundColor = ConsoleColor.Gray;
-                        Console.ForegroundColor = ConsoleColor.DarkBlue;
-                        Console.Clear();
-                        Console.WriteLine($"Вы успешно изменили тему консоли");
-                        Title.Wait();
+                        Title.ThemeSet(1);
                         break;
                     case 2:
-                        Console.BackgroundColor = ConsoleColor.Green;
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.Clear();
-                        Console.WriteLine($"Вы успешно изменили тему консоли");
-                        Title.Wait();
+                        Title.ThemeSet(2);
                         break;
                     case 3:
-                        Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                        Console.Clear();
-                        Console.WriteLine($"Вы успешно изменили тему консоли");
-                        Title.Wait();
+                        Title.ThemeSet(3);
                         break;
                     case 4:
-                        Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.DarkBlue;
-                        Console.Clear();
-                        Console.WriteLine($"Вы успешно изменили тему консоли");
-                        Title.Wait();
+                        Title.ThemeSet(4);
                         break;
                     case 5:
-                        Console.BackgroundColor = ConsoleColor.DarkBlue;
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.Clear();
-                        Console.WriteLine($"Вы успешно изменили тему консоли");
-                        Title.Wait();
+                        Title.ThemeSet(5);
                         break;
                     case 6:
-                        Console.BackgroundColor = ConsoleColor.DarkGreen;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                        Console.Clear();
-                        Console.WriteLine($"Вы успешно изменили тему консоли");
-                        Title.Wait();
+                        Title.ThemeSet(6);
                         break;
                     case 7:
-                        Console.BackgroundColor = ConsoleColor.DarkYellow;
-                        Console.ForegroundColor = ConsoleColor.DarkBlue;
-                        Console.Clear();
-                        Console.WriteLine($"Вы успешно изменили тему консоли");
-                        Title.Wait();
+                        Title.ThemeSet(7);
                         break;
                     case 8:
-                        Console.ResetColor();
-                        Console.Clear();
-                        Console.WriteLine($"Вы изменили тему консоли на стандарт");
-                        Title.Wait();
+                        Title.ThemeSet(8);
                         break;
                     case 0:
                         enableMenu = false;
@@ -96,9 +65,6 @@ namespace VeterinaryClinicRB
                         break;
                 }
             }
-            Console.Clear();
-            Console.WriteLine("Данные настройки были сохранены!");
-            Title.Wait();
             return;
         }
     }

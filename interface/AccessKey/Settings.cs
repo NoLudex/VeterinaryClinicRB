@@ -5,41 +5,35 @@ using System.Threading.Tasks;
 
 namespace VeterinaryClinicRB
 {
-    public partial class Account
+    public partial class AccessKey
     {
         public static string MenuStr =
-            "Меню связанное с данной сессией приложения\n" +
+            "Меню настроек ключа доступа\n" +
             "Выберите действие из списка, которое желаете произвести\n" +
-            "1. Текущая учетная запись (NEW)\n" +
-            "2. Изменить логин уч. записи (NEW)\n" +
-            "3. Изменить пароль уч. записи (NEW)\n" +
-            "4. Вкл / Выкл автоматический вход (NEW)\n" +
-            "5. Полностью выйти из приложения (NEW)\n" +
-            "6. Меню настроек ключа-доступа (NEW)\n" +
-            "0. Вернуться в главное меню";
+            "1. Вкл / Выкл автоматический ввод ключа при входе (NEW)\n" +
+            "2. Удалить сохранённый ключ (NEW)\n" +
+            "3. Посмотреть текущий ключ доступа (NEW)\n" +
+            "0. Вернуться в меню аккаунта";
+        
         public static void Menu()
         {
-            bool enableMenu = true; 
+            bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Меню аккаунта");
+                Title.Set("Меню ключа доступа");
                 Console.Clear();
                 Console.Write(MenuStr + "\nВвод: ");
 
                 switch (Choice.Get())
                 {
                     case 1:
+                        AccessKey.AutoCheckKey();
                         break;
                     case 2:
+                        AccessKey.Delete();
                         break;
                     case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        AccessKey.Menu(); // Включить меню настроек ключ-доступа
+                        AccessKey.Get();
                         break;
                     case 0:
                         enableMenu = false;
