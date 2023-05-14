@@ -14,8 +14,8 @@ namespace VeterinaryClinicRB
 {
     class Program
     {
-        public static string? key = "";
-        public static int j = 5;
+        public static bool authorizedKey = false;
+        public static bool authorizedLogin = false;
         static void Main(string[] args)
         {
             // Получение ключ из app.config
@@ -24,40 +24,25 @@ namespace VeterinaryClinicRB
             // Console.WriteLine(Decrypt.Get("ROHJWRS4LNgdgdgd==", 3));
             // Title.Wait();
 
-            // key = ConfigurationManager.AppSettings["AccessKey"];
-            // if (ConfigurationManager.AppSettings["AutoKey"].ToLower() != "true")
-            // {
-            //     key = "";
-            //     Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            //     config.AppSettings.Settings["AccessKey"].Value = "";
-            //     config.Save(ConfigurationSaveMode.Modified);
-            // }
-
-            // Console.BackgroundColor = ConsoleColor.Green;
-            // Console.ForegroundColor = ConsoleColor.Yellow;  
-            
-            // Первая проверка ключа
-            if (key == "")
-            {
-                AccessKey.InputKey(key);
-                key = Console.ReadLine();
-            }
             while (true)
             {
                 // Проверка ключа доступа на соответстиве ключам
-                if (AccessKey.InputKey(key))
+                if (AccessKey.Check(Config.Get("AutoKey", true), authorizedKey))
                 {
+                    if (authorizedKey == false)
+                        authorizedKey = true;
+                    Title.Theme(Convert.ToInt32(Config.Get("ConsoleTheme")));
                     General.Menu();
                 }
-                else
-                {
-                    AccessKey.Error(j);
-                    j += 5;
-                    Console.Clear();
-                    Title.Set("Верификация");
-                    Console.Write("Чтобы иметь доступ к программе, нужен специальный ключ. \nВы можете обратиться к администрации для получения данного ключа.\nВвод: ");
-                    key = Console.ReadLine();
-                }
+                // else
+                // {
+                //     AccessKey.Error(j);
+                //     j += 5;
+                //     Console.Clear();
+                //     Title.Set("Верификация");
+                //     Console.Write("Чтобы иметь доступ к программе, нужен специальный ключ. \nВы можете обратиться к администрации для получения данного ключа.\nВвод: ");
+                //     key = Console.ReadLine();
+                // }
             }
         }
     }
