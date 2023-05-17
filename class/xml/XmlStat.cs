@@ -301,6 +301,7 @@ namespace VeterinaryClinicRB
                 Console.WriteLine("Ничего не найдено");
             }
         }
+        // Функция просмотра статистики по виду животного
         public static void GetStatsByAnimalType(string animalType)
         {
             List<Paciente> pacientes = Paciente.Get();
