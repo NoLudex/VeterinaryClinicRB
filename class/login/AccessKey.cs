@@ -63,7 +63,10 @@ namespace VeterinaryClinicRB
         {
             string result = Decrypt.Get(Config.Get("AccessKey"), 2);
             Console.Clear();
-            Console.WriteLine($"На данный момент авторизован ключ: {result}");
+            if (result == "Данный ключ отсутствует")
+                Console.WriteLine("Программа была недавно запущена или ключ был удалён, перезапустите программу, чтобы получить ключ");
+            else
+                Console.WriteLine($"На данный момент авторизован ключ: {result}");
             Title.Wait();
         }
     }

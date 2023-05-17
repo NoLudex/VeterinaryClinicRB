@@ -23,7 +23,7 @@ namespace VeterinaryClinicRB
             // Console.WriteLine(Encrypt.Get(pas, 3));
             // Console.WriteLine(Decrypt.Get("ROHJWRS4LNgdgdgd==", 3));
             // Title.Wait();
-
+            
             while (true)
             {
                 // Проверка ключа доступа на соответстиве ключам
@@ -32,7 +32,7 @@ namespace VeterinaryClinicRB
                     if (authorizedKey == false)
                         authorizedKey = true;
                     Title.Theme(Convert.ToInt32(Config.Get("ConsoleTheme")));
-                    General.Menu();
+                    Authorization.Menu();
                 }
                 // else
                 // {

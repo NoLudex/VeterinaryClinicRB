@@ -16,10 +16,10 @@ namespace VeterinaryClinicRB
             "2. Приёмы\n" +
             "3. Пациенты\n" +
             "4. Статистика\n" +
-            "5. Аккаунт (В процессе...)\n" +
+            "5. Аккаунт (NEW)\n" +
             "6. Настройка цвета (NEW)\n" +
             "0. Выход из программы";
-        public static void Menu()
+        public static void Menu(string fullnameUser)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace VeterinaryClinicRB
                     
                     Title.Set("Главная");
                     Console.Clear();
-                    Console.Write($"{MenuStr0} {todayCount} приёмов\n{MenuStr1}\nВвод: ");
+                    Console.Write($"{MenuStr0} {todayCount} приёмов\nАвторизирован как: {fullnameUser}\n{MenuStr1}\nВвод: ");
 
                     switch (Choice.Get())
                     {

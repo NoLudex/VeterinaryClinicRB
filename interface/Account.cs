@@ -14,7 +14,7 @@ namespace VeterinaryClinicRB
             "2. Изменить логин уч. записи (NEW)\n" +
             "3. Изменить пароль уч. записи (NEW)\n" +
             "4. Вкл / Выкл автоматический вход (NEW)\n" +
-            "5. Полностью выйти из приложения (NEW)\n" +
+            "5. Сменить уч. запись (NEW)\n" +
             "6. Меню настроек ключа-доступа (NEW)\n" +
             "0. Вернуться в главное меню";
         public static void Menu()
@@ -37,6 +37,11 @@ namespace VeterinaryClinicRB
                     case 4:
                         break;
                     case 5:
+                        Config.Set("Login", "");
+                        Config.Set("AutoLogin", false);
+                        Console.WriteLine("Чтобы продолжить, перезапустите программу.");
+                        Title.Wait();
+                        Environment.Exit(0);
                         break;
                     case 6:
                         AccessKey.Menu(); // Включить меню настроек ключ-доступа
