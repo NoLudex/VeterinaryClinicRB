@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using System.Globalization;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace VeterinaryClinicRB
 {
@@ -22,7 +24,8 @@ namespace VeterinaryClinicRB
             // string pas = "OLEGTOP4IKdadada";
             // Console.WriteLine(Encrypt.Get(pas, 3));
             // Console.WriteLine(Decrypt.Get("ROHJWRS4LNgdgdgd==", 3));
-            // Title.Wait();
+            Console.WriteLine(Lang.GetText("aut_title"));
+            Title.Wait();
             
             while (true)
             {
