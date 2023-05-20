@@ -8,24 +8,24 @@ namespace VeterinaryClinicRB
     public partial class Color
     {
         public static string MenuStr =
-            "Меню связанное с цветами консоли\n" +
-            "1. Фон - Серый, текст - Тёмно-синий (NEW)\n" +
-            "2. Фон - Зелёный, текст - Белый (NEW)\n" +
-            "3. Фон - Белый, текст - Чёрный (NEW)\n" +
-            "4. Фон - Белый, текст - Тёмно-синий (NEW)\n" +
-            "5. Фон - Тёмно-синий, текст - Белый (NEW)\n" +
-            "6. Фон - Тёмно-зелёный, текст - Чёрный (NEW)\n" +
-            "7. Фон - Тёмно-жёлтый, текст - Тёмно-синий (NEW)\n" +
-            "8. Вернуть цвет консоли\n" +
-            "0. Вернуться на главную";
+            $"{Lang.GetText("Меню связанное с цветами консоли")}\n" +
+            $"1. {Lang.GetText("Colors_choice_1")}\n" +
+            $"2. {Lang.GetText("Colors_choice_2")}\n" +
+            $"3. {Lang.GetText("Colors_choice_3")}\n" +
+            $"4. {Lang.GetText("Colors_choice_4")}\n" +
+            $"5. {Lang.GetText("Colors_choice_5")}\n" +
+            $"6. {Lang.GetText("Colors_choice_6")}\n" +
+            $"7. {Lang.GetText("Colors_choice_7")}\n" +
+            $"8. {Lang.GetText("Colors_choice_8")}\n" +
+            $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Меню цвета");
+                Title.Set($"{Lang.GetText("title_colors")}");
                 Console.Clear();
-                Console.Write(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
@@ -59,8 +59,8 @@ namespace VeterinaryClinicRB
                     default:
                         enableMenu = false;
                         Console.Clear();
-                        Console.WriteLine("Правильно введите номер пункта!");
-                        Title.Set("Ошибка");
+                        Console.WriteLine($"{Lang.GetText("string_error_input_choise")}");
+                        Title.Set($"{Lang.GetText("title_error")}");
                         Title.Wait();
                         break;
                 }
