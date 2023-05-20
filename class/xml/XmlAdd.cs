@@ -91,7 +91,7 @@ namespace VeterinaryClinicRB
                                     Console.Clear();
                                     Console.Write("Данный пациент отсутствует в базе данных. \n(Вы желаете попробовать снова? (да / 'другой ответ' - нет)\nВвод: ");
                                     string answer = Console.ReadLine();
-                                    if (answer.ToLower() != "д" || answer.ToLower() != "да")
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да" || answer.ToLower() != "y" || answer.ToLower() != "yes")
                                         return;
                                 }
                             }
@@ -117,7 +117,7 @@ namespace VeterinaryClinicRB
                                     Console.Clear();
                                     Console.Write("Данный врач отсутствует в базе данных. \n(Вы желаете попробовать снова? (да / 'другой ответ' => нет)\nВвод: ");
                                     string answer = Console.ReadLine();
-                                    if (answer.ToLower() != "д" || answer.ToLower() != "да")
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да" || answer.ToLower() != "y" || answer.ToLower() != "yes")
                                         return;
                                 }
                             }
@@ -168,6 +168,68 @@ namespace VeterinaryClinicRB
                         Title.Set("Успех!");
                         Title.Wait();
                         break;
+                    case "cassa":
+                        string? idAdmission, amount;
+                        id = XmlRead.GetFreeID(FileName).ToString();
+                        XmlDocument cassa = new XmlDocument();
+                        document.Load($"./database/cassa.xml");
+                        Title.Set($"Добавление лота ID ({id})");
+                        do 
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"Вы добавляете лот в кассу, его ID будет: ({id})");
+                            Title.Wait();
+                            XDocument doc = XDocument.Load("./database/admission.xml");
+                            
+                            while (true)
+                            {
+                                idAdmission = Valid.Number("Введите ID приёма: ");
+                                // Поиск и просмотр элемента в БД по ID
+                                bool idExists = doc.Descendants("id").Any(x => (string)x == idAdmission);
+
+                                if (idExists)
+                                    break;
+                                else
+                                {
+                                    Console.Clear();
+                                    Console.Write("Данный приём отсутствует в базе данных. \n(Вы желаете попробовать снова? (да / 'другой ответ' - нет)\nВвод: ");
+                                    string answer = Console.ReadLine();
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да" || answer.ToLower() != "y" || answer.ToLower() != "yes")
+                                        return;
+                                }
+                            }
+
+                            amount = Valid.Number("Введите цену лота: ");
+                            
+                        } while (string.IsNullOrWhiteSpace(idAdmission) || string.IsNullOrWhiteSpace(amount));
+
+                        Element1 = document.CreateElement("id");
+                        Element2 = document.CreateElement("id-admission");
+                        Element3 = document.CreateElement("amount");
+                        Element4 = document.CreateElement("date");
+                        Element5 = document.CreateElement("status");
+
+                        Element1.InnerText = id;
+                        Element2.InnerText = idAdmission;
+                        Element3.InnerText = $"{amount}";
+                        Element4.InnerText = DateTime.Today.ToString();
+                        Element5.InnerText = "Не оплачен";
+
+                        AddElement.AppendChild(Element1);
+                        AddElement.AppendChild(Element2);
+                        AddElement.AppendChild(Element3);
+                        AddElement.AppendChild(Element4);
+                        AddElement.AppendChild(Element5);
+
+
+                        root?.AppendChild(AddElement);
+                        document.Save($"./database/{FileName}.xml");
+                        Abuz = Convert.ToInt32(id) + 1;
+                        Console.Clear();
+                        Console.WriteLine($"Новый лот был создан в базе данных кассы, его ID ({id})");
+                        Title.Set("Успех!");
+                        Title.Wait();
+                        break;
                     case "pacientes":
                         string? animalType, name, gender, age, fullnameOwner, valid;
                         id = XmlRead.GetFreeID(FileName).ToString();
@@ -192,14 +254,6 @@ namespace VeterinaryClinicRB
 
                             age = Valid.Number("Введите возраст животного: ");
                             fullnameOwner = Valid.FullNameUser("владельца");
-
-                            // do
-                            // {
-                            //     Console.Clear();
-                            //     Console.Write("Валиден ли данный пациент(?) [Да / Нет]: ");
-                            //     valid = Console.ReadLine();
-                            // } while (valid == null || valid.ToLower() != "да" || valid.ToLower() != "нет");
-
                             telegramID = Valid.TelegramID("Введите Telegram владельца: ");
                         } while (string.IsNullOrWhiteSpace(animalType) || string.IsNullOrWhiteSpace(name)  || string.IsNullOrWhiteSpace(gender) || string.IsNullOrWhiteSpace(age) || string.IsNullOrWhiteSpace(fullnameOwner) || string.IsNullOrWhiteSpace(telegramID));
 
@@ -239,37 +293,6 @@ namespace VeterinaryClinicRB
                         Title.Set("Успех!");
                         Title.Wait();
                         break;
-                    // case "statistic":
-                    //     string? date, description;
-                    //     do 
-                    //     {
-                    //         Console.Clear();
-                    //         Console.WriteLine($"Вы добавляете новое событие дня");
-
-                    //         Console.Write("Напишите дату события: ");
-                    //         date = Console.ReadLine();
-
-                    //         Console.Write("Напишите что произошло (Описание): ");
-                    //         description = Console.ReadLine();
-                    //     } while (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(description));
-
-                    //     Element1 = document.CreateElement("date");
-                    //     Element2 = document.CreateElement("description");
-
-                    //     Element1.InnerText = date;
-                    //     Element2.InnerText = description;
-
-                    //     AddElement.AppendChild(Element1);
-                    //     AddElement.AppendChild(Element2);
-
-                    //     root?.AppendChild(AddElement);
-                    //     document.Save($"./database/{FileName}.xml");
-                    //     Console.Clear();
-                    //     Console.WriteLine($"Новое событие было добавлено на число: {date}");
-                    //     XmlSort.SortByDate("./database/statistic.xml");
-                    //     Title.Set("Успех!");
-                    //     Title.Wait();
-                    //     break;
                     default:
                         Title.Set("Ошибка");
                         Console.WriteLine("[DEBUG] Неверный файл");
