@@ -5,7 +5,7 @@
         <time>6:04</time>
         <paciente-id>1</paciente-id>
         <date-time>26.04.2023</date-time>
-        <fullname-doctor>Яковлев Максим Вадимович</fullname-doctor>
+        <fullname-doctor>Неправильный врач тест</fullname-doctor>
         <complaints>потеря аппетита</complaints>
         <diagnosis>Инсульт</diagnosis>
         <info>Нужно принимать такие-то лекарства</info>
