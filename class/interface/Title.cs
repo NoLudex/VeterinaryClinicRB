@@ -22,6 +22,8 @@ namespace VeterinaryClinicRB
         }
         
         // Тема консоли. Проверка и установка значения
+
+        public static int activeTheme = Convert.ToInt32(Config.Get("ConsoleTheme"));
         public static void Theme(int Number)
         {
             switch (Number)
@@ -72,18 +74,21 @@ namespace VeterinaryClinicRB
                 Console.WriteLine(Lang.GetText("console_color_set", Number));
                 Set(Lang.GetText("title_console_color_set", Number));
                 Config.Set("ConsoleTheme", Number.ToString());
+                activeTheme = Number;
             }
             else if (Number == 0)
             {
                 Console.WriteLine(Lang.GetText("console_color_clear"));
-                Set(Lang.GetText("title_console_color_clear"));
+                Title.Set(Lang.GetText("title_console_color_clear"));
                 Config.Set("ConsoleTheme", Number.ToString());
+                activeTheme = 0;
             }
             else
             {
                 Console.WriteLine(Lang.GetText("console_color_error"));
                 Set(Lang.GetText("title_console_color_error"));
                 Config.Set("ConsoleTheme", 0.ToString());
+                activeTheme = 0;
             }
             Title.Wait();
         }
