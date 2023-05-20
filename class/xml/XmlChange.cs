@@ -71,7 +71,7 @@ namespace VeterinaryClinicRB
                                     Console.Clear();
                                     Console.Write("Данный пациент отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
                                     string answer = Console.ReadLine();
-                                    if (answer.ToLower() != "д" || answer.ToLower() != "да")
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да"  || answer.ToLower() != "yes"  || answer.ToLower() != "y")
                                         return;
                                 }
                             }
@@ -97,7 +97,7 @@ namespace VeterinaryClinicRB
                                     Console.Clear();
                                     Console.Write("Данный врач отсутствует в базе данных. \n(Вы желаете попробовать снова? (да / 'другой ответ' => нет)\nВвод: ");
                                     string answer = Console.ReadLine();
-                                    if (answer.ToLower() != "д" || answer.ToLower() != "да")
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да"  || answer.ToLower() != "yes"  || answer.ToLower() != "y")
                                         return;
                                 }
                             }
@@ -125,6 +125,44 @@ namespace VeterinaryClinicRB
                         document.Save("./database/admission.xml");
                         Console.Clear();
                         Console.WriteLine($"Приём изменен в базе данных под ID ({id})");
+                        Title.Set("Успех!");
+                        Title.Wait();
+                        break;
+                    case "cassa":
+                        string? idAdmission, amount;
+                        do 
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"Вы редактируете лот кассы ID ({id}).");
+                            Title.Wait();
+
+                            while (true)
+                            {
+                                idAdmission = Valid.Number("Введите ID приёма, к которому нужно прикрепить данный лот: ");
+                                XDocument doc = XDocument.Load("./database/admission.xml");
+                                // Поиск и просмотр элемента в БД по ID
+                                bool idExists = doc.Descendants("id").Any(x => (string)x == idAdmission);
+
+                                if (idExists)
+                                    break;
+                                else
+                                {
+                                    Console.Clear();
+                                    Console.Write("Данный лот отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
+                                    string answer = Console.ReadLine();
+                                    if (answer.ToLower() != "д" || answer.ToLower() != "да"  || answer.ToLower() != "yes"  || answer.ToLower() != "y")
+                                        return;
+                                }
+                            }
+                            amount = Valid.Number("Введите стоимость приёма: ");
+                        } while (string.IsNullOrWhiteSpace(idAdmission) || string.IsNullOrWhiteSpace(amount));
+                        
+                        FileNameNode.SelectSingleNode("id-admission").InnerText = idAdmission;
+                        FileNameNode.SelectSingleNode("amount").InnerText = amount;
+
+                        document.Save("./database/cassa.xml");
+                        Console.Clear();
+                        Console.WriteLine($"Лот изменен в базе данных под ID ({id})");
                         Title.Set("Успех!");
                         Title.Wait();
                         break;
@@ -265,6 +303,55 @@ namespace VeterinaryClinicRB
                 doctor.Save("./database/doctors.xml");
                 Console.Clear();
                 Console.WriteLine($"Информация об приёме изменена в базе данных под ID ({id})");
+                Title.Set("Успех!");
+                Title.Wait();
+            }
+        }
+
+        public static void UpdatePaid(string id) 
+        {
+            Title.Set($"Редактируется: cassa.xml ({id})");
+            XmlDocument document = new XmlDocument();
+            document.Load($"./database/cassa.xml");
+            XmlNode ?admissionNode = document.SelectSingleNode($"/cassa/payment[id='{id}']");
+
+            if (admissionNode != null)
+            {
+                string? valid, check, result;
+                valid = "";
+                result = "";
+                check = admissionNode.SelectSingleNode("valid").InnerText;
+                
+                Console.Clear();
+                Console.WriteLine($"Вы редактируете лот кассы с ID ({id})");
+
+                Console.WriteLine("На данный момент он: " + check);
+
+                Console.WriteLine("Изменить статус? (1 - да / другой ответ - нет): ");
+                switch (Choice.Get())
+                {
+                    case 1:
+                        if (check == "Оплачен")
+                        {
+                            result = "Не оплачен";
+                        }
+                        else
+                        {
+                            result = "Оплачен";
+                        }
+                        break;
+                    default:
+                        Console.Clear();
+                        Title.Set("Отмена действия");
+                        Console.WriteLine("Вы отменили изменение статуса лота!");
+                        Title.Wait();
+                        return;
+                }
+
+                admissionNode.SelectSingleNode("status").InnerText = result;
+                document.Save("./database/cassa.xml");
+                Console.Clear();
+                Console.WriteLine($"Статус лота был изменен на: {result} ({id})");
                 Title.Set("Успех!");
                 Title.Wait();
             }
