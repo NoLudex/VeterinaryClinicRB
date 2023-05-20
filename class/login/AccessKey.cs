@@ -35,13 +35,13 @@ namespace VeterinaryClinicRB
             {
                 Config.Set("AutoKey", false);
                 Console.Clear();
-                Console.WriteLine("Теперь при входе в приложение, нужно будет вводить ключ на регулярной основе");
+                Console.WriteLine(Lang.GetText("key_auto_set_false"));
             }
             else
             {
                 Config.Set("AutoKey", true);
                 Console.Clear();
-                Console.WriteLine("Теперь при входе в приложение, не нужно вводить ключ повторно");
+                Console.WriteLine(Lang.GetText("key_auto_set_true"));
             }
             Title.Wait();
             return;
@@ -53,7 +53,7 @@ namespace VeterinaryClinicRB
             Config.Set("AutoKey", false);
             Config.Set("AccessKey", "");
             Console.Clear();
-            Console.WriteLine("Ключ доступа для данной сессии удалён, вам потребуется ввести его снова. (Приложение закроется)");
+            Console.WriteLine(Lang.GetText("key_deleted"));
             Title.Wait();
             Environment.Exit(0);
         }
@@ -64,9 +64,9 @@ namespace VeterinaryClinicRB
             string result = Decrypt.Get(Config.Get("AccessKey"), 2);
             Console.Clear();
             if (result == "Данный ключ отсутствует")
-                Console.WriteLine("Программа была недавно запущена или ключ был удалён, перезапустите программу, чтобы получить ключ");
+                Console.WriteLine(Lang.GetText("key_get_error"));
             else
-                Console.WriteLine($"На данный момент авторизован ключ: {result}");
+                Console.WriteLine(Lang.GetText("key_get", result));
             Title.Wait();
         }
     }

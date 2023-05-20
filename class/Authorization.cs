@@ -49,13 +49,13 @@ namespace VeterinaryClinicRB
             string? fullnameDoctor = "";
             
             Console.Clear();
-            Title.Set("Регистрация");
-            fullnameDoctor = Valid.FullNameUser("врача");
+            Title.Set(Lang.GetText("title_account_register"));
+            fullnameDoctor = Valid.FullNameUser(Lang.GetText("valid_full_name"));
 
             if (!string.IsNullOrEmpty(fullnameDoctor))
             {
                 Console.Clear();
-                doctorID = Valid.Number("Введи ID врача, если незнаете, напишите 0");
+                doctorID = Valid.Number(Lang.GetText("reg_input_doctor_id") + "\n" + Lang.GetText("string_input"));
                 if (doctorID == "0")
                 {
                     XmlDocument xmlDoc = new XmlDocument();
@@ -65,11 +65,11 @@ namespace VeterinaryClinicRB
                     if (doctor != null)
                     {
                         doctorID = doctor.SelectSingleNode("id").InnerText;
-                        Console.WriteLine($"Найден доктор под данным ФИО, его ID - {doctorID}");
+                        Console.WriteLine(Lang.GetText("reg_search_doctor_id_done", doctorID));
                     }
                     else
                     {
-                        Console.WriteLine("ФИО данного врача нет в базе данных. Возможно вы ошиблись");
+                        Console.WriteLine(Lang.GetText("reg_search_doctor_id_error"));
                         Title.Wait();
                         return;
                     }
@@ -81,65 +81,65 @@ namespace VeterinaryClinicRB
                     if (!DBNull.CheckIfDoctorHasAccounts(doctorID))
                     {
                         Console.Clear();
-                        Console.Write("Введите желаемый логин: ");
+                        Console.Write(Lang.GetText("reg_input_login") + ": ");
                         login = Console.ReadLine();
 
                         if (!string.IsNullOrEmpty(login))
                         {
                             Console.Clear();
-                            Console.Write("Введите желаемый пароль: ");
+                            Console.Write(Lang.GetText("reg_input_pass") + ": ");
                             password = Console.ReadLine();
 
                             if (!string.IsNullOrEmpty(password))
                             {
                                 Console.Clear();
-                                Console.Write("Повторите пароль: ");
+                                Console.Write(Lang.GetText("reg_input_pass_confirm") + ": ");
                                 string? confirmPassword = Console.ReadLine();
 
                                 Console.Clear();
                                 if (confirmPassword == password)
                                 {
                                     AddUser(login, password, fullnameDoctor, doctorID);
-                                    Console.WriteLine($"Вы успешно зарегистрировались! Login: {login}\nТеперь авторизуйтесь под данной учетной записью!");
+                                    Console.WriteLine(Lang.GetText("reg_done", login));
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Пароли не совпадают, попробуйте снова");
+                                    Console.WriteLine(Lang.GetText("reg_error_pass_confirm"));
                                 }
                                 Title.Wait();
                             }
                             else 
                             {
                                 Console.Clear();
-                                Console.WriteLine("Вы должны ввести пароль, чтобы продолжить.");
+                                Console.WriteLine(Lang.GetText("reg_error_pass"));
                                 Title.Wait();
                             }
                         }
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine("Логин не может быть пустым, повторите попытку.");
+                            Console.WriteLine(Lang.GetText("reg_error_login"));
                             Title.Wait();
                         }
                     }
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine("Данный врач уже зарегистрирован!");
+                        Console.WriteLine(Lang.GetText("reg_error_account_alredy_exits"));
                         Title.Wait();
                     }
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("Вы должны ввести ID врача, чтобы продолжить!");
+                    Console.WriteLine(Lang.GetText("reg_error_doctor_id"));
                     Title.Wait();
                 }
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Вы должны ввести ФИО врача. Оно не должно быть пустым");
+                Console.WriteLine(Lang.GetText("reg_error_bio"));
                 Title.Wait();
             }
             return;
@@ -148,7 +148,7 @@ namespace VeterinaryClinicRB
         public static string? ValidateUser(bool autoLogin)
         {
             string? login = "";
-            Title.Set("Авторизация");
+            Title.Set(Lang.GetText("title_validate_user"));
             Console.Clear();
             if (autoLogin) // Есть ли логин в конфигах
             {
@@ -164,7 +164,7 @@ namespace VeterinaryClinicRB
             if (login == "")
             {
                 Console.Clear();
-                Console.Write("Введите логин: ");
+                Console.Write($"{Lang.GetText("login_input")}: ");
                 login = Console.ReadLine();
             }
             
