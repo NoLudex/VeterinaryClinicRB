@@ -19,34 +19,39 @@ namespace VeterinaryClinicRB
         public static bool authorizedKey = false;
         public static bool authorizedLogin = false;
         static void Main(string[] args)
-        {
-            // Получение ключ из app.config
-            // string pas = "OLEGTOP4IKdadada";
-            // Console.WriteLine(Encrypt.Get(pas, 3));
-            // Console.WriteLine(Decrypt.Get("ROHJWRS4LNgdgdgd==", 3));
-            Console.WriteLine(Lang.GetText("aut_title"));
-            Title.Wait();
-            
-            while (true)
+        {            
+            // Если программа запущена первый раз, то диалог с выбором языка
+            Lang.Welcome();
+
+            // Проверка языка, который активен, если он существует, то программа запустит меню со входом
+            while (Lang.Check())
             {
                 // Проверка ключа доступа на соответстиве ключам
                 if (AccessKey.Check(Config.Get("AutoKey", true), authorizedKey))
                 {
-                    if (authorizedKey == false)
-                        authorizedKey = true;
-                    Title.Theme(Convert.ToInt32(Config.Get("ConsoleTheme")));
-                    Authorization.Menu();
+                    while (true)
+                    {
+                        try
+                        {
+                            Console.Clear();
+                            if (authorizedKey == false)
+                                authorizedKey = true;
+                            Title.Theme(Title.activeTheme);
+                            Authorization.Menu();
+                        }
+                        catch (System.Exception)
+                        {
+                            Console.Clear();
+                            Console.WriteLine(
+                                "Программа аварийно была приостановлена.\n" +
+                                "Чтобы такое не повторилось, соблюдайте верный формат ввода\n" +
+                                "Вы вернётесь в главное меню, будьте бдительны!"
+                            );
+                            Title.Wait();
+                        }
+                    }
                 }
-                // else
-                // {
-                //     AccessKey.Error(j);
-                //     j += 5;
-                //     Console.Clear();
-                //     Title.Set("Верификация");
-                //     Console.Write("Чтобы иметь доступ к программе, нужен специальный ключ. \nВы можете обратиться к администрации для получения данного ключа.\nВвод: ");
-                //     key = Console.ReadLine();
-                // }
-            }
+            }  
         }
     }
 }
