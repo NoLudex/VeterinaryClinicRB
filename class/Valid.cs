@@ -19,8 +19,8 @@ namespace VeterinaryClinicRB
 
             while (!validInput)
             {
-                Console.Write($"Введите ФИО {NAME} на русском языке (Фамилия Имя отчество)\nВвод: ");
-                string ?inputString = Console.ReadLine();
+                Console.Write($"{Lang.GetText("valid_input_name", NAME)}\n{Lang.GetText("string_input")}: ");
+                string ?inputString = Console.ReadLine(); // NAME
 
                 // Разделяет текст на слова
                 string[] inputArray = inputString.Split(new char[] { ' '}, StringSplitOptions.RemoveEmptyEntries);
@@ -39,13 +39,13 @@ namespace VeterinaryClinicRB
                     else // Ошибка
                     {
                         Console.Clear();
-                        Console.WriteLine("[Внимание!] Неверный ввод. ФИО должно быть написано на русском языке и без доп. знаков, повторите ввод");
+                        Console.WriteLine($"[{Lang.GetText("string_attention")}] {Lang.GetText("valid_input_name_error0")}");
                     }
                 }
                 else // Ошибка
                 {
                     Console.Clear();
-                    Console.WriteLine("[Внимание!] Неверный ввод. Введите полное ФИО через пробелы");
+                    Console.WriteLine($"[{Lang.GetText("string_attention")}] {Lang.GetText("valid_input_name_error1")}");
                 }
             }
 
@@ -70,7 +70,7 @@ namespace VeterinaryClinicRB
             string ?inputDate = "";
             
             Console.Clear();
-            Console.Write($"Введите дату {NAME} в формате (ДД.ММ.ГГГГ)\nВвод: ");
+            Console.Write($"{Lang.GetText("valid_input_date", NAME)}\n{Lang.GetText("string_input")}: ");
             while (!validInput)
             {
                 inputDate = Console.ReadLine();
@@ -84,13 +84,13 @@ namespace VeterinaryClinicRB
                     else
                     {   
                         Console.Clear();
-                        Console.Write("[Внимание!] Неверная дата рождения. Дата должна быть не позже сегодняшнего дня и не раньше 01.01.1900\nВвод:");
+                        Console.Write($"[{Lang.GetText("string_attention")}] {Lang.GetText("valid_input_date_error0")}\n{Lang.GetText("string_input")}:");
                     }
                 }
                 else
                 {
                     Console.Clear();
-                    Console.Write("[Внимание!] Неверный формат даты. Формат должен быть (ДД.ММ.ГГГГ)\nВвод:");
+                    Console.Write($"[{Lang.GetText("string_attention")}] {Lang.GetText("valid_input_date_error1")}\n{Lang.GetText("string_input")}:");
                 }
             }
             return inputDate;
@@ -99,17 +99,18 @@ namespace VeterinaryClinicRB
         // Обработчик чисел в string значении!
         public static string Number(string TEXT)
         {
-            Console.Clear();
             double number = -1;
             while (number < 0)
             {
+                Console.Clear();
                 Console.Write(TEXT);
                 string input = Console.ReadLine();
                 if (double.TryParse(input, out number))
                     if (number >= 0)
                         return number.ToString();
                 Console.Clear();
-                Console.WriteLine("Неверный ввод. Нужно положительное число");
+                Console.WriteLine($"{Lang.GetText("valid_input_number_error")}");
+                Title.Wait();
             }
 
             return "";
@@ -140,7 +141,7 @@ namespace VeterinaryClinicRB
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("Неверный ввод. Тег должен быть на английской раскладке без спецсимволов (за исключением '-')");
+                    Console.WriteLine($"[{Lang.GetText("error_input")}] {Lang.GetText("valid_input_tag_error")}");
                 }
             }
             return id;
@@ -157,8 +158,8 @@ namespace VeterinaryClinicRB
 
         public static bool Accept(string NAME)
         {
-            Console.WriteLine("=-=-= Предупреждение! =-=-=");
-            Console.WriteLine($"Данное действие удалит безвозвратно данные, вы согласны продолжить? ({NAME}) (да / нет <= (другой ответ))\nВвод:");
+            Console.WriteLine($"=-=-= {Lang.GetText("string_attention")} =-=-=");
+            Console.WriteLine($"{Lang.GetText("valid_delete_data", NAME)}\n{Lang.GetText("string_input")}:");
             string? choice = Console.ReadLine();
             if (string.IsNullOrEmpty(choice) || string.IsNullOrWhiteSpace(choice))
                 return false;

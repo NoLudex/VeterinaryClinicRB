@@ -8,21 +8,21 @@ namespace VeterinaryClinicRB
     public partial class Authorization
     {
         public static string MenuStr = 
-            "Для того, чтобы войти в приложение, нужно авторизироваться\n" +
-            "Вы можете зарегистрировать аккаунт, если вы есть в базе данных врачей\n" +
-            "Выберите действие из списка, которое желаете сделать\n" +
-            "1. Авторизация существующей уч. записи\n" +
-            "2. Регистрация врача, который не проходил регистрацию\n" +
-            "3. Меню настроек ключ-доступа\n" +
-            "0. Выход из приложения";
+            $"{Lang.GetText("Autorization_menu_0")}\n" +
+            $"{Lang.GetText("Autorization_menu_1")}\n" +
+            $"{Lang.GetText("string_choise")}\n" +
+            $"1. {Lang.GetText("Autorization_choice_1")}\n" +
+            $"2. {Lang.GetText("Autorization_choice_2")}\n" +
+            $"3. {Lang.GetText("Autorization_choice_3")}\n" +
+            $"0. {Lang.GetText("string_exit")}";
         public static void Menu()
         {
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Авторизация");
+                Title.Set($"{Lang.GetText("title_autorization")}");
                 Console.Clear();
-                Console.Write(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
@@ -39,14 +39,14 @@ namespace VeterinaryClinicRB
                         break;
                     case 0:
                         Console.Clear();
-                        Console.WriteLine("Приложение будет закрыто");
+                        Console.WriteLine($"{Lang.GetText("string_programm_will_closed")}");
                         Title.Wait();
                         Environment.Exit(0);
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Ошибка ввода действия! Вы будете возвращены в меню авторизации");
-                        Title.Set("Ошибка действия");
+                        Console.WriteLine($"{Lang.GetText("string_error_back")}");
+                        Title.Set($"{Lang.GetText("title_error")}");
                         Title.Wait();
                         break;
                 }

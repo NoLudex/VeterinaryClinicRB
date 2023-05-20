@@ -10,7 +10,7 @@ namespace VeterinaryClinicRB
         // Ошибка ключа
         public static void Error(int j)
         {
-            Title.Set("Ошибка доступа");
+            Title.Set($"{Lang.GetText("title_access_error")}");
 
             int i = j;
             string dots = "";
@@ -41,8 +41,8 @@ namespace VeterinaryClinicRB
         public static void ErrorWrite(string dots, int i)
         {
             Console.Clear();
-            Console.WriteLine("Неверный ключ доступа!");
-            Console.Write($"Повторите попытку через {i} секунд" + dots + "\n");
+            Console.WriteLine($"{Lang.GetText("error_access_key")}");
+            Console.Write($"{Lang.GetText("error_try_again", i)}" + dots + "\n");
         }
     }
 }

@@ -171,8 +171,8 @@ namespace VeterinaryClinicRB
             if (!string.IsNullOrEmpty(login))
             {
                 Console.Clear();
-                Console.WriteLine($"Логин: {login}");
-                Console.Write("Введите пароль: ");
+                Console.WriteLine(Lang.GetText("login_login", login));
+                Console.Write($"{Lang.GetText("login_password")}: ");
                 string? password = Console.ReadLine();
 
                 XmlDocument accountDoc = new XmlDocument();
@@ -193,7 +193,7 @@ namespace VeterinaryClinicRB
                 Console.Clear();
                 if (valid != null)
                 {
-                    Console.WriteLine("Вы успешно авторизировались!");
+                    Console.WriteLine(Lang.GetText("login_done"));
                     Config.Set("Login", login);
                     Config.Set("AutoLogin", false);
                     Title.Wait();
@@ -201,7 +201,7 @@ namespace VeterinaryClinicRB
                 }
                 else
                 {
-                    Console.WriteLine("Неверный логин или пароль. Попробуйте снова");
+                    Console.WriteLine(Lang.GetText("login_password_error"));
                     Config.Set("Login", "");
                     Config.Set("AutoLogin", false);
                 }
@@ -211,7 +211,7 @@ namespace VeterinaryClinicRB
             else
             {
                 Console.Clear();
-                Console.WriteLine("Логин не может быть пустым! Попробуйте снова");
+                Console.WriteLine(Lang.GetText("login_input_error"));
                 Title.Wait();
             }
             
