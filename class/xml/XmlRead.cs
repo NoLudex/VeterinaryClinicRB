@@ -23,6 +23,8 @@ namespace VeterinaryClinicRB
             int pageSize = 2; // Количество записей на странице
             if (FileName == "statistic" || FileName == "admission")
                 pageSize = 1;
+            if (FileName == "cassa")
+                pageSize = 3;
             int totalPages = (int)Math.Ceiling((double)document.SelectNodes($"/{MainTag}/{ObjectTag}").Count / pageSize); // Общее количество страниц
             
             bool finished = false;
@@ -30,9 +32,15 @@ namespace VeterinaryClinicRB
             while (!finished)
             {
                 Console.Clear();
-                Title.Set($"Страница {currentPage} из {totalPages}");
+                Title.Set($"Страница {currentPage} из {totalPages}"); // Используй две переменные %1$ и %2$, через запятую указывай две переменных, удали этот комментарий потом!
                 string input;
                 XmlNodeList FileNameNodes = document.SelectNodes($"/{MainTag}/{ObjectTag}[position()>={(currentPage -1) * pageSize + 1} and position()<={currentPage * pageSize}]");
+                
+                string skip = 
+                    "Чтобы посмотреть следующую страницу введите 'n'\n" +
+                    "Введите 'p' Чтобы просмотреть предыдущую страницу, \n" +
+                    "Любая другая клавиша выводит вас с данного меню";
+                
                 if (nodeList != null)
                     switch (FileName)
                     {
@@ -49,10 +57,43 @@ namespace VeterinaryClinicRB
                                     "-----------------------------"
                                     );
                             }
-                            Console.WriteLine(
-                                "Чтобы посмотреть следующую страницу введите 'n'\n" +
-                                "Введите 'p' Чтобы просмотреть предыдущую страницу, \n" +
-                                "Любая другая клавиша выводит вас с данного меню");
+                            Console.WriteLine(skip);
+                            do
+                                input = Console.ReadLine();
+                            while (input == null);
+
+                            switch (input.ToLower())
+                            {
+                                case "p":
+                                    if (currentPage > 1)
+                                    {
+                                        currentPage--;
+                                    }
+                                    break;
+                                case "n":
+                                    if (currentPage < totalPages)
+                                    {
+                                        currentPage++;
+                                    }
+                                    break;
+                                default:
+                                    finished = true;
+                                    break;
+                            }
+                            break;
+                        case "cassa":
+                            Console.WriteLine("-----------------------------");
+                            foreach (XmlNode FileNameNode in FileNameNodes) 
+                            {
+                                Console.WriteLine(
+                                    $"Идентификатор приёма: {FileNameNode.SelectSingleNode("id-admission")?.InnerText} (Лот {FileNameNode.SelectSingleNode("id")?.InnerText})\n" +
+                                    "Стоимость приёма: " + FileNameNode.SelectSingleNode("amount")?.InnerText + "\n" +
+                                    "Дата:  " + FileNameNode.SelectSingleNode("date")?.InnerText + "\n" +
+                                    "Статус:  " + FileNameNode.SelectSingleNode("status")?.InnerText + "\n" +
+                                    "-----------------------------"
+                                    );
+                            }
+                            Console.WriteLine(skip);
                             do
                                 input = Console.ReadLine();
                             while (input == null);
@@ -77,27 +118,64 @@ namespace VeterinaryClinicRB
                             }
                             break;
                         case "admission":
+                            Title.Theme(Title.activeTheme);
+
+                            XmlDocument documentDoctors = new XmlDocument();
+                            documentDoctors.Load($"./database/doctors.xml");
+
+                            XmlDocument cassa = new XmlDocument();
+                            cassa.Load($"./database/cassa.xml");
+
                             Console.WriteLine("-----------------------------");
-                            foreach (XmlNode FileNameNode in FileNameNodes) 
+                            foreach (XmlNode FileNameNode in FileNameNodes)
                             {
-                                Console.WriteLine(
-                                    "Дата: " + FileNameNode.SelectSingleNode("date-time")?.InnerText + " ID (" + FileNameNode.SelectSingleNode("id")?.InnerText + ")\n" +
-                                    "ФИО доктора: " + FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText + "\n" +
-                                    "Идентификатор пациента: ID (" + FileNameNode.SelectSingleNode("paciente-id")?.InnerText + ")\n" +
-                                    "Жалобы: " + FileNameNode.SelectSingleNode("complaints")?.InnerText + "\n" +
-                                    "Диагноз:  " + FileNameNode.SelectSingleNode("diagnosis")?.InnerText + "\n" +
-                                    "Рекомендации от доктора:  " + FileNameNode.SelectSingleNode("info")?.InnerText + "\n" +
+                                string doctorName = FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText;
+                                string id = FileNameNode.SelectSingleNode("id")?.InnerText;
+                                XmlNode doctorNode = documentDoctors.SelectSingleNode($"./doctors/doctor[fullname-doctor='{doctorName}']");
+                                XmlNode cassaNode = cassa.SelectSingleNode($"./cassa/payment[id-admission='{id}']");
+                                Console.WriteLine($"Дата: {FileNameNode.SelectSingleNode("date-time")?.InnerText} ID ({FileNameNode.SelectSingleNode("id")?.InnerText})");
+
+                                Console.WriteLine("ФИО доктора: ");
+                                // Проверяем наличие доктора в базе данных
+                                if (doctorNode != null)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.Green;
+                                    Console.ForegroundColor = ConsoleColor.Black;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Black;
+                                    Console.BackgroundColor = ConsoleColor.Red;
+                                    doctorName += " (уволен)";
+                                }
+                                
+                                string payment = "";
+
+                                if (cassaNode == null)
+                                {
+                                    payment = "Приём бесплатный";
+                                }
+                                else
+                                {
+                                    payment = $"Приём платный, его стоимость: {cassaNode.SelectSingleNode("amount")?.InnerText}";
+                                }
+
+                                Console.Write($"{doctorName}");
+                                Title.Theme(Title.activeTheme);
+                                
+                                Console.WriteLine("\n" +
+                                    $"Идентификатор пациента: ID ({FileNameNode.SelectSingleNode("paciente-id")?.InnerText})\n" +
+                                    $"Жалобы: {FileNameNode.SelectSingleNode("complaints")?.InnerText}\n" +
+                                    $"Диагноз: {FileNameNode.SelectSingleNode("diagnosis")?.InnerText}\n" +
+                                    $"Рекомендации от доктора: {FileNameNode.SelectSingleNode("info")?.InnerText}\n" +
+                                    $"{payment}\n" +
                                     "-----------------------------"
-                                    );
+                                );
                             }
-                            Console.WriteLine(
-                                "Чтобы посмотреть следующую страницу введите 'n'\n" +
-                                "Введите 'p' Чтобы просмотреть предыдущую страницу, \n" +
-                                "Любая другая клавиша выводит вас с данного меню");
+                            Console.WriteLine(skip);
                             do
                                 input = Console.ReadLine();
                             while (input == null);
-
                             switch (input.ToLower())
                             {
                                 case "p":
@@ -132,10 +210,7 @@ namespace VeterinaryClinicRB
                                     "-----------------------------"
                                     );
                             }
-                            Console.WriteLine(
-                                "Чтобы посмотреть следующую страницу введите 'n'\n" +
-                                "Введите 'p' Чтобы просмотреть предыдущую страницу, \n" +
-                                "Любая другая клавиша выводит вас с данного меню");
+                            Console.WriteLine(skip);
                             do
                                 input = Console.ReadLine();
                             while (input == null);
@@ -169,10 +244,7 @@ namespace VeterinaryClinicRB
                                     "-----------------------------"
                                     );
                             }
-                            Console.WriteLine(
-                                "Чтобы посмотреть следующую страницу введите 'n'\n" +
-                                "Введите 'p' Чтобы просмотреть предыдущую страницу, \n" +
-                                "Любая другая клавиша выводит вас с данного меню");
+                            Console.WriteLine(skip);
                             do
                                 input = Console.ReadLine();
                             while (input == null);
