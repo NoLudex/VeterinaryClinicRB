@@ -26,8 +26,8 @@ namespace VeterinaryClinicRB
                     else
                     {
                         Console.Clear();
-                        Title.Set("Ошибка авто-ключа");
-                        Console.WriteLine("Ключ установленный в файле настроек является недействительным\nПерезапустите приложение, чтобы продолжить");
+                        Title.Set($"{Lang.GetText("title_error_input_keys")}");
+                        Console.WriteLine($"{Lang.GetText("Access_key_error_0")}\n{Lang.GetText("string_restart")}");
                         Config.Set("AutoKey", false);
                         Title.Wait();
                         Environment.Exit(0);
@@ -37,9 +37,9 @@ namespace VeterinaryClinicRB
                 {
                     Console.Clear();
                     Console.Write(
-                        "Чтобы иметь доступ к программе нужен специальный ключ.\n" +
-                        "Вы можете обратиться к администрации для получения данного ключа\n" +
-                        "Ввод: "
+                        $"{Lang.GetText("Access_key_need_0")}.\n" +
+                        $"{Lang.GetText("Access_key_need_1")}\n" +
+                        $"{Lang.GetText("string_input")}: "
                         );
                     key = Console.ReadLine();
                     if (CheckAccess(key))
@@ -47,11 +47,11 @@ namespace VeterinaryClinicRB
                         if (!Config.Get("ConfirmSaveKey", false))
                         {
                             Console.Clear();
-                            Console.WriteLine("Желаете ли вы сохранить ключ доступа\nЧтобы не вводить его снова?");
+                            Console.WriteLine($"{Lang.GetText("Access_menu_save_key_0")}\n{Lang.GetText("Access_menu_save_key_1")}");
                             Console.Write(
-                                "1. Хочу сохранить ключ (Рекомендуется)\n" +
-                                "2. Вводить каждый раз при входе\n" +
-                                "Ввод: "
+                                $"1. {Lang.GetText("Access_save_choice_0")}\n" +
+                                $"2. {Lang.GetText("Access_save_choice_1")}\n" +
+                                $"{Lang.GetText("string_input")}: "
                                 );
                             switch (Choice.Get())
                             {
@@ -59,11 +59,13 @@ namespace VeterinaryClinicRB
                                     Config.Set("AccessKey", Encrypt.Get(key, 2));
                                     Config.Set("AutoKey", true);
                                     Console.Clear();
-                                    Console.WriteLine("Ключ успешно сохранен!");
+                                    Console.WriteLine($"{Lang.GetText("string_key_done")}");
+                                    Title.Wait();
                                     break;
                                 case 2:
                                     Console.Clear();
-                                    Console.WriteLine("Ключ не будет сохранен и вам нужно вводить его каждый раз при входе\nЕсли вы желаете изменить это, то сможете сделать это в настройках аккаунта!");
+                                    Console.WriteLine($"{Lang.GetText("Access_key_not_saved_0")}\n{Lang.GetText("Access_key_not_saved_1")}");
+                                    Title.Wait();
                                     break;
                             }
                             Title.Wait();

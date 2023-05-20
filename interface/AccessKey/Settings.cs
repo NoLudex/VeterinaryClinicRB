@@ -8,21 +8,21 @@ namespace VeterinaryClinicRB
     public partial class AccessKey
     {
         public static string MenuStr =
-            "Меню настроек ключа доступа\n" +
-            "Выберите действие из списка, которое желаете произвести\n" +
-            "1. Вкл / Выкл автоматический ввод ключа при входе (NEW)\n" +
-            "2. Удалить сохранённый ключ (NEW)\n" +
-            "3. Посмотреть текущий ключ доступа (NEW)\n" +
-            "0. Вернуться в меню аккаунта";
+            $"{Lang.GetText("Access_menu_main")}\n" +
+            $"{Lang.GetText("string_choise")}\n" +
+            $"1. {Lang.GetText("Access_choice_1")}\n" +
+            $"2. {Lang.GetText("Access_choice_2")}\n" +
+            $"3. {Lang.GetText("Access_choice_3")}\n" +
+            $"0. {Lang.GetText("Access_choice_0")}";
         
         public static void Menu()
         {
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Меню ключа доступа");
+                Title.Set("title_acess_key");
                 Console.Clear();
-                Console.Write(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
@@ -41,8 +41,8 @@ namespace VeterinaryClinicRB
                     default:
                         enableMenu = false;
                         Console.Clear();
-                        Console.WriteLine("Ошибка ввода действия, возвращаем в предыдущее меню!");
-                        Title.Set("Ошибка действия");
+                        Console.WriteLine($"{Lang.GetText("string_error_back")}");
+                        Title.Set($"{Lang.GetText("title_error")}");
                         Title.Wait();
                         break;
                 }

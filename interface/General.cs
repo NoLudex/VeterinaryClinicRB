@@ -11,14 +11,14 @@ namespace VeterinaryClinicRB
             "Главное меню | VeterinaryClinicRB\n" +
             "Сегодня было совершено";
         public static string MenuStr1 =
-            $"Выберите пункт, с которым желаете работать:\n" +
-            "1. Врачи\n" +
-            "2. Приёмы\n" +
-            "3. Пациенты\n" +
-            "4. Статистика\n" +
-            "5. Аккаунт (NEW)\n" +
-            "6. Настройка цвета (NEW)\n" +
-            "0. Выход из программы";
+            $"{Lang.GetText("General_menu_0")}:\n" +
+            $"1. {Lang.GetText("General_choice_1")}Врачи\n" +
+            $"2. {Lang.GetText("General_choice_2")}Приёмы\n" +
+            $"3. {Lang.GetText("General_choice_3")}Пациенты\n" +
+            $"4. {Lang.GetText("General_choice_4")}Статистика\n" +
+            $"5. {Lang.GetText("General_choice_5")}Аккаунт (NEW)\n" +
+            $"6. {Lang.GetText("General_choice_6")}Настройка цвета (NEW)\n" +
+            $"0. {Lang.GetText("string_exit")}";
         public static void Menu(string fullnameUser)
         {
             try
@@ -29,9 +29,9 @@ namespace VeterinaryClinicRB
                     Statistic statistic = new Statistic("./database/statistic.xml");
                     int todayCount = statistic.GetTodayCount();
                     
-                    Title.Set("Главная");
+                    Title.Set($"{Lang.GetText("title_general")}");
                     Console.Clear();
-                    Console.Write($"{MenuStr0} {todayCount} приёмов\nАвторизирован как: {fullnameUser}\n{MenuStr1}\nВвод: ");
+                    Console.Write($"{Lang.GetText("General_menu_1", MenuStr0, todayCount)}\n{Lang.GetText("General_menu_2", fullnameUser)}\n{MenuStr1}\n{Lang.GetText("string_input")}: ");
 
                     switch (Choice.Get())
                     {
@@ -58,8 +58,8 @@ namespace VeterinaryClinicRB
                             break;
                         default:
                             Console.Clear();
-                            Console.WriteLine("Правильно введите номер пункта!");
-                            Title.Set("Ошибка");
+                            Console.WriteLine($"{Lang.GetText("string_error_input_choise")}");
+                            Title.Set($"{Lang.GetText("title_error")}");
                             Title.Wait();
                             break;
                     }

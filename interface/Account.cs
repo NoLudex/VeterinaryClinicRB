@@ -8,21 +8,22 @@ namespace VeterinaryClinicRB
     public partial class Account
     {
         public static string MenuStr =
-            "Меню связанное с данной сессией приложения\n" +
-            "Выберите действие из списка, которое желаете произвести\n" +
-            "1. Текущая учетная запись (NEW)\n" +
-            "2. Изменить логин уч. записи (NEW)\n" +
-            "3. Изменить пароль уч. записи (NEW)\n" +
-            "4. Вкл / Выкл автоматический вход (NEW)\n" +
-            "5. Сменить уч. запись (NEW)\n" +
-            "6. Меню настроек ключа-доступа (NEW)\n" +
-            "0. Вернуться в главное меню";
+            $"{Lang.GetText("Account_menu_1")}\n" +
+            $"{Lang.GetText("string_choise")}\n" +
+            $"1. {Lang.GetText("Account_choice_1")}\n" +
+            $"2. {Lang.GetText("Account_choice_2")}\n" +
+            $"3. {Lang.GetText("Account_choice_3")}\n" +
+            $"4. {Lang.GetText("Account_choice_4")}\n" +
+            $"5. {Lang.GetText("Account_choice_5")}\n" +
+            $"6. {Lang.GetText("Account_choice_6")}\n" +
+            $"7. {Lang.GetText("Account_choice_7")}\n" +
+            $"0. {Lang.GetText("Account_choice_0")}";
         public static void Menu()
         {
             bool enableMenu = true; 
             while (enableMenu)
             {
-                Title.Set("Меню аккаунта");
+                Title.Set($"{Lang.GetText("title_account")}");
                 Console.Clear();
                 Console.Write(MenuStr + "\nВвод: ");
 
@@ -39,12 +40,15 @@ namespace VeterinaryClinicRB
                     case 5:
                         Config.Set("Login", "");
                         Config.Set("AutoLogin", false);
-                        Console.WriteLine("Чтобы продолжить, перезапустите программу.");
+                        Console.WriteLine($"{Lang.GetText("string_restart")}.");
                         Title.Wait();
                         Environment.Exit(0);
                         break;
                     case 6:
                         AccessKey.Menu(); // Включить меню настроек ключ-доступа
+                        break;
+                    case 7:
+                        Lang.Menu(); // меню настроек языка
                         break;
                     case 0:
                         enableMenu = false;
@@ -52,8 +56,8 @@ namespace VeterinaryClinicRB
                     default:
                         enableMenu = false;
                         Console.Clear();
-                        Console.WriteLine("Ошибка ввода действия, возвращаем в предыдущее меню!");
-                        Title.Set("Ошибка действия");
+                        Console.WriteLine($"{Lang.GetText("string_error_back")}");
+                        Title.Set($"{Lang.GetText("title_error")}");
                         Title.Wait();
                         break;
                 }

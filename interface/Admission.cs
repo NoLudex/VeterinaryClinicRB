@@ -8,23 +8,23 @@ namespace VeterinaryClinicRB
     public partial class Admission
     {
         public static string MenuStr =
-            "Меню связанное с Приёмами\n" +
-            "Выберите действие из списка, которое желаете произвести\n" +
-            "1. Открыть список Приёмов\n" +
-            "2. Показать Приём, указав ID\n" +
-            "3. Изменить информацию Приёма по ID\n" +
-            "4. Добавить новый Приём в список\n" +
-            "5. Удалить Приём, указав ID\n" +
-            "6. Изменить информацию Приёма, указав ID\n" +
-            "0. Выйти в основное меню";
+            $"{Lang.GetText("Admissions_menu_1")}\n" +
+            $"{Lang.GetText("string_choise")}\n" +
+            $"1. {Lang.GetText("Admissions_choise_1")}\n" +
+            $"2. {Lang.GetText("Admissions_choise_2")}\n" +
+            $"3. {Lang.GetText("Admissions_choise_3")}\n" +
+            $"4. {Lang.GetText("Admissions_choise_4")}\n" +
+            $"5. {Lang.GetText("Admissions_choise_5")}\n" +
+            $"6. {Lang.GetText("Admissions_choise_6")}\n" +
+            $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Меню приёмов");
+                Title.Set($"{Lang.GetText("title_admissions")}");
                 Console.Clear();
-                Console.Write(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
@@ -55,7 +55,7 @@ namespace VeterinaryClinicRB
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine("Удаление приёма было отменено.");
+                            Console.WriteLine($"{Lang.GetText("Addmissions_delete_cancel")}");
                             Title.Wait();
                         }
                         break;
@@ -71,8 +71,8 @@ namespace VeterinaryClinicRB
                     default:
                         enableMenu = false;
                         Console.Clear();
-                        Console.WriteLine("Ошибка. Правильно введите номер действия!");
-                        Title.Set("Ошибка");
+                        Console.WriteLine($"{Lang.GetText("string_error_back")}");
+                        Title.Set($"{Lang.GetText("title_error")}");
                         Title.Wait();
                         break;
                 }

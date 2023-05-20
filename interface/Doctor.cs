@@ -8,23 +8,23 @@ namespace VeterinaryClinicRB
     public partial class Doctor
     {
         public static string MenuStr = 
-            "Меню связанное с Врачами\n" +
-            "Выберите действие из списка, которое желаете произвести\n" +
-            "1. Открыть список Врачей\n" +
-            "2. Показать Врача, указав ID\n" +
-            "3. Изменить информацию Врача по ID\n" +
-            "4. Добавить нового Врача в список\n" +
-            "5. Удалить Врача, указав ID\n" +
-            "6. Вывести статистику Врача по ФИО\n" +
-            "0. Выйти в основное меню";
+            $"{Lang.GetText("Doctors_menu_1")}\n" +
+            $"{Lang.GetText("string_choise")}\n" +
+            $"1. {Lang.GetText("Doctors_choice_1")}\n" +
+            $"2. {Lang.GetText("Doctors_choice_2")}\n" +
+            $"3. {Lang.GetText("Doctors_choice_3")}\n" +
+            $"4. {Lang.GetText("Doctors_choice_4")}\n" +
+            $"5. {Lang.GetText("Doctors_choice_5")}\n" +
+            $"6. {Lang.GetText("Doctors_choice_6")}\n" +
+            $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {   
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Меню врачи");
+                Title.Set($"{Lang.GetText("title_doctors")}");
                 Console.Clear();
-                Console.Write(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
@@ -55,7 +55,7 @@ namespace VeterinaryClinicRB
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine("Удаление врача было отменено.");
+                            Console.WriteLine($"{Lang.GetText("Doctors_delete_cancel")}");
                             Title.Wait();
                         }
                         break;
@@ -69,8 +69,8 @@ namespace VeterinaryClinicRB
                     default:
                         enableMenu = false;
                         Console.Clear();
-                        Console.WriteLine("Ошибка! Правильно введите номер действия");
-                        Title.Set("Ошибка");
+                        Console.WriteLine($"{Lang.GetText("string_error_back")}");
+                        Title.Set($"{Lang.GetText("title_error")}");
                         Title.Wait();
                         break;
                 }

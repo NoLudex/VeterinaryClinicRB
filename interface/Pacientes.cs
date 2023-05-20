@@ -8,24 +8,24 @@ namespace VeterinaryClinicRB
     public partial class Pacientes
     {
         public static string MenuStr =
-            "Меню связанное с Пациентами\n" +
-            "Выберите действие из списка, которое желаете произвести\n" +
-            "1. Открыть список Пациентов\n" +
-            "2. Показать Пациента, указав ID\n" +
-            "3. Изменить информацию Пациента по ID\n" +
-            "4. Добавить нового Пациента в список\n" +
-            "5. Удалить Пациента, указав ID\n" +
-            "6. Изменить валидность Пациента, указать ID\n" +
-            "7. Найти Пациента(ов) по кличке\n" +
-            "0. Выйти в основное меню";
+            $"{Lang.GetText("Patientes_menu_0")}\n" +
+            $"{Lang.GetText("string_choise")}\n" +
+            $"1. {Lang.GetText("Patientes_choice_1")}\n" +
+            $"2. {Lang.GetText("Patientes_choice_2")}\n" +
+            $"3. {Lang.GetText("Patientes_choice_3")}\n" +
+            $"4. {Lang.GetText("Patientes_choice_4")}\n" +
+            $"5. {Lang.GetText("Patientes_choice_5")}\n" +
+            $"6. {Lang.GetText("Patientes_choice_6")}\n" +
+            $"7. {Lang.GetText("Patientes_choice_7")}\n" +
+            $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Меню пациентов");
+                Title.Set($"{Lang.GetText("title_patientes")}");
                 Console.Clear();
-                Console.Write(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
@@ -56,7 +56,7 @@ namespace VeterinaryClinicRB
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine("Удаление пациента было отменено.");
+                            Console.WriteLine($"{Lang.GetText("Patientes_delete_cancel")}");
                             Title.Wait();
                         }
                         break;
@@ -75,8 +75,8 @@ namespace VeterinaryClinicRB
                     default:
                         enableMenu = false;
                         Console.Clear();
-                        Console.WriteLine("Ошибка! Правильно введите номер действия");
-                        Title.Set("Ошибка");
+                        Console.WriteLine($"{Lang.GetText("string_error_back")}");
+                        Title.Set($"{Lang.GetText("title_error")}");
                         Title.Wait();
                     break;
                 }
