@@ -11,13 +11,13 @@ namespace VeterinaryClinicRB
         // Выставление названия консоли с именем {NAME}
         public static void Set(string NAME)
         {
-            Console.Title = "Ветеринарная клиника | " + NAME;
+            Console.Title = Lang.GetText("title_main") + " | " + NAME;
         }
 
         // Обычный обработчик, который ждёт подтверждения
         public static void Wait()
         {
-            Console.Write("Нажмите Enter, чтобы продолжить...");
+            Console.Write($"{Lang.GetText("enter_for_done")}: ");
             Console.ReadKey();
         }
         
@@ -69,20 +69,20 @@ namespace VeterinaryClinicRB
             Console.Clear();
             if (Number > 0 && Number <= 7)
             {
-                Console.WriteLine("Вы успешно изменили цветовую тему консоли на #" + Number);
-                Set("Тема #" + Number);
+                Console.WriteLine(Lang.GetText("console_color_set", Number));
+                Set(Lang.GetText("title_console_color_set", Number));
                 Config.Set("ConsoleTheme", Number.ToString());
             }
             else if (Number == 0)
             {
-                Console.WriteLine("Вы убрали цветовую тему консоли");
-                Set("Тема убрана");
+                Console.WriteLine(Lang.GetText("console_color_clear"));
+                Set(Lang.GetText("title_console_color_clear"));
                 Config.Set("ConsoleTheme", Number.ToString());
             }
             else
             {
-                Console.WriteLine("Данная тема не обнаружена! Возвращаем на стандартную...");
-                Set("Ошибка темы");
+                Console.WriteLine(Lang.GetText("console_color_error"));
+                Set(Lang.GetText("title_console_color_error"));
                 Config.Set("ConsoleTheme", 0.ToString());
             }
             Title.Wait();
