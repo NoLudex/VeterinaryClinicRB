@@ -17,11 +17,14 @@ namespace VeterinaryClinicRB
         public static string GetText(string key, params object[] args)
         {
             CultureInfo culture = CultureInfo.CurrentCulture; 
-            var text = (string)json.SelectToken(key) ?? $"[{key}]";
+            var text = (string)json.SelectToken(key);
+        
+            if (text == "" || text == null)
+                throw new ArgumentNullException(nameof(key), $"${key}~~");
+
             if (args.Length > 0)
                 text = string.Format(culture, text, args);
-            if (text == "" || text == null)
-                text = $"${key}~~";
+            
             return text;
         }
 
