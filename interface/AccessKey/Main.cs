@@ -8,12 +8,12 @@ namespace VeterinaryClinicRB
     public partial class AccessKey
     {
         public static string MenuStr =
-            $"{Lang.GetText("Access_menu_main")}\n" +
+            $"{Lang.GetText("access_menu_main")}\n" +
             $"{Lang.GetText("string_choise")}\n" +
-            $"1. {Lang.GetText("Access_choice_1")}\n" +
-            $"2. {Lang.GetText("Access_choice_2")}\n" +
-            $"3. {Lang.GetText("Access_choice_3")}\n" +
-            $"0. {Lang.GetText("Access_choice_0")}";
+            $"1. {Lang.GetText("access_choice_1")}\n" +
+            $"2. {Lang.GetText("access_choice_2")}\n" +
+            $"3. {Lang.GetText("access_choice_3")}\n" +
+            $"0. {Lang.GetText("access_choice_0")}";
         
         public static void Menu()
         {

@@ -14,7 +14,7 @@ namespace VeterinaryClinicRB
         // Обновить данные по ID
         public static void Update(string FileName, string MainTag, string ObjectTag, int id)
         {
-            Title.Set($"Редактируется: {FileName}.xml ({id})");
+            Title.Set($"{Lang.GetText("title_change", FileName, id)}");
             XmlDocument document = new XmlDocument();
             document.Load($"./database/{FileName}.xml");
             XmlNode ?FileNameNode = document.SelectSingleNode($"/{MainTag}/{ObjectTag}" + "[id='" + id + "']");
@@ -28,13 +28,13 @@ namespace VeterinaryClinicRB
                         do 
                         {
                             Console.Clear();
-                            Console.WriteLine($"Вы редактируете врача с ID ({id}).");
+                            Console.WriteLine($"{Lang.GetText("change_doctor_id", id)}.");
                             Title.Wait();
 
-                            fullName = Valid.FullNameUser("врача");
-                            birthday = Valid.Date("рождения врача");
-                            animalsTreated = Valid.Number("Введите количество пройденных клиентов у врача: ");
-                            telegramID = Valid.TelegramID("Введите Telegram врача: ");
+                            fullName = Valid.FullNameUser($"{Lang.GetText("add_doctor_fullname")}");
+                            birthday = Valid.Date($"{Lang.GetText("add_doctor_date")}");
+                            animalsTreated = Valid.Number($"{Lang.GetText("add_doctor_clients")}: ");
+                            telegramID = Valid.TelegramID($"{Lang.GetText("add_doctor_telegram")}: ");
 
                         } while (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(birthday) || string.IsNullOrWhiteSpace(animalsTreated) || string.IsNullOrWhiteSpace(telegramID));
                         
@@ -45,8 +45,8 @@ namespace VeterinaryClinicRB
 
                         document.Save("./database/doctors.xml");
                         Console.Clear();
-                        Title.Set($"Успех!");
-                        Console.WriteLine($"Доктор изменён в базе данных под ID ({id})");
+                        Title.Set($"{Lang.GetText("title_success")}");
+                        Console.WriteLine($"{Lang.GetText("change_doctor_success", id)}Доктор изменён в базе данных под ID ({id})");
                         Title.Wait();
                         break;
                     case "admission":
@@ -54,12 +54,12 @@ namespace VeterinaryClinicRB
                         do 
                         {
                             Console.Clear();
-                            Console.WriteLine($"Вы редактируете приём с ID ({id}).");
+                            Console.WriteLine($"{Lang.GetText("change_admission_id", id)}.");
                             Title.Wait();
 
                             while (true)
                             {
-                                pacienteId = Valid.Number("Введите ID пациента: ");
+                                pacienteId = Valid.Number($"{Lang.GetText("add_input_patient_id")}: ");
                                 XDocument doc = XDocument.Load("./database/pacientes.xml");
                                 // Поиск и просмотр элемента в БД по ID
                                 bool idExists = doc.Descendants("id").Any(x => (string)x == pacienteId);
@@ -69,23 +69,23 @@ namespace VeterinaryClinicRB
                                 else
                                 {
                                     Console.Clear();
-                                    Console.Write("Данный пациент отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
+                                    Console.Write($"{Lang.GetText("add_error_pacient_id")} \n{Lang.GetText("string_try_again")}\n{Lang.GetText("string_input")}: ");
                                     string answer = Console.ReadLine();
                                     if (answer.ToLower() != "д" || answer.ToLower() != "да"  || answer.ToLower() != "yes"  || answer.ToLower() != "y")
                                         return;
                                 }
                             }
-                            dateTime = Valid.Date("приёма");
+                            dateTime = Valid.Date($"{Lang.GetText("add_admission_date")}");
 
                             Console.Clear();
-                            Console.WriteLine("Введите время приёма (ЧЧ:ММ): ");
+                            Console.WriteLine($"{Lang.GetText("add_admission_time")}: ");
                             time = Console.ReadLine();
                             if (string.IsNullOrWhiteSpace(time))
                                 time = "00:00";
 
                             while (true)
                             {
-                                fullnameDoctor = Valid.FullNameUser("доктора");
+                                fullnameDoctor = Valid.FullNameUser($"{Lang.GetText("add_doctor_fullname")}");
                                 XDocument doc = XDocument.Load("./database/doctors.xml");
                                 // Поиск и просмотр элемента в БД по ID
                                 bool idExists = doc.Descendants("fullname-doctor").Any(x => (string)x == fullnameDoctor);
@@ -95,7 +95,7 @@ namespace VeterinaryClinicRB
                                 else
                                 {
                                     Console.Clear();
-                                    Console.Write("Данный врач отсутствует в базе данных. \n(Вы желаете попробовать снова? (да / 'другой ответ' => нет)\nВвод: ");
+                                    Console.Write($"{Lang.GetText("add_error_doctor_id")} \n{Lang.GetText("string_try_again")}\n{Lang.GetText("string_input")}: ");
                                     string answer = Console.ReadLine();
                                     if (answer.ToLower() != "д" || answer.ToLower() != "да"  || answer.ToLower() != "yes"  || answer.ToLower() != "y")
                                         return;
@@ -103,15 +103,15 @@ namespace VeterinaryClinicRB
                             }
                             
                             Console.Clear();
-                            Console.Write("Введите жалобы пациента: ");
+                            Console.Write($"{Lang.GetText("add_input_complaints")}: ");
                             complaints = Console.ReadLine();
 
                             Console.Clear();
-                            Console.Write("Введите диагноз: ");
+                            Console.Write($"{Lang.GetText("add_input_diagnosis")}: ");
                             diagnosis = Console.ReadLine();
                             
                             Console.Clear();
-                            Console.WriteLine("Чтобы изменить информацию о приёме, используйте соответствующий пункт программы");
+                            Console.WriteLine($"{Lang.GetText("change_admission_menu")}");
                             Title.Wait();
                         } while (string.IsNullOrWhiteSpace(pacienteId) || string.IsNullOrWhiteSpace(dateTime) || string.IsNullOrWhiteSpace(fullnameDoctor) || string.IsNullOrWhiteSpace(complaints) || string.IsNullOrWhiteSpace(diagnosis));
                         
@@ -124,8 +124,8 @@ namespace VeterinaryClinicRB
 
                         document.Save("./database/admission.xml");
                         Console.Clear();
-                        Console.WriteLine($"Приём изменен в базе данных под ID ({id})");
-                        Title.Set("Успех!");
+                        Console.WriteLine($"{Lang.GetText("change_admission_success", id)}");
+                        Title.Set($"{Lang.GetText("title_success")}");
                         Title.Wait();
                         break;
                     case "cassa":
@@ -133,12 +133,12 @@ namespace VeterinaryClinicRB
                         do 
                         {
                             Console.Clear();
-                            Console.WriteLine($"Вы редактируете лот кассы ID ({id}).");
+                            Console.WriteLine($"{Lang.GetText("change_lot_id", id)}.");
                             Title.Wait();
 
                             while (true)
                             {
-                                idAdmission = Valid.Number("Введите ID приёма, к которому нужно прикрепить данный лот: ");
+                                idAdmission = Valid.Number($"{Lang.GetText("change_input_admission_id")}: ");
                                 XDocument doc = XDocument.Load("./database/admission.xml");
                                 // Поиск и просмотр элемента в БД по ID
                                 bool idExists = doc.Descendants("id").Any(x => (string)x == idAdmission);
@@ -148,13 +148,13 @@ namespace VeterinaryClinicRB
                                 else
                                 {
                                     Console.Clear();
-                                    Console.Write("Данный лот отсутствует в базе данных. \n(Вы желаете попробовать снова? ('y' - да, 'другой ответ' - нет)\nВвод: ");
+                                    Console.Write($"{Lang.GetText("add_error_lot_id")}. \n{Lang.GetText("string_try_again")}\n{Lang.GetText("string_input")}: ");
                                     string answer = Console.ReadLine();
                                     if (answer.ToLower() != "д" || answer.ToLower() != "да"  || answer.ToLower() != "yes"  || answer.ToLower() != "y")
                                         return;
                                 }
                             }
-                            amount = Valid.Number("Введите стоимость приёма: ");
+                            amount = Valid.Number($"{Lang.GetText("change_input_admission_cost")}: ");
                         } while (string.IsNullOrWhiteSpace(idAdmission) || string.IsNullOrWhiteSpace(amount));
                         
                         FileNameNode.SelectSingleNode("id-admission").InnerText = idAdmission;
@@ -162,8 +162,8 @@ namespace VeterinaryClinicRB
 
                         document.Save("./database/cassa.xml");
                         Console.Clear();
-                        Console.WriteLine($"Лот изменен в базе данных под ID ({id})");
-                        Title.Set("Успех!");
+                        Console.WriteLine($"{Lang.GetText("change_lot_success", id)}");
+                        Title.Set($"{Lang.GetText("title_success")}");
                         Title.Wait();
                         break;
                     case "pacientes":
@@ -171,14 +171,14 @@ namespace VeterinaryClinicRB
                         do 
                         {
                             Console.Clear();
-                            Console.WriteLine($"Вы редактируете пациента с ID ({id}).");
+                            Console.WriteLine($"{Lang.GetText("change_patient_id", id)}.");
                             Title.Wait();
 
                             Console.Clear();
-                            Console.Write("Введите кличку животного: ");
+                            Console.Write($"{Lang.GetText("add_input_patient_name")}: ");
                             name = Console.ReadLine();
 
-                            age = Valid.Number("Введите возраст животного: ");
+                            age = Valid.Number($"{Lang.GetText("add_input_patient_age")}: ");
                         } while (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(age));
                         
                         FileNameNode.SelectSingleNode("name").InnerText = name;
@@ -186,21 +186,21 @@ namespace VeterinaryClinicRB
 
                         document.Save("./database/paciente.xml");
                         Console.Clear();
-                        Console.WriteLine($"Пациент изменён в базе данных под ID ({id})");
-                        Title.Set("Успех!");
+                        Console.WriteLine($"{Lang.GetText("change_patient_success", id)}");
+                        Title.Set($"{Lang.GetText("title_success")}");
                         Title.Wait();
                         break;
                     default:
-                        Title.Set("Ошибка");
-                        Console.WriteLine("[DEBUG] Неверный файл");
+                        Title.Set($"{Lang.GetText("title_error_simpl")}");
+                        Console.WriteLine($"{Lang.GetText("string_wrong_file")}");
                         Title.Wait();
                         break;
                 }
             }
             else
             {
-                Title.Set("Ошибка");
-                Console.WriteLine("Ничего не найдено, возможно под данным ID нечего нет.");
+                Title.Set($"{Lang.GetText("title_error_simpl")}");
+                Console.WriteLine($"{Lang.GetText("change_error_id")}.");
                 Title.Wait();
             }
         }
@@ -208,7 +208,7 @@ namespace VeterinaryClinicRB
         // Отдельное обновление информации у Приёмов, ибо информация требует больше текста
         public static void UpdateInfo(string id) 
         {
-            Title.Set($"Редактируется: admission.xml ({id})");
+            Title.Set($"{Lang.GetText("title_change_admission", id)}");
             XmlDocument document = new XmlDocument();
             document.Load($"./database/admission.xml");
             XmlNode admissionNode = document.SelectSingleNode($"/admission/animal[id='{id}']");
@@ -219,31 +219,31 @@ namespace VeterinaryClinicRB
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine($"Вы редактируете Приём ID ({id})");
+                    Console.WriteLine($"{Lang.GetText("change_admission_id", id)}");
 
-                    Console.WriteLine("Введите изменённую информацию об данном приёме, информация полностью переписывается\nЕсли нужно, то стоит написать предыдущую информацию, чтобы её дополнить.");
-                    Console.WriteLine("-----------------\nПредыдущая информация:\n" + admissionNode.SelectSingleNode("info").InnerText + "\n-----------------");
-                    Console.Write("Начните ввод здесь: ");
+                    Console.WriteLine($"{Lang.GetText("change_input_admission_info_0")}\n{Lang.GetText("change_input_admission_info_1")}.");
+                    Console.WriteLine($"{Lang.GetText("line")}\n{Lang.GetText("string_prev_info")}:\n" + admissionNode.SelectSingleNode("info").InnerText + $"\n{Lang.GetText("line")}");
+                    Console.Write($"{Lang.GetText("string_start_input")}: ");
                     info = Console.ReadLine();
                 } while (string.IsNullOrWhiteSpace(info));
                 admissionNode.SelectSingleNode("info").InnerText = info;
                 document.Save("./database/admission.xml");
                 Console.Clear();
-                Console.WriteLine($"Информация об приёме изменена в базе данных под ID ({id})");
-                Title.Set("Успех!");
+                Console.WriteLine($"{Lang.GetText("change_admission_success", id)}");
+                Title.Set($"{Lang.GetText("title_success")}");
                 Title.Wait();
             }
             else
             {
                 Console.Clear();
-                Title.Set("Ничего не найдено");
-                Console.WriteLine("По данному ID не найден приём, попробуйте снова");
+                Title.Set($"{Lang.GetText("string_nothing_found")}");
+                Console.WriteLine($"{Lang.GetText("change_error_admission_id")}\n{Lang.GetText("string_try_again")}\n{Lang.GetText("string_input")}");
                 Title.Wait();
             }
         }
         public static void UpdateValid(string id) 
         {
-            Title.Set($"Редактируется: pacientes.xml ({id})");
+            Title.Set($"{Lang.GetText("title_change_pacientes", id)}");
             XmlDocument document = new XmlDocument();
             document.Load($"./database/pacientes.xml");
             XmlNode ?admissionNode = document.SelectSingleNode($"/pacientes/paciente[id='{id}']");
@@ -256,11 +256,11 @@ namespace VeterinaryClinicRB
                 check = admissionNode.SelectSingleNode("valid").InnerText;
                 
                 Console.Clear();
-                Console.WriteLine($"Вы редактируете ID Пациента ({id})");
+                Console.WriteLine($"{Lang.GetText("change_patoent_id", id)}");
 
-                Console.WriteLine("Валидность данного пациента: " + check);
+                Console.WriteLine($"{Lang.GetText("change_patient_valid")}: " + check);
 
-                Console.WriteLine("Изменить валидность? (1 - да / другой ответ - нет): ");
+                Console.WriteLine($"{Lang.GetText("change_valid")}: ");
                 switch (Choice.Get())
                 {
                     case 1:
@@ -277,8 +277,8 @@ namespace VeterinaryClinicRB
                         break;
                     default:
                         Console.Clear();
-                        Title.Set("Отмена действия");
-                        Console.WriteLine("Вы отменили изменение валидности пациента");
+                        Title.Set($"{Lang.GetText("string_cancel")}");
+                        Console.WriteLine($"{Lang.GetText("change_valid_cancel")}");
                         Title.Wait();
                         return;
                 }
@@ -302,15 +302,15 @@ namespace VeterinaryClinicRB
                 document.Save("./database/pacientes.xml");
                 doctor.Save("./database/doctors.xml");
                 Console.Clear();
-                Console.WriteLine($"Информация об приёме изменена в базе данных под ID ({id})");
-                Title.Set("Успех!");
+                Console.WriteLine($"{Lang.GetText("change_admission_success", id)}");
+                Title.Set($"{Lang.GetText("title_success")}");
                 Title.Wait();
             }
         }
 
         public static void UpdatePaid(string id) 
         {
-            Title.Set($"Редактируется: cassa.xml ({id})");
+            Title.Set($"{Lang.GetText("title_change_cassa", id)}");
             XmlDocument document = new XmlDocument();
             document.Load($"./database/cassa.xml");
             XmlNode ?admissionNode = document.SelectSingleNode($"/cassa/payment[id='{id}']");
@@ -323,11 +323,11 @@ namespace VeterinaryClinicRB
                 check = admissionNode.SelectSingleNode("valid").InnerText;
                 
                 Console.Clear();
-                Console.WriteLine($"Вы редактируете лот кассы с ID ({id})");
+                Console.WriteLine($"{Lang.GetText("change_lot_id", id)}");
 
-                Console.WriteLine("На данный момент он: " + check);
+                Console.WriteLine($"{Lang.GetText("change_lot_menu_0")}: " + check);
 
-                Console.WriteLine("Изменить статус? (1 - да / другой ответ - нет): ");
+                Console.WriteLine($"{Lang.GetText("change_status")}: ");
                 switch (Choice.Get())
                 {
                     case 1:
@@ -342,8 +342,8 @@ namespace VeterinaryClinicRB
                         break;
                     default:
                         Console.Clear();
-                        Title.Set("Отмена действия");
-                        Console.WriteLine("Вы отменили изменение статуса лота!");
+                        Title.Set($"{Lang.GetText("string_cancel")}");
+                        Console.WriteLine($"{Lang.GetText("change_status_cancel")}");
                         Title.Wait();
                         return;
                 }
@@ -351,8 +351,8 @@ namespace VeterinaryClinicRB
                 admissionNode.SelectSingleNode("status").InnerText = result;
                 document.Save("./database/cassa.xml");
                 Console.Clear();
-                Console.WriteLine($"Статус лота был изменен на: {result} ({id})");
-                Title.Set("Успех!");
+                Console.WriteLine($"{Lang.GetText("change_status_success", result, id)}");
+                Title.Set($"{Lang.GetText("title_success")}");
                 Title.Wait();
             }
         }

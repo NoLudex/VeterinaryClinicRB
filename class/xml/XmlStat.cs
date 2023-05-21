@@ -97,7 +97,7 @@ namespace VeterinaryClinicRB
                     {
                         // Если описания событий не превышают лимит, добавляем их к строке с описанием прошлых дней
                         int eventsCount = eventsByDay[date].Count;
-                        string dayEvents = $"{date} ({eventsCount} событий):\n{events}\n";
+                        string dayEvents = $"{date} ({Lang.GetText("statistic_events_count", eventsCount)}):\n{events}\n";
                         pastEvents += dayEvents;
                     }
                     else
@@ -114,7 +114,7 @@ namespace VeterinaryClinicRB
             string result = todayEvents + pastEvents;
             if (string.IsNullOrEmpty(result))
             {
-                result = "Сегодня ничего не произошло.";
+                result = $"{Lang.GetText("statistic_events_nothing")}";
             }
 
             return result;
@@ -131,8 +131,8 @@ namespace VeterinaryClinicRB
             if (doctorNode == null)
             {
                 Console.Clear();
-                Title.Set("Результаты не найдены");
-                Console.WriteLine("Данного врача нет в базе данных");
+                Title.Set(Lang.GetText("title_find_doctor_stat_nothing"));
+                Console.WriteLine(Lang.GetText("find_doctor_stat_nothing"));
                 Title.Wait();
                 return;
             }
@@ -151,22 +151,22 @@ namespace VeterinaryClinicRB
                 Console.Clear();
                 foreach (XmlNode admissionNode in admissionNodes)
                 {
-                    Title.Set($"Приём {i} / {admissionNodes.Count}");
-                    Console.WriteLine($"Статистика приемов врача {fullName}:");
-                    Console.WriteLine($"Пациент: {admissionNode.SelectSingleNode("paciente-id").InnerText}");
-                    Console.WriteLine($"Дата и время приема: {admissionNode.SelectSingleNode("date-time").InnerText} в {admissionNode.SelectSingleNode("time").InnerText}");
-                    Console.WriteLine($"Жалобы: {admissionNode.SelectSingleNode("complaints").InnerText}");
-                    Console.WriteLine($"Диагноз: {admissionNode.SelectSingleNode("diagnosis").InnerText}");
-                    Console.WriteLine($"Рекомендации: {admissionNode.SelectSingleNode("info").InnerText}");
-                    Console.WriteLine("----------------------------");
+                    Title.Set(Lang.GetText("line", i, admissionNodes.Count));
+                    Console.WriteLine($"{Lang.GetText("find_doctor_stat_element_0", fullName)}:");
+                    Console.WriteLine($"{Lang.GetText("find_doctor_stat_element_1", admissionNode.SelectSingleNode("paciente-id").InnerText)}");
+                    Console.WriteLine($"{Lang.GetText("find_doctor_stat_element_2", admissionNode.SelectSingleNode("date-time").InnerText, admissionNode.SelectSingleNode("time").InnerText)}");
+                    Console.WriteLine($"{Lang.GetText("find_doctor_stat_element_3", admissionNode.SelectSingleNode("complaints").InnerText)}");
+                    Console.WriteLine($"{Lang.GetText("find_doctor_stat_element_4", admissionNode.SelectSingleNode("diagnosis").InnerText)}");
+                    Console.WriteLine($"{Lang.GetText("find_doctor_stat_element_5", admissionNode.SelectSingleNode("info").InnerText)}");
+                    Console.WriteLine(Lang.GetText("line"));
                     Title.Wait();
                 }
             }
             else
             {
                 Console.Clear();
-                Title.Set("Результаты не найдены");
-                Console.WriteLine("У данного врача нет истории приёмов");
+                Title.Set($"{Lang.GetText("")}Результаты не найдены");
+                Console.WriteLine($"{Lang.GetText("")}У данного врача нет истории приёмов");
                 Title.Wait();
             }
         }
@@ -203,29 +203,29 @@ namespace VeterinaryClinicRB
 
                 foreach (var admission in pagedResult)
                 {
-                    Console.WriteLine($"ID: {admission.Id}");
-                    Console.WriteLine($"Время: {admission.Time}");
-                    Console.WriteLine($"Идентификатор пациента: {admission.PacienteId}");
-                    Console.WriteLine($"Дата и время приема: {admission.DateTime}");
-                    Console.WriteLine($"ФИО врача: {admission.FullNameDoctor}");
-                    Console.WriteLine($"Жалобы: {admission.Complaints}");
-                    Console.WriteLine($"Диагноз: {admission.Diagnosis}");
-                    Console.WriteLine($"Дополнительная информация: {admission.Info}");
+                    Console.WriteLine($"{Lang.GetText("")}ID: {admission.Id}");
+                    Console.WriteLine($"{Lang.GetText("")}Время: {admission.Time}");
+                    Console.WriteLine($"{Lang.GetText("")}Идентификатор пациента: {admission.PacienteId}");
+                    Console.WriteLine($"{Lang.GetText("")}Дата и время приема: {admission.DateTime}");
+                    Console.WriteLine($"{Lang.GetText("")}ФИО врача: {admission.FullNameDoctor}");
+                    Console.WriteLine($"{Lang.GetText("")}Жалобы: {admission.Complaints}");
+                    Console.WriteLine($"{Lang.GetText("")}Диагноз: {admission.Diagnosis}");
+                    Console.WriteLine($"{Lang.GetText("")}Дополнительная информация: {admission.Info}");
                     Console.WriteLine();
                 }
                 if (totalRecords == 0)
                 {
                     Console.Clear();
-                    Console.WriteLine("В данную дату нет приёмов");
-                    Title.Set("Приёмов не найдено");
+                    Console.WriteLine($"{Lang.GetText("")}В данную дату нет приёмов");
+                    Title.Set($"{Lang.GetText("")}Приёмов не найдено");
                     Title.Wait();
                     return;
                 }
                 // Выводим информацию о количестве записей, текущей странице и общем количестве страниц
-                Console.WriteLine($"Всего записей: {totalRecords}, Текущая страница: {currentPage}, Всего страниц: {totalPages}");
+                Console.WriteLine($"{Lang.GetText("")}Всего записей: {totalRecords}, Текущая страница: {currentPage}, Всего страниц: {totalPages}");
 
                 // Получаем команду от пользователя
-                Console.Write("Введите команду (n - следующая страница, p - предыдущая страница, что-то другое - выход): ");
+                Console.Write($"{Lang.GetText("")}Введите команду (n - следующая страница, p - предыдущая страница, что-то другое - выход): ");
                 string command = Console.ReadLine();
 
                 // Обрабатываем команду пользователя
@@ -269,16 +269,16 @@ namespace VeterinaryClinicRB
                 while (true)
                 {
                     Console.Clear();
-                    Console.WriteLine("Прием #" + (index + 1) + ":");
-                    Console.WriteLine("Время: " + admissions[index].Element("time").Value);
-                    Console.WriteLine("ID пациента: " + admissions[index].Element("paciente-id").Value);
-                    Console.WriteLine("Дата: " + admissions[index].Element("date-time").Value);
-                    Console.WriteLine("ФИО врача: " + admissions[index].Element("fullname-doctor").Value);
-                    Console.WriteLine("Жалобы: " + admissions[index].Element("complaints").Value);
-                    Console.WriteLine("Диагноз: " + admissions[index].Element("diagnosis").Value);
-                    Console.WriteLine("Информация: " + admissions[index].Element("info").Value);
+                    Console.WriteLine($"{Lang.GetText("")}Прием #" + (index + 1) + ":");
+                    Console.WriteLine($"{Lang.GetText("")}Время: " + admissions[index].Element("time").Value);
+                    Console.WriteLine($"{Lang.GetText("")}ID пациента: " + admissions[index].Element("paciente-id").Value);
+                    Console.WriteLine($"{Lang.GetText("")}Дата: " + admissions[index].Element("date-time").Value);
+                    Console.WriteLine($"{Lang.GetText("")}ФИО врача: " + admissions[index].Element("fullname-doctor").Value);
+                    Console.WriteLine($"{Lang.GetText("")}Жалобы: " + admissions[index].Element("complaints").Value);
+                    Console.WriteLine($"{Lang.GetText("")}Диагноз: " + admissions[index].Element("diagnosis").Value);
+                    Console.WriteLine($"{Lang.GetText("")}Информация: " + admissions[index].Element("info").Value);
 
-                    Console.WriteLine("\nНажмите n для перехода к следующему приему, p - к предыдущему, любую другую клавишу для выхода");
+                    Console.WriteLine($"\n{Lang.GetText("")}Нажмите n для перехода к следующему приему, p - к предыдущему, любую другую клавишу для выхода");
                     ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                     if (keyInfo.Key == ConsoleKey.N)
                     {
@@ -298,7 +298,7 @@ namespace VeterinaryClinicRB
             }
             else
             {
-                Console.WriteLine("Ничего не найдено");
+                Console.WriteLine($"{Lang.GetText("string_nothing_found")}");
             }
         }
         // Функция просмотра статистики по виду животного
@@ -314,8 +314,8 @@ namespace VeterinaryClinicRB
             if (pageCount == 0)
             {
                 Console.Clear();
-                Title.Set("Ошибка поиска");
-                Console.WriteLine("Данный тип животного отсутствует в базе данных");
+                Title.Set($"{Lang.GetText("title_error_search")}");
+                Console.WriteLine($"{Lang.GetText("stats_error_animal_type")}");
                 Title.Wait();
                 return;
             }
@@ -325,46 +325,53 @@ namespace VeterinaryClinicRB
                 {
                     Console.Clear();
                     Title.Set($"Категория: {animalType}");
-                    Console.WriteLine("===============");
-                    Console.WriteLine("Категория: {0}", animalType);
-                    Console.WriteLine("Страница {0} из {1}", pageIndex + 1, pageCount);
-                    Console.WriteLine("Всего пациентов: {0}", filteredPacientes.Count);
-                    Console.WriteLine("===============");
+                    Console.WriteLine($"{Lang.GetText("line")}");
+                    Console.WriteLine($"{Lang.GetText("statistic_animal_element_0", animalType)}");
+                    Console.WriteLine($"{Lang.GetText("title_page", pageIndex + 1, pageCount)}");
+                    Console.WriteLine($"{Lang.GetText("statistic_animal_element_1", filteredPacientes.Count)}");
+                    Console.WriteLine($"{Lang.GetText("line")}");
 
                     var pagePacientes = filteredPacientes.Skip(pageIndex * pageSize).Take(pageSize).ToList();
                     int admissionsCount = 0;
 
                     foreach (var paciente in pagePacientes)
                     {
-                        Console.WriteLine("Пациент: {0} ({1}), возраст: {2}", paciente.Name, paciente.Gender, paciente.Age);
+                        Console.WriteLine($"{Lang.GetText("statistic_animal_element_2", paciente.Name, paciente.Gender, paciente.Age)}");
 
                         var pacienteAdmissions = admissions.Where(a => a.PacienteId == paciente.Id).ToList();
                         admissionsCount += pacienteAdmissions.Count;
 
                         if (pacienteAdmissions.Count > 0)
                         {
-                            Console.WriteLine("Приемы:");
+                            Console.WriteLine($"{Lang.GetText("general_choice_2")}:");
                             foreach (var admission in pacienteAdmissions)
                             {
-                                Console.WriteLine("  Дата и время: {0}, врач: {1}, жалобы: {2}, диагноз: {3}, информация: {4}",
-                                    admission.DateTime.ToString("dd.MM.yyyy H:mm"), admission.FullnameDoctor, admission.Complaints, admission.Diagnosis, admission.Info);
+                                Console.WriteLine(
+                                    $"{Lang.GetText("statistic_animal_element_3", 
+                                        admission.DateTime.ToString("dd.MM.yyyy H:mm"), 
+                                        admission.FullnameDoctor, 
+                                        admission.Complaints, 
+                                        admission.Diagnosis, 
+                                        admission.Info
+                                    )}"
+                                );
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Приемы отсутствуют");
+                            Console.WriteLine($"{Lang.GetText("statistic_animal_element_nothing")}");
                         }
 
                         Console.WriteLine();
                     }
 
-                    Console.WriteLine("Количество приемов: {0}", admissionsCount);
+                    Console.WriteLine($"{Lang.GetText("statistic_animal_count", admissionsCount)}");
 
                     double avgAge = pagePacientes.Average(p => p.Age);
-                    Console.WriteLine("Средний возраст: {0}", avgAge);
+                    Console.WriteLine($"{Lang.GetText("statistic_animal_age", avgAge)}");
 
                     Console.WriteLine();
-                    Console.WriteLine("Введите 'n' для просмотра следующей страницы, 'p' для предыдущей или любую другую клавишу для выхода");
+                    Console.WriteLine($"{Lang.GetText("statistic_anumal_skip")}");
                     string choice = Console.ReadLine().ToLower();
                     if (choice == "n")
                     {
@@ -377,7 +384,7 @@ namespace VeterinaryClinicRB
                 }
             }
             Console.Clear();
-            System.Console.WriteLine("Это были все приёмы, которые относятся к типу: {0}", animalType);
+            System.Console.WriteLine($"{Lang.GetText("statistic_anumal_done", animalType)}");
             Title.Wait();
         }
     }

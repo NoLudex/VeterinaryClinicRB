@@ -8,28 +8,29 @@ namespace VeterinaryClinicRB
     public partial class Cassa
     {
         public static string MenuStr =
-            "Меню связанное с кассой\n" +
-            "Чтобы продолжить, нужно выбрать пункт ниже\n" +
-            "1. Просмотр статистики кассы\n" +
-            "2. Просмотр лотов кассы\n" +
-            "3. Добавить лот приёма\n" +
-            "4. Изменить лот приёма\n" +
-            "5. Изменить статус лота\n" +
-            "6. Удалить лот приёма\n" +
-            "0. Выйти назад";
+            $"{Lang.GetText("Cassa_menu_0")}\n" +
+            $"{Lang.GetText("Cassa_menu_1")}\n" +
+            $"1.{Lang.GetText("Cassa_choice_1")}\n" +
+            $"2.{Lang.GetText("Cassa_choice_2")}\n" +
+            $"3.{Lang.GetText("Cassa_choice_3")}\n" +
+            $"4.{Lang.GetText("Cassa_choice_4")}\n" +
+            $"5.{Lang.GetText("Cassa_choice_5")}\n" +
+            $"6.{Lang.GetText("Cassa_choice_6")}\n" +
+            $"0.{Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Касса");
+                Title.Set($"{Lang.GetText("title_cassa")}");
                 Console.Clear();
-                Console.Write(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
                     case 1:
-                        Cassa.GetStatistics();
+                        Cassa myCassa = new Cassa("./database/cassa.xml");
+                        myCassa.GetStatistics();
                         break;
                     case 2:
                         XmlRead.Book("cassa", "cassa", "payment");
@@ -38,19 +39,19 @@ namespace VeterinaryClinicRB
                         XmlAdd.New("cassa", "cassa", "payment");
                         break;
                     case 4:
-                        int IDToUpdate = Convert.ToInt32(Valid.Number("Введите ID лота, чтобы изменить его (0 - отмена)\nВвод: "));
+                        int IDToUpdate = Convert.ToInt32(Valid.Number($"{Lang.GetText("cassa_menu_change")}\n{Lang.GetText("string_input")}: "));
                         if (IDToUpdate == 0)
                             break;
                         XmlChange.Update("cassa", "cassa", "payment", IDToUpdate);
                         break;
                     case 5:
-                        string IDToChangeStatus = Valid.Number("Введите ID лота, чтобы изменить его статус (0 - отмена)\nВвод: ");
+                        string IDToChangeStatus = Valid.Number($"{Lang.GetText("cassa_menu_change_status")}\n{Lang.GetText("string_input")}: ");
                         if (IDToChangeStatus == "0")
                             break;
                         XmlChange.UpdatePaid(IDToChangeStatus);
                         break;
                     case 6:
-                        int IDToDelete = Convert.ToInt32(Valid.Number("Введите ID лота, чтобы удалить его (0 - отмена)\nВвод: "));
+                        int IDToDelete = Convert.ToInt32(Valid.Number($"{Lang.GetText("cassa_menu_delete")}\n{Lang.GetText("string_input")}: "));
                         if (IDToDelete == 0)
                             break;
                         if (Valid.Accept($"ID: {IDToDelete}"))
@@ -58,7 +59,7 @@ namespace VeterinaryClinicRB
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine("Удаление лота было отменено.");
+                            Console.WriteLine($"{Lang.GetText("Cassa_delete_cancel")}");
                             Title.Wait();
                         }
                         break;
@@ -68,7 +69,7 @@ namespace VeterinaryClinicRB
                     default:
                         enableMenu = false;
                         Console.Clear();
-                        Console.WriteLine("Введите номер пунктта правильно!");
+                        Console.WriteLine($"{Lang.GetText("string_error_input_choise")}");
                         Title.Wait();
                         break;
                 }

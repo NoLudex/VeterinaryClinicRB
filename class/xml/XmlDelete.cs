@@ -14,7 +14,7 @@ namespace VeterinaryClinicRB
         // Удаление Элемента
         public static void This(string FileName, string MainTag, string ObjectTag, int id)
         {   
-            Title.Set($"Удаление элемента в {FileName}.xml");
+            Title.Set($"{Lang.GetText("title_delete_element", FileName)}.xml");
             XmlDocument document = new XmlDocument();
             document.Load($"./database/{FileName}.xml");
             XmlNode ?FileNameNode = document.SelectSingleNode($"/{MainTag}/{ObjectTag}[id='{id}']");
@@ -25,17 +25,17 @@ namespace VeterinaryClinicRB
                 if (parentNode != null)
                     parentNode.RemoveChild(FileNameNode);
                 else
-                    Console.WriteLine("[DEBUG] Произошла внутренняя ошибка");
+                    Console.WriteLine(Lang.GetText("string_wrong_other"));
                 
                 document.Save($"./database/{FileName}.xml");
-                Console.WriteLine($"Успешно удалена секция под ID: {id}, в файле {FileName}.xml");
-                Title.Set("Успех!");
+                Console.WriteLine($"{Lang.GetText("delete_this_done", id, FileName)}");
+                Title.Set(Lang.GetText("title_success"));
                 Title.Wait();
             }
             else
             {
-                Console.WriteLine($"Не найдена секция под ID ({id}) в файле {FileName}.xml");
-                Title.Set("Ошибка");
+                Console.WriteLine($"{Lang.GetText("delete_this_error", id, FileName)}");
+                Title.Set(Lang.GetText("title_error_simpl"));
                 Title.Wait();
             }
         }
@@ -58,7 +58,7 @@ namespace VeterinaryClinicRB
 
             // Сообщаем пользователю, сколько элементов было удалено
             Console.Clear();
-            Console.WriteLine($"Удалено элементов: {nodesToDelete.Count}");
+            Console.WriteLine($"{Lang.GetText("delete_statistics_by_date", nodesToDelete.Count)}");
             Title.Wait();
             // Сохраняем изменения в xml-файле
             doc.Save(path);

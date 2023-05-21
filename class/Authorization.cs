@@ -99,7 +99,7 @@ namespace VeterinaryClinicRB
                                 Console.Clear();
                                 if (confirmPassword == password)
                                 {
-                                    AddUser(login, password, fullnameDoctor, doctorID);
+                                    AddUser(login, Encrypt.Get(password, 3), fullnameDoctor, doctorID);
                                     Console.WriteLine(Lang.GetText("reg_done", login));
                                 }
                                 else

@@ -9,20 +9,20 @@ namespace VeterinaryClinicRB
     public partial class Statistic
     {
         public static string SearchMenuStr =
-            "Меню поиска по другим параметрам (Статистика)\n" +
-            "Выберите фильтр для поиска статистики\n" +
-            "1. Просмотр всех приёмов\n" +
-            "2. По диапазону дат\n" +
-            "3. По определённой дате\n" +
-            "0. Вернуться в меню статистики";
+            $"{Lang.GetText("stat_menu_line_0")}\n" +
+            $"{Lang.GetText("stat_menu_line_1")}\n" +
+            $"1. {Lang.GetText("stat_choice_1")}\n" +
+            $"2. {Lang.GetText("stat_choice_2")}\n" +
+            $"3. {Lang.GetText("stat_choice_3")}\n" +
+            $"0. {Lang.GetText("stat_choice_0")}";
         public static void SearchMenu()
         {
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Меню поиска стат.");
+                Title.Set($"{Lang.GetText("title_stat")}.");
                 Console.Clear();
-                Console.Write(SearchMenuStr + "\nВвод: ");
+                Console.Write(SearchMenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
@@ -31,17 +31,17 @@ namespace VeterinaryClinicRB
                         break;
                     case 2:
                         Console.Clear();
-                        string startTimeSrt = Valid.Date("(начальную)");
-                        string endTimeSrt = Valid.Date("(конечную)");
+                        string startTimeSrt = Valid.Date($"({Lang.GetText("start_stat")})");
+                        string endTimeSrt = Valid.Date($"({Lang.GetText("start_end")})");
                         DateTime startTime = DateTime.ParseExact(startTimeSrt, "dd.MM.yyyy", CultureInfo.InvariantCulture);
                         DateTime endTime = DateTime.ParseExact(endTimeSrt, "dd.MM.yyyy", CultureInfo.InvariantCulture);
                         XmlStat.FindAdmissions(startTime, endTime);
                         break;
                     case 3:
                         Console.Clear();
-                        Title.Set("Просмотр приёма по дате");
+                        Title.Set($"{Lang.GetText("stat_check")}");
                         string date = Valid.Date("");
-                        Title.Set($"Просмотр приёмов {date}");
+                        Title.Set($"{Lang.GetText("stat_check_date", date)}");
                         XmlStat.SearchByDate(date);
                         break;
                     default:

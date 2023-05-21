@@ -43,9 +43,9 @@ namespace VeterinaryClinicRB
                         {
                             Console.Clear();
                             Console.WriteLine(
-                                "Программа аварийно была приостановлена.\n" +
-                                "Чтобы такое не повторилось, соблюдайте верный формат ввода\n" +
-                                "Вы вернётесь в главное меню, будьте бдительны!"
+                                $"{Lang.GetText("extra_error_line_0")}\n" +
+                                $"{Lang.GetText("extra_error_line_1")}\n" +
+                                $"{Lang.GetText("extra_error_line_2")}"
                             );
                             Title.Wait();
                         }

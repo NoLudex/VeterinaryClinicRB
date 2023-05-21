@@ -9,14 +9,14 @@ namespace VeterinaryClinicRB
     {
         public static string MenuStr =
             $"{Lang.GetText("Меню связанное с цветами консоли")}\n" +
-            $"1. {Lang.GetText("Colors_choice_1")}\n" +
-            $"2. {Lang.GetText("Colors_choice_2")}\n" +
-            $"3. {Lang.GetText("Colors_choice_3")}\n" +
-            $"4. {Lang.GetText("Colors_choice_4")}\n" +
-            $"5. {Lang.GetText("Colors_choice_5")}\n" +
-            $"6. {Lang.GetText("Colors_choice_6")}\n" +
-            $"7. {Lang.GetText("Colors_choice_7")}\n" +
-            $"8. {Lang.GetText("Colors_choice_8")}\n" +
+            $"1. {Lang.GetText("colors_choice_1")}\n" +
+            $"2. {Lang.GetText("colors_choice_2")}\n" +
+            $"3. {Lang.GetText("colors_choice_3")}\n" +
+            $"4. {Lang.GetText("colors_choice_4")}\n" +
+            $"5. {Lang.GetText("colors_choice_5")}\n" +
+            $"6. {Lang.GetText("colors_choice_6")}\n" +
+            $"7. {Lang.GetText("colors_choice_7")}\n" +
+            $"8. {Lang.GetText("colors_choice_8")}\n" +
             $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {

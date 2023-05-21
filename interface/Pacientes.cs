@@ -8,15 +8,15 @@ namespace VeterinaryClinicRB
     public partial class Pacientes
     {
         public static string MenuStr =
-            $"{Lang.GetText("Patientes_menu_0")}\n" +
+            $"{Lang.GetText("patientes_menu_0")}\n" +
             $"{Lang.GetText("string_choise")}\n" +
-            $"1. {Lang.GetText("Patientes_choice_1")}\n" +
-            $"2. {Lang.GetText("Patientes_choice_2")}\n" +
-            $"3. {Lang.GetText("Patientes_choice_3")}\n" +
-            $"4. {Lang.GetText("Patientes_choice_4")}\n" +
-            $"5. {Lang.GetText("Patientes_choice_5")}\n" +
-            $"6. {Lang.GetText("Patientes_choice_6")}\n" +
-            $"7. {Lang.GetText("Patientes_choice_7")}\n" +
+            $"1. {Lang.GetText("patientes_choice_1")}\n" +
+            $"2. {Lang.GetText("patientes_choice_2")}\n" +
+            $"3. {Lang.GetText("patientes_choice_3")}\n" +
+            $"4. {Lang.GetText("patientes_choice_4")}\n" +
+            $"5. {Lang.GetText("patientes_choice_5")}\n" +
+            $"6. {Lang.GetText("patientes_choice_6")}\n" +
+            $"7. {Lang.GetText("patientes_choice_7")}\n" +
             $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
@@ -33,13 +33,13 @@ namespace VeterinaryClinicRB
                         XmlRead.Book("pacientes", "pacientes", "paciente");
                         break;
                     case 2:
-                        int IDToFind = Convert.ToInt32(Valid.Number("Введите ID пациента, чтобы просмотреть его профиль (0 - отмена)\nВвод: "));
+                        int IDToFind = Convert.ToInt32(Valid.Number($"{Lang.GetText("patientes_menu_info")}\n{Lang.GetText("string_input")}: "));
                         if (IDToFind == 0)
                             break;
                         XmlRead.ShowById("pacientes", "pacientes", "paciente", IDToFind);
                         break;
                     case 3:
-                        int IDToUpdate = Convert.ToInt32(Valid.Number("Введите ID пациента, чтобы обновить его данные (0 - отмена)\nВвод: "));
+                        int IDToUpdate = Convert.ToInt32(Valid.Number($"{Lang.GetText("patientes_menu_update")}\n{Lang.GetText("string_input")}: "));
                         if (IDToUpdate == 0)
                             break;
                         XmlChange.Update("pacientes", "pacientes", "paciente", IDToUpdate);
@@ -48,7 +48,7 @@ namespace VeterinaryClinicRB
                         XmlAdd.New("pacientes", "pacientes", "paciente");
                         break;
                     case 5:
-                        int IDToDelete = Convert.ToInt32(Valid.Number("Введите ID пациента, чтобы удалить его (0 - отмена)\nВвод: "));
+                        int IDToDelete = Convert.ToInt32(Valid.Number($"{Lang.GetText("patientes_menu_delete")}\n{Lang.GetText("string_input")}: "));
                         if (IDToDelete == 0)
                             break;
                         if (Valid.Accept($"ID: {IDToDelete}"))
@@ -56,12 +56,12 @@ namespace VeterinaryClinicRB
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine($"{Lang.GetText("Patientes_delete_cancel")}");
+                            Console.WriteLine($"{Lang.GetText("patientes_delete_cancel")}");
                             Title.Wait();
                         }
                         break;
                     case 6:
-                        string IDToChangeValid = Valid.Number("Введите ID пациента, чтобы изменить его валидность (0 - отмена)\nВвод: ");
+                        string IDToChangeValid = Valid.Number($"{Lang.GetText("patientes_menu_valid")}\n{Lang.GetText("string_input")}: ");
                         if (IDToChangeValid == "0")
                             break;
                         XmlChange.UpdateValid(IDToChangeValid);

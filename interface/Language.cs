@@ -8,11 +8,11 @@ namespace VeterinaryClinicRB
     public partial class Lang
     {
         public static string MenuStr =
-            $"{Lang.GetText("Language_menu_0")}Меню связанное с изменением языка приложения\n" +
-            $"{Lang.GetText("Language_menu_1")}На данный момент вы используете РУССКИЙ язык.\n" + // На англ версии "РУССКИЙ" будет заменён на англ!
-            $"{Lang.GetText("Language_menu_2")}Если вы желаете изменить язык приложения, выберите номер языка ниже:\n" +
-            $"1.{Lang.GetText("Language_choice_1")}\n" + // Прикол в том, что на англ версии "используется" будет на втором пункте
-            $"2.{Lang.GetText("Language_choice_2")}\n" +
+            $"{Lang.GetText("language_menu_0")}\n" +
+            $"{Lang.GetText("language_menu_1")}\n" +
+            $"{Lang.GetText("language_menu_2")}:\n" +
+            $"1.{Lang.GetText("language_choice_1")}\n" +
+            $"2.{Lang.GetText("language_choice_2")}\n" +
             $"0.{Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
@@ -51,7 +51,7 @@ namespace VeterinaryClinicRB
             {
                 Console.Clear();
                 Title.Set("Welcome!");
-                Console.Write( // Всё, что ниже, переводу не подлежит!!! (Для Ильи)
+                Console.Write(
                     "[EN] Set the language of the program, make a choice of the language that is available from the list\n" +
                     "[RU] Установите язык программы, сделайте выбор языка, который доступен из списка\n" +
                     "1. ru - Russian [Руссский]\n" +

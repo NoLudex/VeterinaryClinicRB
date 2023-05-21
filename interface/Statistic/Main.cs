@@ -8,23 +8,23 @@ namespace VeterinaryClinicRB
     public partial class Statistic
     {
         public static string MenuStr =
-            "Меню связанное со статистикой\n" +
-            "Выберите действие из списка, которое желаете произвести\n" +
-            "1. Открыть список/статистику по дням\n" +
-            "2. Удалить статистику дня\n" +
-            "3. Сделать сортировку статистики\n" +
-            "4. Статистика с количеством событий\n" +
-            "5. Другие параметры просмотра статистики (NEW)\n" +
-            "6. Статистика по виду животного (NEW)\n" +
-            "0. Выйти в основное меню";
+            $"{Lang.GetText("statistic_menu_line")}\n" +
+            $"{Lang.GetText("general_menu_0")}\n" +
+            $"1. {Lang.GetText("statistic_choice_1")}\n" +
+            $"2. {Lang.GetText("statistic_choice_2")}\n" +
+            $"3. {Lang.GetText("statistic_choice_3")}\n" +
+            $"4. {Lang.GetText("statistic_choice_4")}\n" +
+            $"5. {Lang.GetText("statistic_choice_5")}\n" +
+            $"6. {Lang.GetText("statistic_choice_6")}\n" +
+            $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Меню статистики");
+                Title.Set($"{Lang.GetText("title_statistic")}");
                 Console.Clear();
-                Console.Write(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
@@ -33,27 +33,27 @@ namespace VeterinaryClinicRB
                         break;
                     case 2:
                         string data = Valid.Date("");
-                        if (Valid.Accept($"DATE: {data}"))
+                        if (Valid.Accept($"{Lang.GetText("date")}: {data}"))
                             XmlDelete.StatisticsByDate(data);
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine("Удаление статистики дня было отменено.");
+                            Console.WriteLine($"{Lang.GetText("statistic_delete_close")}");
                             Title.Wait();
                         }
                         break;
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("Производится сортировка...");
+                        Console.WriteLine($"{Lang.GetText("statistic_sorting")}...");
                         XmlSort.SortByDate("./database/statistic.xml");
-                        Console.WriteLine("Успешно!");
-                        Title.Set("Успех!");
+                        Console.WriteLine($"{Lang.GetText("title_success")}");
+                        Title.Set($"{Lang.GetText("title_success")}");
                         Title.Wait();
                         break;
                     case 4:
                         Console.Clear();
                         XmlSort.SortByDate("./database/statistic.xml");
-                        Title.Set("Все события");
+                        Title.Set($"{Lang.GetText("title_all_events")}");
                         Console.WriteLine(XmlStat.GetEventsToday());
                         Title.Wait();
                         break;
@@ -62,15 +62,15 @@ namespace VeterinaryClinicRB
                         break;
                     case 6:
                         Console.Clear();
-                        Console.Write("Введите вид животного: ");
+                        Console.Write($"{Lang.GetText("statistic_input_type_animal")}: ");
                         string? animalType = Console.ReadLine();
                         if (!string.IsNullOrWhiteSpace(animalType) || !string.IsNullOrWhiteSpace(animalType))
                             XmlStat.GetStatsByAnimalType(animalType);
                         else
                         {
                             Console.Clear();
-                            Title.Set("Ошибка ввода");
-                            Console.WriteLine("Неверный формат, попробуйте снова");
+                            Title.Set($"{Lang.GetText("title_error_put")}");
+                            Console.WriteLine($"{Lang.GetText("string_error_input")}");
                             Title.Wait();
                         }
                         break;
@@ -80,8 +80,8 @@ namespace VeterinaryClinicRB
                     default:
                         enableMenu = false;
                         Console.Clear();
-                        Console.WriteLine("Правильно введите номер действия");
-                        Title.Set("Ошибка");
+                        Console.WriteLine($"{Lang.GetText("string_error_input_choise")}");
+                        Title.Set($"{Lang.GetText("title_error_simpl")}");
                         Title.Wait();
                         break;
                 }

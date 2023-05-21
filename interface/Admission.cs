@@ -8,14 +8,14 @@ namespace VeterinaryClinicRB
     public partial class Admission
     {
         public static string MenuStr =
-            $"{Lang.GetText("Admissions_menu_1")}\n" +
+            $"{Lang.GetText("admissions_menu_1")}\n" +
             $"{Lang.GetText("string_choise")}\n" +
-            $"1. {Lang.GetText("Admissions_choise_1")}\n" +
-            $"2. {Lang.GetText("Admissions_choise_2")}\n" +
-            $"3. {Lang.GetText("Admissions_choise_3")}\n" +
-            $"4. {Lang.GetText("Admissions_choise_4")}\n" +
-            $"5. {Lang.GetText("Admissions_choise_5")}\n" +
-            $"6. {Lang.GetText("Admissions_choise_6")}\n" +
+            $"1. {Lang.GetText("admissions_choise_1")}\n" +
+            $"2. {Lang.GetText("admissions_choise_2")}\n" +
+            $"3. {Lang.GetText("admissions_choise_3")}\n" +
+            $"4. {Lang.GetText("admissions_choise_4")}\n" +
+            $"5. {Lang.GetText("admissions_choise_5")}\n" +
+            $"6. {Lang.GetText("admissions_choise_6")}\n" +
             $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
@@ -32,13 +32,13 @@ namespace VeterinaryClinicRB
                         XmlRead.Book("admission", "admission", "animal");
                         break;
                     case 2:
-                        int IDToFind = Convert.ToInt32(Valid.Number("Введите ID приёма, чтобы просмотреть подробнее (0 - отмена)\nВвод: "));
+                        int IDToFind = Convert.ToInt32(Valid.Number($"{Lang.GetText("admissions_info")}\n{Lang.GetText("string_input")}: "));
                         if (IDToFind == 0)
                             break;
                         XmlRead.ShowById("admission", "admission", "animal", IDToFind);
                         break;
                     case 3:
-                        int IDToUpdate = Convert.ToInt32(Valid.Number("Введите ID приёма, чтобы изменить его (0 - отмена)\nВвод: "));
+                        int IDToUpdate = Convert.ToInt32(Valid.Number($"{Lang.GetText("admissions_update")}\n{Lang.GetText("string_input")}: "));
                         if (IDToUpdate == 0)
                             break;
                         XmlChange.Update("admission", "admission", "animal", IDToUpdate);
@@ -47,7 +47,7 @@ namespace VeterinaryClinicRB
                         XmlAdd.New("admission", "admission", "animal");
                         break;
                     case 5:
-                        int IDToDelete = Convert.ToInt32(Valid.Number("Введите ID приёма, чтобы удалить его (0 - отмена)\nВвод: "));
+                        int IDToDelete = Convert.ToInt32(Valid.Number($"{Lang.GetText("admissions_delete")}\n{Lang.GetText("string_input")}: "));
                         if (IDToDelete == 0)
                             break;
                         if (Valid.Accept($"ID: {IDToDelete}"))
@@ -55,12 +55,12 @@ namespace VeterinaryClinicRB
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine($"{Lang.GetText("Addmissions_delete_cancel")}");
+                            Console.WriteLine($"{Lang.GetText("addmissions_delete_cancel")}");
                             Title.Wait();
                         }
                         break;
                     case 6:
-                        string IDToChangeInfo = Valid.Number("Введите ID приёма, чтобы обновить его информацию (0 - отмена)\nВвод: ");
+                        string IDToChangeInfo = Valid.Number($"{Lang.GetText("admissions_info_update")}\n{Lang.GetText("string_input")}: ");
                         if (IDToChangeInfo == "0")
                             break;
                         XmlChange.UpdateInfo(IDToChangeInfo);

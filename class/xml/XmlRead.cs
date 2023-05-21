@@ -32,29 +32,28 @@ namespace VeterinaryClinicRB
             while (!finished)
             {
                 Console.Clear();
-                Title.Set($"Страница {currentPage} из {totalPages}"); // Используй две переменные %1$ и %2$, через запятую указывай две переменных, удали этот комментарий потом!
+                Title.Set($"{Lang.GetText("title_page", currentPage, totalPages)}");
                 string input;
                 XmlNodeList FileNameNodes = document.SelectNodes($"/{MainTag}/{ObjectTag}[position()>={(currentPage -1) * pageSize + 1} and position()<={currentPage * pageSize}]");
                 
                 string skip = 
-                    "Чтобы посмотреть следующую страницу введите 'n'\n" +
-                    "Введите 'p' Чтобы просмотреть предыдущую страницу, \n" +
-                    "Любая другая клавиша выводит вас с данного меню";
+                    $"{Lang.GetText("string_skip_0")}\n" +
+                    $"{Lang.GetText("string_skip_1")}\n" +
+                    $"{Lang.GetText("string_skip_2")}";
                 
                 if (nodeList != null)
                     switch (FileName)
                     {
                         // Доступные файлы для работы данного метода:
                         case "doctors":
-                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine(Lang.GetText("line"));
                             foreach (XmlNode FileNameNode in FileNameNodes) 
                             {
                                 Console.WriteLine(
-                                    "ФИО доктора: " + FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText + "\n" +
-                                    "Дата рождения: " + FileNameNode.SelectSingleNode("birthday")?.InnerText + "\n" +
-                                    "Пациентов прошло данного врача:  " + FileNameNode.SelectSingleNode("animals-treated")?.InnerText + "\n" +
-                                    "Telegram ID:  " + FileNameNode.SelectSingleNode("telegram-id")?.InnerText + " (" + FileNameNode.SelectSingleNode("id")?.InnerText + ")\n" +
-                                    "-----------------------------"
+                                    $"{Lang.GetText("book_doctors_element_0", FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_doctors_element_1", FileNameNode.SelectSingleNode("birthday")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_doctors_element_2", FileNameNode.SelectSingleNode("telegram-id")?.InnerText, FileNameNode.SelectSingleNode("id")?.InnerText)}\n" +
+                                    $"{Lang.GetText("line")}"
                                     );
                             }
                             Console.WriteLine(skip);
@@ -82,15 +81,15 @@ namespace VeterinaryClinicRB
                             }
                             break;
                         case "cassa":
-                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine($"{Lang.GetText("line")}");
                             foreach (XmlNode FileNameNode in FileNameNodes) 
                             {
                                 Console.WriteLine(
-                                    $"Идентификатор приёма: {FileNameNode.SelectSingleNode("id-admission")?.InnerText} (Лот {FileNameNode.SelectSingleNode("id")?.InnerText})\n" +
-                                    "Стоимость приёма: " + FileNameNode.SelectSingleNode("amount")?.InnerText + "\n" +
-                                    "Дата:  " + FileNameNode.SelectSingleNode("date")?.InnerText + "\n" +
-                                    "Статус:  " + FileNameNode.SelectSingleNode("status")?.InnerText + "\n" +
-                                    "-----------------------------"
+                                    $"{Lang.GetText("book_cassa_element_0", FileNameNode.SelectSingleNode("id-admission")?.InnerText, FileNameNode.SelectSingleNode("id")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_cassa_element_1", FileNameNode.SelectSingleNode("amount")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_cassa_element_2", FileNameNode.SelectSingleNode("date")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_cassa_element_3", FileNameNode.SelectSingleNode("status")?.InnerText)}\n" +
+                                    $"{Lang.GetText("line")}"
                                     );
                             }
                             Console.WriteLine(skip);
@@ -126,16 +125,16 @@ namespace VeterinaryClinicRB
                             XmlDocument cassa = new XmlDocument();
                             cassa.Load($"./database/cassa.xml");
 
-                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine($"{Lang.GetText("line")}");
                             foreach (XmlNode FileNameNode in FileNameNodes)
                             {
                                 string doctorName = FileNameNode.SelectSingleNode("fullname-doctor")?.InnerText;
                                 string id = FileNameNode.SelectSingleNode("id")?.InnerText;
                                 XmlNode doctorNode = documentDoctors.SelectSingleNode($"./doctors/doctor[fullname-doctor='{doctorName}']");
                                 XmlNode cassaNode = cassa.SelectSingleNode($"./cassa/payment[id-admission='{id}']");
-                                Console.WriteLine($"Дата: {FileNameNode.SelectSingleNode("date-time")?.InnerText} ID ({FileNameNode.SelectSingleNode("id")?.InnerText})");
+                                Console.WriteLine($"{Lang.GetText("book_admission_element_0", FileNameNode.SelectSingleNode("date-time")?.InnerText, FileNameNode.SelectSingleNode("id")?.InnerText)}");
 
-                                Console.WriteLine("ФИО доктора: ");
+                                Console.Write($"{Lang.GetText("book_admission_element_0")}: ");
                                 // Проверяем наличие доктора в базе данных
                                 if (doctorNode != null)
                                 {
@@ -146,30 +145,30 @@ namespace VeterinaryClinicRB
                                 {
                                     Console.ForegroundColor = ConsoleColor.Black;
                                     Console.BackgroundColor = ConsoleColor.Red;
-                                    doctorName += " (уволен)";
+                                    doctorName += $" ({Lang.GetText("book_admission_element_1_variate")})";
                                 }
                                 
                                 string payment = "";
 
                                 if (cassaNode == null)
                                 {
-                                    payment = "Приём бесплатный";
+                                    payment = $"{Lang.GetText("book_admission_element_2")}";
                                 }
                                 else
                                 {
-                                    payment = $"Приём платный, его стоимость: {cassaNode.SelectSingleNode("amount")?.InnerText}";
+                                    payment = $"{Lang.GetText("book_admission_element_2_variate", cassaNode.SelectSingleNode("amount")?.InnerText)}";
                                 }
 
                                 Console.Write($"{doctorName}");
                                 Title.Theme(Title.activeTheme);
                                 
                                 Console.WriteLine("\n" +
-                                    $"Идентификатор пациента: ID ({FileNameNode.SelectSingleNode("paciente-id")?.InnerText})\n" +
-                                    $"Жалобы: {FileNameNode.SelectSingleNode("complaints")?.InnerText}\n" +
-                                    $"Диагноз: {FileNameNode.SelectSingleNode("diagnosis")?.InnerText}\n" +
-                                    $"Рекомендации от доктора: {FileNameNode.SelectSingleNode("info")?.InnerText}\n" +
+                                    $"{Lang.GetText("book_admission_element_3", FileNameNode.SelectSingleNode("paciente-id")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_admission_element_4", FileNameNode.SelectSingleNode("complaints")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_admission_element_5", FileNameNode.SelectSingleNode("diagnosis")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_admission_element_6", FileNameNode.SelectSingleNode("info")?.InnerText)}\n" +
                                     $"{payment}\n" +
-                                    "-----------------------------"
+                                    $"{Lang.GetText("line")}"
                                 );
                             }
                             Console.WriteLine(skip);
@@ -196,18 +195,18 @@ namespace VeterinaryClinicRB
                             }
                             break;
                         case "pacientes":
-                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine($"{Lang.GetText("line")}");
                             foreach (XmlNode FileNameNode in FileNameNodes) 
                             {
                                 Console.WriteLine(
-                                    "Вид животного: " + FileNameNode.SelectSingleNode("animal-type")?.InnerText + " ID (" + FileNameNode.SelectSingleNode("id")?.InnerText + ")\n" +
-                                    "Кличка: " + FileNameNode.SelectSingleNode("name")?.InnerText + "\n" +
-                                    "Пол: " + FileNameNode.SelectSingleNode("gender")?.InnerText + "\n" +
-                                    "Возраст животного:  " + FileNameNode.SelectSingleNode("age")?.InnerText + "\n" +
-                                    "ФИО владельца:  " + FileNameNode.SelectSingleNode("fullname-owner")?.InnerText + "\n" +
-                                    "Валидно ли животное (?):  " + FileNameNode.SelectSingleNode("valid")?.InnerText + "\n" +
-                                    "Телеграм владельца: " + FileNameNode.SelectSingleNode("telegram-id")?.InnerText + "\n" +
-                                    "-----------------------------"
+                                    $"{Lang.GetText("book_pacientes_element_0", FileNameNode.SelectSingleNode("animal-type")?.InnerText, FileNameNode.SelectSingleNode("id")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_pacientes_element_1", FileNameNode.SelectSingleNode("name")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_pacientes_element_2", FileNameNode.SelectSingleNode("gender")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_pacientes_element_3", FileNameNode.SelectSingleNode("age")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_pacientes_element_4", FileNameNode.SelectSingleNode("fullname-owner")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_pacientes_element_5", FileNameNode.SelectSingleNode("valid")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_pacientes_element_6", FileNameNode.SelectSingleNode("telegram-id")?.InnerText)}\n" +
+                                    $"{Lang.GetText("line")}"
                                     );
                             }
                             Console.WriteLine(skip);
@@ -235,13 +234,13 @@ namespace VeterinaryClinicRB
                             }
                             break;
                         case "statistic":
-                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine($"{Lang.GetText("line")}");
                             foreach (XmlNode FileNameNode in FileNameNodes) 
                             {
                                 Console.WriteLine(
-                                    "Дата: " + FileNameNode.SelectSingleNode("date")?.InnerText + "\n" +
-                                    "Описание данного дня: " + FileNameNode.SelectSingleNode("description")?.InnerText + "\n" +
-                                    "-----------------------------"
+                                    $"{Lang.GetText("book_statistic_element_1", FileNameNode.SelectSingleNode("date")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_statistic_element_1", FileNameNode.SelectSingleNode("description")?.InnerText)}\n" +
+                                    $"{Lang.GetText("line")}"
                                     );
                             }
                             Console.WriteLine(skip);
@@ -269,25 +268,24 @@ namespace VeterinaryClinicRB
                             }
                             break;
                         default:
-                            Title.Set($"Ошибка!");
-                            Console.WriteLine("[DEBUG] Неверно указан файл");
+                            Title.Set($"{Lang.GetText("title_error_simpl")}");
+                            Console.WriteLine($"{Lang.GetText("string_wrong_file")}");
                             Title.Wait();
                             break;
                     }
                 else
                 {
-                    Title.Set($"Ошибка!");
-                    Console.WriteLine("[DEBUG] Ошибка чтения");
+                    Title.Set($"{Lang.GetText("title_error_simpl")}");
+                    Console.WriteLine($"{Lang.GetText("string_wrong_file")}");
                     Title.Wait();
                 }
             }
         }
-
         // Показать информацию об одном элементе, указав ID
         public static void ShowById(string FileName, string MainTag, string ObjectTag, int id)
         {
             
-            Title.Set($"Просмотр элемента в {FileName}.xml");
+            Title.Set($"{Lang.GetText("title_read_element", FileName)}");
             XmlDocument document = new XmlDocument();
             document.Load($"./database/{FileName}.xml");
 
@@ -305,11 +303,10 @@ namespace VeterinaryClinicRB
                         string animalsTreated = FileNameNode.SelectSingleNode("animals-treated").InnerText;
                         telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
-                        Console.WriteLine("Информация об враче:");
-                        Console.WriteLine($"ФИО врача: {fullName}");
-                        Console.WriteLine("Дата рождения: " + birthday);
-                        Console.WriteLine("Пациентов прошло данного врача: " + animalsTreated);
-                        Console.WriteLine("Telegram ID: " + telegramID + $" ({id})");
+                        Console.WriteLine($"{Lang.GetText("show_one_doctors_element_0")}:");
+                        Console.WriteLine($"{Lang.GetText("show_one_doctors_element_1", fullName)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_doctors_element_2", birthday)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_doctors_element_3", telegramID, id)}");
                         break; 
                     case "admission":
                         string pacienteId = FileNameNode.SelectSingleNode("paciente-id").InnerText;
@@ -319,13 +316,13 @@ namespace VeterinaryClinicRB
                         string diagnosis = FileNameNode.SelectSingleNode("diagnosis").InnerText;
                         string info = FileNameNode.SelectSingleNode("info").InnerText;
 
-                        Console.WriteLine("Информация об приёме:");
-                        Console.WriteLine($"ID пациента: {pacienteId}; ID приёма: ({id})");
-                        Console.WriteLine("Дата приёма: " + dateTime);
-                        Console.WriteLine("ФИО врача: " + fullnameDoctor);
-                        Console.WriteLine("Жалобы пациента: " + complaints);
-                        Console.WriteLine("Диагноз: " + diagnosis);
-                        Console.WriteLine($"Рекомендации от доктора: {info}");
+                        Console.WriteLine($"{Lang.GetText("show_one_admission_element_0")}");
+                        Console.WriteLine($"{Lang.GetText("show_one_admission_element_1", pacienteId, id)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_admission_element_2", dateTime)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_admission_element_3", fullnameDoctor)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_admission_element_4", complaints)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_admission_element_5", diagnosis)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_admission_element_6", info)}");
                         break;     
                     case "pacientes":
                         string animalType = FileNameNode.SelectSingleNode("animal-type").InnerText;
@@ -336,26 +333,26 @@ namespace VeterinaryClinicRB
                         string valid = FileNameNode.SelectSingleNode("valid").InnerText;
                         telegramID = FileNameNode.SelectSingleNode("telegram-id").InnerText;
 
-                        Console.WriteLine("Информация об пациенте:");
-                        Console.WriteLine($"Вид животного: {animalType}; ID ({id})");
-                        Console.WriteLine("Кличка животного: " + name);
-                        Console.WriteLine("Пол животного: " + gender);
-                        Console.WriteLine("Возраст: " + age);
-                        Console.WriteLine("ФИО владельца: " + fullnameOwner);
-                        Console.WriteLine("Активен(?): " + valid);
-                        Console.WriteLine($"Telegram владельца: {telegramID}");
+                        Console.WriteLine($"{Lang.GetText("show_one_pacientes_element_0")}:");
+                        Console.WriteLine($"{Lang.GetText("show_one_pacientes_element_1", animalType, id)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_pacientes_element_2", name)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_pacientes_element_3", gender)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_pacientes_element_4", age)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_pacientes_element_5", fullnameOwner)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_pacientes_element_6", valid)}");
+                        Console.WriteLine($"{Lang.GetText("show_one_pacientes_element_7", telegramID)}");
                         break;
                     default:
-                        Console.WriteLine("Ошибка вывода");
-                        Title.Set("Ошибка");
+                        Console.WriteLine($"{Lang.GetText("title_error_input")}");
+                        Title.Set(Lang.GetText("title_error_simpl"));
                         break;
                 }
                 Title.Wait();
             }
             else
             {
-                Title.Set("Ошибка поиска");
-                Console.WriteLine("Ничего не найдено. Проверьте, верно ли вы указали ID");
+                Title.Set($"{Lang.GetText("title_error_search")}");
+                Console.WriteLine($"{Lang.GetText("change_error_id")}");
                 Title.Wait();
             }
         }
@@ -380,7 +377,7 @@ namespace VeterinaryClinicRB
             xmlDoc.Load("./database/pacientes.xml");
             
             Console.Clear();
-            Console.Write("Введите критерий поиска (кличка животного): ");
+            Console.Write($"{Lang.GetText("find_pacient_input_name")}: ");
             string searchCriteria = Console.ReadLine();
             Console.Clear();
             XmlNodeList pacientesList = xmlDoc.GetElementsByTagName("paciente");
@@ -396,17 +393,16 @@ namespace VeterinaryClinicRB
                 if (nameNode != null && nameNode.InnerText.ToLower().Contains(searchCriteria.ToLower()))
                 {
                     count++;
-                    Console.WriteLine("Найден пациент №{0}:", count);
-                    Console.WriteLine("  ID: {0}", idNode.InnerText);
-                    Console.WriteLine("  Вид: {0}", animalNode.InnerText);
-                    Console.WriteLine("  Кличка: {0}", nameNode.InnerText);
-                    Console.WriteLine("  Владелец: {0}", ownerNode != null ? ownerNode.InnerText : "Неизвестно");
-                    Console.WriteLine("-----------------");
+                    Console.WriteLine($"{Lang.GetText("find_pacient_element_0", count)}");
+                    Console.WriteLine($"{Lang.GetText("find_pacient_element_1", idNode.InnerText)}");
+                    Console.WriteLine($"{Lang.GetText("find_pacient_element_2", animalNode.InnerText)}");
+                    Console.WriteLine($"{Lang.GetText("find_pacient_element_3", nameNode.InnerText)}");
+                    Console.WriteLine($"{Lang.GetText("find_pacient_element_4", ownerNode != null ? ownerNode.InnerText : "Неизвестно")}");
+                    Console.WriteLine(Lang.GetText("line"));
 
                     if (count > 1 && count % 2 == 0)
                     {
-                        Console.Clear();
-                        Console.WriteLine("Нажмите Enter, чтобы продолжить...");
+                        Title.Wait();
                         Console.ReadLine();
                     }
                 }
@@ -415,125 +411,22 @@ namespace VeterinaryClinicRB
             if (count == 0)
             {
                 Console.Clear();
-                Title.Set("Результаты не найдены");
-                Console.WriteLine("Результаты не найдены.");
+                Title.Set($"{Lang.GetText("string_nothing_found")}");
+                Console.WriteLine($"{Lang.GetText("string_nothing_found")}");
                 Title.Wait();
             }
             else if (count == 1)
             {
-                Title.Set("Найден один пациент");
-                Console.WriteLine("Найден единственный пациент.");
+                Title.Set($"{Lang.GetText("title_find_pacient_one_element")}");
+                Console.WriteLine($"{Lang.GetText("find_pacient_one_element")}");
                 Title.Wait();
             }
             else
             {
-                Title.Set($"Найдено {count}");
-                Console.WriteLine("Найдено {0} пациентов.", count);
+                Title.Set($"{Lang.GetText("title_find_pacient_more_element", count)}");
+                Console.WriteLine($"{Lang.GetText("find_pacient_more_element", count)}");
                 Title.Wait();
             }
-        }
-
-        public static void PrintAdmissionData(string date = null, string startDate = null, string endDate = null)
-        {
-            // Загрузка баз данных XML в объекты XmlDocument
-            var admissionDoc = new XmlDocument();
-            admissionDoc.Load("./database/admission.xml");
-
-            var doctorsDoc = new XmlDocument();
-            doctorsDoc.Load("./database/doctors.xml");
-
-            var pacientesDoc = new XmlDocument();
-            pacientesDoc.Load("./database/pacientes.xml");
-
-            var statisticDoc = new XmlDocument();
-            statisticDoc.Load("./database/statistic.xml");
-
-            var admissionNodes = admissionDoc.SelectNodes("//admission");
-            var doctorsNodes = doctorsDoc.SelectNodes("//doctor");
-            var pacientesNodes = pacientesDoc.SelectNodes("//paciente");
-            var statisticNodes = statisticDoc.SelectNodes("//data");
-
-            int totalCount = 0;
-
-            // Проходим по всем записям приема в заданном диапазоне дат
-            foreach (XmlNode admissionNode in admissionNodes)
-            {
-                var dateTimeString = admissionNode.SelectSingleNode("date-time").InnerText;
-                var admissionDate = DateTime.ParseExact(dateTimeString, "dd.MM.yyyy", null);
-
-                if (date != null && admissionDate.ToString("dd.MM.yyyy") != date)
-                {
-                    continue;
-                }
-
-                if (startDate != null)
-                {
-                    var startDateObj = DateTime.ParseExact(startDate, "dd.MM.yyyy", null);
-                    if (admissionDate < startDateObj)
-                    {
-                        continue;
-                    }
-                }
-
-                if (endDate != null)
-                {
-                    var endDateObj = DateTime.ParseExact(endDate, "dd.MM.yyyy", null);
-                    if (admissionDate > endDateObj)
-                    {
-                        continue;
-                    }
-                }
-
-                // Получение информации о животном, враче и пациенте
-                var animalId = admissionNode.SelectSingleNode("paciente-id").InnerText;
-
-                // Перебираем все элементы пациентов для получения информации о требуемом животном
-                foreach (XmlNode pacienteNode in pacientesNodes)
-                {
-                    var pacienteId = pacienteNode.SelectSingleNode("id").InnerText;
-
-                    if (pacienteId == animalId)
-                    {
-                        var animalType = pacienteNode.SelectSingleNode("animal-type").InnerText;
-                        var animalName = pacienteNode.SelectSingleNode("name").InnerText;
-                        var animalGender = pacienteNode.SelectSingleNode("gender").InnerText;
-                        var animalAge = pacienteNode.SelectSingleNode("age").InnerText;
-                        var ownerFullName = pacienteNode.SelectSingleNode("fullname-owner").InnerText;
-
-                        var doctorFullName = admissionNode.SelectSingleNode("fullname-doctor").InnerText;
-
-                        // Перебираем все элементы врачей для получения информации о требуемом враче
-                        foreach (XmlNode doctorNode in doctorsNodes)
-                        {
-                            var doctorFullNameInXml = doctorNode.SelectSingleNode("fullname-doctor").InnerText;
-
-                            if (doctorFullNameInXml == doctorFullName)
-                            {
-                                var doctorSpecialization = doctorNode.SelectSingleNode("doctor-specialization").InnerText;
-
-                                var complaints = admissionNode.SelectSingleNode("complaints").InnerText;
-                                var diagnosis = admissionNode.SelectSingleNode("diagnosis").InnerText;
-                                var info = admissionNode.SelectSingleNode("info").InnerText;
-                                var admissionTime = admissionNode.SelectSingleNode("time").InnerText;
-
-                                // Вывод информации в заданном формате
-                                Console.WriteLine($"{admissionTime}, врач: {doctorFullName} ({doctorSpecialization}), пациент: {animalType} ({animalName}) [{animalGender}], возраст: {animalAge} лет, Владелец: {ownerFullName}, жалобы: {complaints}, диагноз: {diagnosis}, инфо: {info}.");
-
-                                totalCount++;
-                                break;
-                            }
-                        }
-
-                        break;
-                    }
-                }
-            }
-
-            // Вывод общего количества приемов
-            Console.WriteLine($"Всего приемов за день: {totalCount}");
-
-            // Разделительная линия
-            Console.WriteLine("============================");
         }
     }
 }

@@ -8,16 +8,16 @@ namespace VeterinaryClinicRB
     public partial class General
     {
         public static string MenuStr0 =
-            $"{Lang.GetText("General_menu_1")}\n" +
-            $"{Lang.GetText("General_menu_2")}";
+            $"{Lang.GetText("general_menu_1")}\n" +
+            $"{Lang.GetText("general_menu_2")}";
         public static string MenuStr1 =
             $"{Lang.GetText("General_menu_0")}:\n" +
-            $"1. {Lang.GetText("General_choice_1")}\n" +
-            $"2. {Lang.GetText("General_choice_2")}\n" +
-            $"3. {Lang.GetText("General_choice_3")}\n" +
-            $"4. {Lang.GetText("General_choice_4")}\n" +
-            $"5. {Lang.GetText("General_choice_5")}\n" +
-            $"6. {Lang.GetText("General_choice_6")}\n" +
+            $"1. {Lang.GetText("general_choice_1")}\n" +
+            $"2. {Lang.GetText("general_choice_2")}\n" +
+            $"3. {Lang.GetText("general_choice_3")}\n" +
+            $"4. {Lang.GetText("general_choice_4")}\n" +
+            $"5. {Lang.GetText("general_choice_5")}\n" +
+            $"6. {Lang.GetText("general_choice_6")}\n" +
             $"0. {Lang.GetText("string_exit")}";
         public static void Menu(string fullnameUser)
         {
@@ -31,7 +31,7 @@ namespace VeterinaryClinicRB
                     
                     Title.Set($"{Lang.GetText("title_general")}");
                     Console.Clear();
-                    Console.Write($"{Lang.GetText("General_menu_1", MenuStr0, todayCount)}\n{Lang.GetText("General_menu_2", Authorization.nowLogin)}\n{MenuStr1}\n{Lang.GetText("string_input")}: ");
+                    Console.Write($"{Lang.GetText("general_menu_1", MenuStr0, todayCount)}\n{Lang.GetText("General_menu_2", Authorization.nowLogin)}\n{MenuStr1}\n{Lang.GetText("string_input")}: ");
 
                     switch (Choice.Get())
                     {
@@ -76,11 +76,11 @@ namespace VeterinaryClinicRB
                 Console.Clear();
                 Title.Set("Ошибка");
                 Console.WriteLine(
-                    $"{Lang.GetText("General_error_menu_0")}\n" +
-                    $"{Lang.GetText("General_error_menu_1")}\n" +
-                    $"{Lang.GetText("General_error_menu_2", ex.Message)}\n\n" +
-                    $"{Lang.GetText("General_error_menu_3")}\n" +
-                    $"{Lang.GetText("")}[link]https://discord.gg/JkkEKuT7P3[/link] (CTRL +  ПКМ по ссылке)"
+                    $"{Lang.GetText("general_error_menu_0")}\n" +
+                    $"{Lang.GetText("general_error_menu_1")}\n" +
+                    $"{Lang.GetText("general_error_menu_2", ex.Message)}\n\n" +
+                    $"{Lang.GetText("general_error_menu_3")}\n" +
+                    $"[link]{Lang.GetText("link_discord")}[/link] ({Lang.GetText("link_discord_gui")})"
                     );
                 Title.Wait();
             }

@@ -8,14 +8,14 @@ namespace VeterinaryClinicRB
     public partial class Doctor
     {
         public static string MenuStr = 
-            $"{Lang.GetText("Doctors_menu_1")}\n" +
+            $"{Lang.GetText("doctors_menu_1")}\n" +
             $"{Lang.GetText("string_choise")}\n" +
-            $"1. {Lang.GetText("Doctors_choice_1")}\n" +
-            $"2. {Lang.GetText("Doctors_choice_2")}\n" +
-            $"3. {Lang.GetText("Doctors_choice_3")}\n" +
-            $"4. {Lang.GetText("Doctors_choice_4")}\n" +
-            $"5. {Lang.GetText("Doctors_choice_5")}\n" +
-            $"6. {Lang.GetText("Doctors_choice_6")}\n" +
+            $"1. {Lang.GetText("doctors_choice_1")}\n" +
+            $"2. {Lang.GetText("doctors_choice_2")}\n" +
+            $"3. {Lang.GetText("doctors_choice_3")}\n" +
+            $"4. {Lang.GetText("doctors_choice_4")}\n" +
+            $"5. {Lang.GetText("doctors_choice_5")}\n" +
+            $"6. {Lang.GetText("doctors_choice_6")}\n" +
             $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {   
@@ -32,13 +32,13 @@ namespace VeterinaryClinicRB
                         XmlRead.Book("doctors", "doctors", "doctor");
                         break;
                     case 2:
-                        int IDToFind = Convert.ToInt32(Valid.Number("Введите ID врача, чтобы просмотреть его профиль (0 - отмена)\nВвод: "));
+                        int IDToFind = Convert.ToInt32(Valid.Number($"{Lang.GetText("doctors_menu_info")}\n{Lang.GetText("string_input")}: "));
                         if (IDToFind == 0)
                             break;
                         XmlRead.ShowById("doctors", "doctors", "doctor", IDToFind);
                         break;
                     case 3:
-                        int IDToUpdate = Convert.ToInt32(Valid.Number("Введите ID врача, чтобы изменить его (0 - отмена)\nВвод: "));
+                        int IDToUpdate = Convert.ToInt32(Valid.Number($"{Lang.GetText("doctors_menu_update")}\n{Lang.GetText("string_input")}: "));
                         if (IDToUpdate == 0)
                             break;
                         XmlChange.Update("doctors", "doctors", "doctor", IDToUpdate);
@@ -47,7 +47,7 @@ namespace VeterinaryClinicRB
                         XmlAdd.New("doctors", "doctors", "doctor");
                         break;
                     case 5:
-                        int IDToDelete = Convert.ToInt32(Valid.Number("Введите ID врача, чтобы удалить его (0 - отмена)\nВвод: "));
+                        int IDToDelete = Convert.ToInt32(Valid.Number($"{Lang.GetText("doctors_menu_delete")}\n{Lang.GetText("string_input")}: "));
                         if (IDToDelete == 0)
                             break;
                         if (Valid.Accept($"ID: {IDToDelete}"))
@@ -55,12 +55,12 @@ namespace VeterinaryClinicRB
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine($"{Lang.GetText("Doctors_delete_cancel")}");
+                            Console.WriteLine($"{Lang.GetText("doctors_delete_cancel")}");
                             Title.Wait();
                         }
                         break;
                     case 6:
-                        string FindDoctor = Valid.FullNameUser("врача");
+                        string FindDoctor = Valid.FullNameUser(Lang.GetText("valid_full_name"));
                         XmlStat.FindDoctorStats(FindDoctor);
                         break;
                     case 0:

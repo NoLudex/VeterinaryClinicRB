@@ -8,12 +8,12 @@ namespace VeterinaryClinicRB
     public partial class Authorization
     {
         public static string MenuStr = 
-            $"{Lang.GetText("Autorization_menu_0")}\n" +
-            $"{Lang.GetText("Autorization_menu_1")}\n" +
+            $"{Lang.GetText("autorization_menu_0")}\n" +
+            $"{Lang.GetText("autorization_menu_1")}\n" +
             $"{Lang.GetText("string_choise")}\n" +
-            $"1. {Lang.GetText("Autorization_choice_1")}\n" +
-            $"2. {Lang.GetText("Autorization_choice_2")}\n" +
-            $"3. {Lang.GetText("Autorization_choice_3")}\n" +
+            $"1. {Lang.GetText("autorization_choice_1")}\n" +
+            $"2. {Lang.GetText("autorization_choice_2")}\n" +
+            $"3. {Lang.GetText("autorization_choice_3")}\n" +
             $"0. {Lang.GetText("string_exit")}";
 
         public static string nowLogin = Config.Get("Login");

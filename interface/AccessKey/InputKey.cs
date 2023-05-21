@@ -27,7 +27,7 @@ namespace VeterinaryClinicRB
                     {
                         Console.Clear();
                         Title.Set($"{Lang.GetText("title_error_input_keys")}");
-                        Console.WriteLine($"{Lang.GetText("Access_key_error_0")}\n{Lang.GetText("string_restart")}");
+                        Console.WriteLine($"{Lang.GetText("access_key_error_0")}\n{Lang.GetText("string_restart")}");
                         Config.Set("AutoKey", false);
                         Title.Wait();
                         Environment.Exit(0);
@@ -37,8 +37,8 @@ namespace VeterinaryClinicRB
                 {
                     Console.Clear();
                     Console.Write(
-                        $"{Lang.GetText("Access_key_need_0")}.\n" +
-                        $"{Lang.GetText("Access_key_need_1")}\n" +
+                        $"{Lang.GetText("access_key_need_0")}.\n" +
+                        $"{Lang.GetText("access_key_need_1")}\n" +
                         $"{Lang.GetText("string_input")}: "
                         );
                     key = Console.ReadLine();
@@ -47,10 +47,10 @@ namespace VeterinaryClinicRB
                         if (!Config.Get("ConfirmSaveKey", false))
                         {
                             Console.Clear();
-                            Console.WriteLine($"{Lang.GetText("Access_menu_save_key_0")}\n{Lang.GetText("Access_menu_save_key_1")}");
+                            Console.WriteLine($"{Lang.GetText("access_menu_save_key_0")}\n{Lang.GetText("Access_menu_save_key_1")}");
                             Console.Write(
-                                $"1. {Lang.GetText("Access_save_choice_0")}\n" +
-                                $"2. {Lang.GetText("Access_save_choice_1")}\n" +
+                                $"1. {Lang.GetText("access_save_choice_0")}\n" +
+                                $"2. {Lang.GetText("access_save_choice_1")}\n" +
                                 $"{Lang.GetText("string_input")}: "
                                 );
                             switch (Choice.Get())
@@ -64,7 +64,7 @@ namespace VeterinaryClinicRB
                                     break;
                                 case 2:
                                     Console.Clear();
-                                    Console.WriteLine($"{Lang.GetText("Access_key_not_saved_0")}\n{Lang.GetText("Access_key_not_saved_1")}");
+                                    Console.WriteLine($"{Lang.GetText("access_key_not_saved_0")}\n{Lang.GetText("access_key_not_saved_1")}");
                                     Title.Wait();
                                     break;
                             }
@@ -82,20 +82,6 @@ namespace VeterinaryClinicRB
                     
                 }
             }
-
-            // if (CheckAccess(key))
-            //     return true;
-            // else
-            // {
-            //     Console.Clear();
-            //     Title.Set("Верификация");
-            //     Console.Write(
-            //         "Чтобы иметь доступ к программе нужен специальный ключ.\n" +
-            //         "Вы можете обратиться к администрации для получения данного ключа\n" +
-            //         "Ввод: "
-            //         );
-            //     return false;
-            // }
         }
     }
 }

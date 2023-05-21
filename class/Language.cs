@@ -31,8 +31,8 @@ namespace VeterinaryClinicRB
         public static void Change(string LANG)
         {
             Console.Clear();
-            Console.WriteLine("Ваш язык был успешно изменён на английский! (Требуется перезапуск программы!)");
-            Config.Set("Lang", LANG); // На английской версии будет "изменён на русский"
+            Console.WriteLine(Lang.GetText("lang_change_done"));
+            Config.Set("Lang", LANG);
             Title.Wait();
             Environment.Exit(0);
         }
@@ -45,7 +45,7 @@ namespace VeterinaryClinicRB
             else
             {
                 Console.Clear();
-                Console.WriteLine("Error loading the program language. The language is set to English. (A restart of the program is required!)");
+                Console.WriteLine("[EN] Error loading the program language. The language is set to English. (A restart of the program is required!)");
                 Config.Set("Lang", "en");
                 Console.WriteLine("[DEBUG] lang = " + language);
                 Title.Wait();

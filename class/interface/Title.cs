@@ -17,7 +17,7 @@ namespace VeterinaryClinicRB
         // Обычный обработчик, который ждёт подтверждения
         public static void Wait()
         {
-            Console.Write($"{Lang.GetText("enter_for_done")}: ");
+            Console.Write($"{Lang.GetText("enter_for_done")} ");
             Console.ReadKey();
         }
         
