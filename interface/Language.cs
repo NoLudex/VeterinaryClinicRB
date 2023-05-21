@@ -8,20 +8,20 @@ namespace VeterinaryClinicRB
     public partial class Lang
     {
         public static string MenuStr =
-            "Меню связанное с изменением языка приложения\n" +
-            "На данный момент вы используете РУССКИЙ язык.\n" + // На англ версии "РУССКИЙ" будет заменён на англ!
-            "Если вы желаете изменить язык приложения, выберите номер языка ниже:\n" +
-            "1. Русский язык (Используется)\n" + // Прикол в том, что на англ версии "используется" будет на втором пункте
-            "2. Английский язык\n" +
-            "0. Вернуться назад в меню";
+            $"{Lang.GetText("Language_menu_0")}Меню связанное с изменением языка приложения\n" +
+            $"{Lang.GetText("Language_menu_1")}На данный момент вы используете РУССКИЙ язык.\n" + // На англ версии "РУССКИЙ" будет заменён на англ!
+            $"{Lang.GetText("Language_menu_2")}Если вы желаете изменить язык приложения, выберите номер языка ниже:\n" +
+            $"1.{Lang.GetText("Language_choice_1")}\n" + // Прикол в том, что на англ версии "используется" будет на втором пункте
+            $"2.{Lang.GetText("Language_choice_2")}\n" +
+            $"0.{Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
             bool enableMenu = true;
             while (enableMenu)
             {
-                Title.Set("Смена языка");
+                Title.Set($"{Lang.GetText("title_language")}");
                 Console.Clear();
-                Console.Write(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + $"\n{Lang.GetText("string_input")}: ");
 
                 switch (Choice.Get())
                 {
@@ -37,8 +37,8 @@ namespace VeterinaryClinicRB
                     default:
                         enableMenu = false;
                         Console.Clear();
-                        Console.WriteLine("Неверный ввод. Возвращаем в предыдущее меню!");
-                        Title.Set("Ошибка действия");
+                        Console.WriteLine($"{Lang.GetText("string_error_back")}");
+                        Title.Set($"{Lang.GetText("title_error")}");
                         Title.Wait();
                         break;
                 }

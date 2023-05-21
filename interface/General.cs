@@ -8,8 +8,8 @@ namespace VeterinaryClinicRB
     public partial class General
     {
         public static string MenuStr0 =
-            "Главное меню | VeterinaryClinicRB\n" +
-            "Сегодня было совершено";
+            $"{Lang.GetText("General_menu_1")}\n" +
+            $"{Lang.GetText("General_menu_2")}";
         public static string MenuStr1 =
             $"{Lang.GetText("General_menu_0")}:\n" +
             $"1. {Lang.GetText("General_choice_1")}\n" +
@@ -75,11 +75,11 @@ namespace VeterinaryClinicRB
                 Console.Clear();
                 Title.Set("Ошибка");
                 Console.WriteLine(
-                    "Возникла ошибка. Программа вернёт вас на Главную\n" +
-                    "Чтобы не столкнуться с данной проблемой вновь, пишите в правильном формате!\n" +
-                    $"[DEBUG]: {ex.Message}\n\n" +
-                    "Если ничего не помогает, напишите нам об ошибке\n" +
-                    "[link]https://discord.gg/JkkEKuT7P3[/link] (CTRL +  ПКМ по ссылке)"
+                    $"{Lang.GetText("General_error_menu_0")}\n" +
+                    $"{Lang.GetText("General_error_menu_1")}\n" +
+                    $"{Lang.GetText("General_error_menu_2", ex.Message)}\n\n" +
+                    $"{Lang.GetText("General_error_menu_3")}\n" +
+                    $"{Lang.GetText("")}[link]https://discord.gg/JkkEKuT7P3[/link] (CTRL +  ПКМ по ссылке)"
                     );
                 Title.Wait();
             }
