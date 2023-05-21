@@ -20,7 +20,7 @@ namespace VeterinaryClinicRB
             var text = (string)json.SelectToken(key);
         
             if (text == "" || text == null)
-                throw new ArgumentNullException(nameof(key), $"${key}~~");
+                text = $"${key}~~";
 
             if (args.Length > 0)
                 text = string.Format(culture, text, args);
