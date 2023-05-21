@@ -79,7 +79,7 @@ namespace VeterinaryClinicRB
                             
                             while (true)
                             {
-                                pacienteId = Valid.Number($"{Lang.GetText("")}: ");
+                                pacienteId = Valid.Number($"{Lang.GetText("add_input_patient_id")}: ");
                                 XDocument doc = XDocument.Load("./database/pacientes.xml");
                                 // Поиск и просмотр элемента в БД по ID
                                 bool idExists = doc.Descendants("id").Any(x => (string)x == pacienteId);
@@ -290,7 +290,7 @@ namespace VeterinaryClinicRB
 
                             age = Valid.Number($"{Lang.GetText("add_input_patient_age")}: ");
                             fullnameOwner = Valid.FullNameUser($"{Lang.GetText("add_input_patient_owner")}");
-                            telegramID = Valid.TelegramID($"{Lang.GetText("")}: ");
+                            telegramID = Valid.TelegramID($"{Lang.GetText("add_input_owner_telegram")}: ");
                         } while (string.IsNullOrWhiteSpace(animalType) || string.IsNullOrWhiteSpace(name)  || string.IsNullOrWhiteSpace(gender) || string.IsNullOrWhiteSpace(age) || string.IsNullOrWhiteSpace(fullnameOwner) || string.IsNullOrWhiteSpace(telegramID));
 
                         Element1 = document.CreateElement("id");

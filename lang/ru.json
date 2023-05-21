@@ -2,7 +2,6 @@
     "NOTE_1": "=== Не относятся к программе ===",
     "NOTE_KEY_CODE": "Получить текст => Lang.GetText(\"aut_title\")",
     "NOTE_KEY": "Переменная выглядит так: {0}",
-
     "NOTE_3": "======= Другое =======",
     "enter_for_done": "Нажмите Enter, чтобы продолжить...",
     "valid_full_name": "врача",
@@ -24,10 +23,8 @@
     "string_start_input": "Начните ввод здесь",
     "string_nothing_found": "Ничего не найдено",
     "string_cancel": "Отмена действия",
-
     "link_discord": "https://discord.gg/JkkEKuT7P3",
     "link_discord_gui": "CTRL +  ПКМ по ссылке",
-
     "NOTE_TITLES": "==================== Заголовки программы ====================",
     "title_main": "Ветеринарная клиника",
     "title_success": "Успех!",
@@ -35,7 +32,7 @@
     "title_console_color_error": "Ошибка темы",
     "title_console_color_set": "Тема #{0}",
     "title_account_register": "Регистрация",
-    "title_validate_user": "Авторизация", 
+    "title_validate_user": "Авторизация",
     "title_access_error": "Ошибка доступа",
     "title_error_input_keys": "Ошибка авто-ключа",
     "title_acess_key": "Меню ключа доступа",
@@ -67,14 +64,11 @@
     "title_statistic": "Меню статистики",
     "title_all_events": "Все события",
     "title_error_put": "Ошибка ввода",
-
     "NOTE_CLASSES": "==================== Классы ====================",
-
     "Notes_0": "======= Цветовая схема =======",
     "console_color_set": "Вы успешно изменили цветовую схему консоли на #{0}",
     "console_color_clear": "Вы убрали цветовую схему консоли",
     "console_color_error": "Данная тема не обнаружена! Цветовая тема будет убрана...",
-
     "Notes_1": "======= Ключи =======",
     "key_auto_set_false": "Теперь при входе в приложение, не потребуетя вводить ключ доступа повторно",
     "key_auto_set_true": "Теперь при входе в приложение, нужно будет вводить ключ на регулярной основе",
@@ -83,8 +77,6 @@
     "key_get_error": "Программа была недавно запущена или ключ был удалён, перезапустите программу, чтобы получить ключ",
     "error_access_key": "Неверный ключ доступа!",
     "error_try_again": "Повторите попытку через {0} секунд",
-
-
     "Notes_2": "======= Регистрация =======",
     "reg_input_doctor_id": "Введите ID врача, если затрудняетесь написать, укажите - 0",
     "reg_search_doctor_id_done": "Найден доктор под данным ФИО, его ID - {0}",
@@ -99,7 +91,6 @@
     "reg_error_account_alredy_exits": "Данный врач уже зарегистрирован!",
     "reg_error_doctor_id": "Вы должны ввести ID врача, чтобы продолжить!",
     "reg_error_bio": "Вы должны ввести ФИО врача. Оно не должно быть пустым",
-
     "Notes_3": "======= Авторизация =======",
     "login_input": "Введите логин",
     "login_password": "Введите пароль",
@@ -107,7 +98,6 @@
     "login_done": "Вы успешно авторизировались!",
     "login_password_error": "Неверный логин или пароль. Попробуйте снова",
     "login_input_error": "Логин не может быть пустым! Попробуйте снова",
-
     "valid_input_name": "Введите ФИО {0} на русском языке (Фамилия Имя отчество)",
     "valid_input_name_error0": "ФИО должно быть написано на русском языке и без доп. знаков, повторите ввод",
     "valid_input_name_error1": "Введите полное ФИО через пробелы",
@@ -117,7 +107,6 @@
     "valid_input_number_error": "Нужно положительное число",
     "valid_input_tag_error": "Тег должен быть на английской раскладке без спецсимволов (за исключением '-')",
     "valid_delete_data": "Данное действие удалит безвозвратно данные, вы согласны продолжить? ({0}) (да / нет <= (другой ответ))",
-    
     "Notes_menu0": "===== AccessKey menu =====",
     "access_menu_main": "Меню настроек ключа",
     "access_choice_1": "Вкл / Выкл автоматический ввод ключа при входе",
@@ -133,7 +122,6 @@
     "access_save_choice_1": "Вводить каждый раз при входе",
     "access_key_not_saved_0": "Ключ не будет сохранен и вам нужно вводить его каждый раз при входе",
     "access_key_not_saved_1": "Если вы желаете изменить это, то сможете сделать это в настройках аккаунта!",
-    
     "account_menu_1": "Меню связанное с данной сессией приложения",
     "account_choice_1": "Текущая учетная запись",
     "account_choice_2": "Поиск уч. записи по логину",
@@ -142,8 +130,8 @@
     "account_choice_5": "Сменить уч. запись",
     "account_choice_6": "Меню настроек ключа-доступа",
     "account_choice_7": "Change Language",
+    "account_choice_0": "Выйти с меню аккаунта",
     "account_input_login": "Введите логин уч записи, который желаете посмотреть",
-    
     "admissions_menu_1": "Меню связанное с Приёмами",
     "admissions_choise_1": "Открыть список Приёмов",
     "admissions_choise_2": "Показать Приём, указав ID",
@@ -156,13 +144,11 @@
     "admissions_update": "Введите ID приёма, чтобы изменить его (0 - отмена)",
     "admissions_delete": "Введите ID приёма, чтобы удалить его (0 - отмена)",
     "admissions_info_update": "Введите ID приёма, чтобы обновить его информацию (0 - отмена)",
-
     "autorization_menu_0": "Для того, чтобы войти в приложение, нужно авторизироваться",
     "autorization_menu_1": "Вы можете зарегистрировать аккаунт, если вы есть в базе данных врачей",
     "autorization_choice_1": "Авторизация существующей уч. записи",
     "autorization_choice_2": "Регистрация врача, который не проходил регистрацию",
     "autorization_choice_3": "Меню настроек ключ-доступа",
-
     "colors_menu_1": "Меню связанное с цветами консоли",
     "colors_choice_1": "Фон - Серый, текст - Тёмно-синий",
     "colors_choice_2": "Фон - Зелёный, текст - Белый",
@@ -172,7 +158,6 @@
     "colors_choice_6": "Фон - Тёмно-зелёный, текст - Чёрный",
     "colors_choice_7": "Фон - Тёмно-жёлтый, текст - Тёмно-синий",
     "colors_choice_8": "Вернуть цвет консоли",
-
     "doctors_menu_1": "Меню связанное с Врачами",
     "doctors_choice_1": "Открыть список Врачей",
     "doctors_choice_2": "Показать Врача, указав ID",
@@ -184,11 +169,9 @@
     "doctors_menu_info": "Введите ID врача, чтобы просмотреть его профиль (0 - отмена)",
     "doctors_menu_update": "Введите ID врача, чтобы изменить его (0 - отмена)",
     "doctors_menu_delete": "Введите ID врача, чтобы удалить его (0 - отмена)",
-    
-
-    "General_menu_0": "Выберите пункт, с которым желаете работать",
+    "general_menu_0": "Выберите пункт, с которым желаете работать",
     "general_menu_1": "Главное меню | VeterinaryClinicRB",
-    "General_menu_2": "Сегодня было совершено",
+    "general_menu_2": "Сегодня было совершено",
     "general_choice_1": "Врачи",
     "general_choice_2": "Приёмы",
     "general_choice_3": "Пациенты",
@@ -198,12 +181,10 @@
     "general_choice_7": "Настройка цвета",
     "general_menu_4": "{0} {1} приёмов",
     "general_menu_5": "Авторизирован как: {0}",
-
     "general_error_menu_0": "Возникла ошибка. Программа вернёт вас на Главную",
     "general_error_menu_1": "Чтобы не столкнуться с данной проблемой вновь, пишите в правильном формате!",
     "general_error_menu_2": "[DEBUG]: {0}",
     "general_error_menu_3": "Если ничего не помогает, напишите нам об ошибке",
-
     "patientes_menu_0": "Меню связанное с Пациентами",
     "patientes_choice_1": "Открыть список Пациентов",
     "patientes_choice_2": "Показать Пациента, указав ID",
@@ -217,26 +198,23 @@
     "patientes_menu_update": "Введите ID пациента, чтобы обновить его данные (0 - отмена)",
     "patientes_menu_delete": "Введите ID пациента, чтобы удалить его (0 - отмена)",
     "patientes_menu_valid": "Введите ID пациента, чтобы изменить его валидность (0 - отмена)",
-
     "language_menu_0": "Меню связанное с изменением языка приложения",
     "language_menu_1": "На данный момент вы используете РУССКИЙ язык.",
     "language_menu_2": "Если вы желаете изменить язык приложения, выберите номер языка ниже",
     "language_choice_1": "Русский язык (Используется)",
     "language_choice_2": "Английский язык",
-
     "Cassa_menu_0": "Меню связанное с кассой",
     "Cassa_menu_1": "Чтобы продолжить, нужно выбрать пункт ниже",
     "Cassa_choice_1": "Просмотр статистики кассы",
-    "cassa_choice_2": "Просмотр лотов кассы",
+    "Cassa_choice_2": "Просмотр лотов кассы",
     "Cassa_choice_3": "Добавить лот приёма",
     "Cassa_choice_4": "Изменить лот приёма",
     "Cassa_choice_5": "Изменить статус лота",
     "Cassa_choice_6": "Удалить лот приёма",
     "Cassa_delete_cancel": "Удаление лота было отменено.",
-    "Cassa_menu_change": "Введите ID лота, чтобы изменить его (0 - отмена)",
-    "Cassa_menu_change_status": "Введите ID лота, чтобы изменить его статус (0 - отмена)",
-    "Cassa_menu_delete": "Введите ID лота, чтобы удалить его (0 - отмена)",
-
+    "cassa_menu_change": "Введите ID лота, чтобы изменить его (0 - отмена)",
+    "cassa_menu_change_status": "Введите ID лота, чтобы изменить его статус (0 - отмена)",
+    "сassa_menu_delete": "Введите ID лота, чтобы удалить его (0 - отмена)",
     "add_doctor_menu": "Вы добавляете нового врача, его ID будет: ({0})",
     "add_doctor_success": "Новый профиль врача был создан, его ID ({0})",
     "add_doctor_fullname": "врача",
@@ -244,7 +222,6 @@
     "add_doctor_clients": "Введите количество пройденных клиентов у врача",
     "add_doctor_telegram": "Введите Telegram врача",
     "add_error_doctor_id": "Данный врач отсутствует в базе данных.",
-
     "add_input_complaints": "Введите жалобы",
     "add_input_diagnosis": "Введите диагноз",
     "add_input_additional_info": "Введите доп. информацию об приёме",
@@ -258,13 +235,11 @@
     "add_input_owner_telegram": "Введите Telegram владельца",
     "add_input_event_date": "Укажите дату события",
     "add_input_event_description": "Укажите что произошло (Описание)",
-
     "add_error_admission_id": "Данный приём отсутствует в базе данных.",
     "add_addmission_error": "Вы авторизированы как {0}, приём записан на вас!",
     "add_admission_error_account_0": "Ваша учетная запись является недействительной, чтобы добавлять приёмы",
     "add_admission_error_account_1": "Вам следует снова зарегистрировать аккаунт врача, который присутствует в базе данных!",
     "add_error_pacient_id": "Данный пациент отсутствует в базе данных.",
-
     "add_admission_success": "Новые данные об приёме были созданы, ID ({0})",
     "add_admission_new_id": "Вы добавляете новый приём, его ID будет: ({0})",
     "add_admission_time": "Введите время приёма (ЧЧ:ММ)",
@@ -274,25 +249,20 @@
     "add_error_lot_id": "Данный лот отсутствует в базе данных",
     "add_lot_success": "Новый лот был создан в базе данных кассы, его ID ({0})",
     "add_new_pacient_id": "Вы добавляете нового пациента, его ID будет: ({0})",
-
     "add_patient_success": "Новый профиль пациента был добавлен, его ID ({0})",
     "add_new_event": "Вы добавляете новое событие дня",
-
     "change_admission_id": "Вы редактируете приём с ID ({0})",
     "change_admission_menu": "Чтобы изменить информацию о приёме, используйте соответствующий пункт программы",
     "change_admission_success": "Приём изменен в базе данных под ID ({0})",
     "change_input_admission_cost": "Введите стоимость приёма",
     "change_input_admission_id": "Введите ID приёма, к которому нужно прикрепить данный лот",
-
     "change_lot_id": "Вы редактируете лот кассы ID ({0})",
     "change_lot_success": "Лот изменен в базе данных под ID ({0})",
-    
     "change_patient_id": "Вы редактируете пациента с ID ({0})",
     "change_patient_success": "Пациент изменён в базе данных под ID ({0})",
     "change_error_id": "Ничего не найдено, возможно под данным ID нечего нет",
     "change_input_admission_info_0": "Введите изменённую информацию об данном приёме, информация полностью переписывается",
     "change_input_admission_info_1": "Если нужно, то стоит написать предыдущую информацию, чтобы её дополнить",
-    
     "change_error_admission_id": "Данный прием отсутствует в базе данных",
     "change_patoent_id": "Вы редактируете ID Пациента ({0})",
     "change_patient_valid": "Валидность данного пациента",
@@ -302,7 +272,6 @@
     "change_status": "Изменить статус? (1 - да / другой ответ - нет)",
     "change_status_cancel": "Вы отменили изменение статуса лота!",
     "change_status_success": "Статус лота был изменен на: {0} ({1})",
-    
     "statistic_animal_element_0": "Категория: {0}",
     "statistic_animal_element_1": "Всего пациентов: {0}",
     "statistic_animal_element_2": "Пациент: {0} ({1}), возраст {2}",
@@ -312,34 +281,26 @@
     "statistic_animal_age": "Средний возраст: {0}",
     "statistic_animal_skip": "Введите 'n' для просмотра следующей страницы, 'p' для предыдущей или любую другую клавишу для выхода",
     "statistic_animal_done": "Это были все приёмы, которые относятся к типу: {0}",
-
     "lang_change_done": "Ваш язык был успешно изменён на английский! (Требуется перезапуск программы!)",
-
     "change_doctor_id": "Вы редактируете врача с ID ({0})",
     "change_doctor_success": "Доктор изменён в базе данных под ID ({0})",
-
     "delete_this_done": "Успешно удалена секция под ID: {0}, в файле {1}.xml",
     "delete_this_error": "Не найдена секция под ID ({0}) в файле {1}.xml",
     "delete_statistics_by_date": "Удалено элементов: {0}",
-    
     "title_page": "Страница {0} из {1}",
     "line": "-----------------------------",
-
     "string_skip_0": "Чтобы посмотреть следующую страницу введите 'n'",
     "string_skip_1": "Введите 'p' Чтобы просмотреть предыдущую страницу,",
     "string_skip_2": "Любая другая клавиша выводит вас с данного меню",
-    
     "book_doctors_element_0": "ФИО доктора: {0}",
     "book_doctors_element_1": "Дата рождения: {0}",
     "book_doctors_element_2": "Telegram ID: {0} ID ({1})",
-
     "book_cassa_element_0": "Идентификатор приёма: {0} (Лот #{1})",
     "book_cassa_element_1": "Стоимость приёма: {0}",
     "book_cassa_element_2": "Дата: {0}",
     "book_cassa_element_3": "Статус: {0}",
-    
     "book_admission_element_0": "Дата: {0} ID ({1})",
-    "book_admission_element_1": "ФИО доктора: {0}",
+    "book_admission_element_1": "ФИО доктора",
     "book_admission_element_1_variate": "уволен",
     "book_admission_element_2": "Приём бесплатный",
     "book_admission_element_2_variate": "Приём платный, его стоимость: {0}",
@@ -347,7 +308,6 @@
     "book_admission_element_4": "Жалобы: {0}",
     "book_admission_element_5": "Диагноз: {0}",
     "book_admission_element_6": "Рекомендации от доктора: {0}",
-
     "book_pacientes_element_0": "Вид животного: {0} ID ({1})",
     "book_pacientes_element_1": "Кличка: {0}",
     "book_pacientes_element_2": "Пол: {0}",
@@ -355,15 +315,12 @@
     "book_pacientes_element_4": "ФИО владельца: {0}",
     "book_pacientes_element_5": "Валидность животного: {0}",
     "book_pacientes_element_6": "Telegram ID: {0} (Владелец)",
-
     "book_statistic_element_0": "Дата: {0}",
     "book_statistic_element_1": "Описание: {0}",
-    
     "show_one_doctors_element_0": "Информация об данном враче",
     "show_one_doctors_element_1": "Фио врача: {0}",
     "show_one_doctors_element_2": "Дата рождения: {0}",
     "show_one_doctors_element_3": "Telegram ID: {0} ID ({1})",
-    
     "show_one_admission_element_0": "Информация об приёме",
     "show_one_admission_element_1": "ID пациента: {0} ID приёма: {1}",
     "show_one_admission_element_2": "Дата приёма: {0}",
@@ -371,7 +328,6 @@
     "show_one_admission_element_4": "Жалобы пациента: {0}",
     "show_one_admission_element_5": "Диагноз: {0}",
     "show_one_admission_element_6": "Рекомендации от доктора: {0}",
-
     "show_one_pacientes_element_0": "Информация об пациенте",
     "show_one_pacientes_element_1": "Вид животного: {0} ID ({1})",
     "show_one_pacientes_element_2": "Кличка животного: {0}",
@@ -380,27 +336,20 @@
     "show_one_pacientes_element_5": "ФИО владельца: {0}",
     "show_one_pacientes_element_6": "Активен (?): {0}",
     "show_one_pacientes_element_7": "Telegram ID: {0} (Владелец)",
-    
     "find_pacient_input_name": "Введите критерий поиска (Кличка животного)",
-    
     "find_pacient_element_0": "Найден пациент #{0}",
     "find_pacient_element_1": " ID: {0}",
     "find_pacient_element_2": " Вид: {0}",
     "find_pacient_element_3": " Кличка: {0}",
     "find_pacient_element_4": " Владелец: {0}",
-    
     "find_pacient_one_element": "Найден единственный пациент",
     "title_find_pacient_one_element": "Найден один пациент",
-    
     "find_pacient_more_element": "Найдено {0} пациентов",
     "title_find_pacient_more_element": "Найдено {0} пациентов",
-
     "statistic_events_count": "{0} событий",
     "statistic_events_nothing": "Сегодня ничего не произошло",
-    
     "title_find_doctor_stat_nothing": "Результаты не найдены",
     "find_doctor_stat_nothing": "Данного врача нет в базе данных!",
-    
     "title_find_doctor_stat": "Приём {0} / {1}",
     "find_doctor_stat_element_0": "Статистика приёмов врача {0}",
     "find_doctor_stat_element_1": "Пациент: {0}",
@@ -408,9 +357,7 @@
     "find_doctor_stat_element_3": "Жалобы: {0}",
     "find_doctor_stat_element_4": "Диагноз: {0}",
     "find_doctor_stat_element_5": "Рекомендации: {0}",
-
     "stats_error_animal_type": "Данный тип животного отсутствует в базе данных",
-    
     "stat_menu_line_0": "Меню поиска по другим параметрам (Статистика)",
     "stat_menu_line_1": "Выберите фильтр для поиска статистики",
     "stat_choice_1": "Просмотр всех приёмов",
@@ -422,7 +369,6 @@
     "start_end": "конечную",
     "stat_check": "Просмотр приёма по дате",
     "stat_check_date": "Просмотр приёмов {0}",
-
     "statistic_menu_line": "Меню связанное со статистикой",
     "statistic_choice_1": "Открыть список/статистику по дням",
     "statistic_choice_2": "Удалить статистику дня",
@@ -434,7 +380,6 @@
     "statistic_sorting": "Производится сортировка",
     "date": "ДАТА",
     "statistic_input_type_animal": "Введите вид животного",
-
     "priem": "Прием #{0}",
     "id": "ID пациента {0}",
     "time": "Время",
@@ -443,7 +388,6 @@
     "con": "Жалобы {0}",
     "diagnosis": "Диагноз {0}",
     "info": "Информация {0}",
-
     "prev_next": "Нажмите n для перехода к следующему приему, p - к предыдущему, любую другую клавишу для выхода",
     "prev_next_1": "Введите команду (n - следующая страница, p - предыдущая страница, что-то другое - выход)",
     "all_zapis": "Всего записей: {0}, Текущая страница: {1}, Всего страниц: {2}",
@@ -452,14 +396,34 @@
     "time_1": "Время: {0}",
     "ident": "Идентификатор пациента: {0}",
     "date_1": "Дата и время приема: {0}",
-    "full": "ФИО врача: {0}",
+    "full": "ФИО: {0}",
     "con_1": "Жалобы: {0}",
     "diagn": "Диагноз: {0}",
     "dop_info": "Дополнительная информация: {0}",
     "no_admissions_y_doctor": "У данного врача нет истории приёмов",
     "id_1": "ID",
-
+    "passvord": "Пароль: {0}",
+    "login": "Логин {0}",
+    "info_doctor": "Сведения об учетной записи врача с ID ({0})",
+    "user_not_found": "Произошла ошибка, пользователь не найден!",
+    "done_work_save_account": "Данные успешно изменены",
+    "password_null": "Пароль не может быть пустым",
+    "password_confirm_new": "Повторите новый пароль",
+    "password_new": "Введите новый пароль",
+    "account_admin_security": "Аккаунт администратора должен быть только с таким логином, менять его запрещено!",
+    "exit_account": "Пользователь с таким логином уже существует",
+    "input_new_password": "Введите новый логин",
+    "choice_change_acc_0": "Изменить логин",
+    "choice_change_acc_1": "Изменить пароль",
+    "no_permission": "ЗАПРЕЩЕНО",
+    "incoorrect_input": "Некорректный ввод. Выберите номер пользователя в диапазоне от 1 до {0} или введите 0 для выхода",
+    "incoorrect_input_1": "Следует выбрать номер в диапазоне от 1 до {0} или введите 0 для выхода",
+    "page_login": "Страница {0} / {1} | Логины",
+    "input_user_number": "Введите номер пользователя для просмотра информации или 0 для выхода",
+    "page": "{0} / {1}",
+    "page_not_exist": "Страницы с номером {0} не существует!",
+    "page_not_valid": "Данной страницы не существует",
     "extra_error_line_0": "Программа аварийно была приостановлена",
     "extra_error_line_1": "Чтобы такое не повторилось, соблюдайте верный формат ввода!",
     "extra_error_line_2": "Вы вернётесь в главное меню, будьте прежде бдительней!"
-}
+  }

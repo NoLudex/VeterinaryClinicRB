@@ -3,21 +3,21 @@
     <payment>
         <id>1</id>
         <id-admission>1</id-admission>
-        <amount>500.0</amount>
+        <amount>500</amount>
         <date>26.04.2023</date>
         <status>Оплачен</status>
     </payment>
     <payment>
         <id>2</id>
         <id-admission>2</id-admission>
-        <amount>1500.0</amount>
+        <amount>1500</amount>
         <date>26.04.2023</date>
         <status>Оплачен</status>
     </payment>
     <payment>
         <id>3</id>
         <id-admission>3</id-admission>
-        <amount>9000.0</amount>
+        <amount>9000</amount>
         <date>26.04.2023</date>
         <status>Оплачен</status>
     </payment>

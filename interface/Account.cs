@@ -17,7 +17,7 @@ namespace VeterinaryClinicRB
             $"5. {Lang.GetText("account_choice_5")}\n" +
             $"6. {Lang.GetText("account_choice_6")}\n" +
             $"7. {Lang.GetText("account_choice_7")}\n" +
-            $"0. {Lang.GetText("account_choice_0")}";
+            $"0. {Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
             bool enableMenu = true; 

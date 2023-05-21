@@ -86,7 +86,7 @@ namespace VeterinaryClinicRB
                             {
                                 Console.WriteLine(
                                     $"{Lang.GetText("book_cassa_element_0", FileNameNode.SelectSingleNode("id-admission")?.InnerText, FileNameNode.SelectSingleNode("id")?.InnerText)}\n" +
-                                    $"{Lang.GetText("book_cassa_element_1", FileNameNode.SelectSingleNode("amount")?.InnerText)}\n" +
+                                    $"{Lang.GetText("book_cassa_element_1", FileNameNode.SelectSingleNode("amount")?.InnerText.ToString())}\n" +
                                     $"{Lang.GetText("book_cassa_element_2", FileNameNode.SelectSingleNode("date")?.InnerText)}\n" +
                                     $"{Lang.GetText("book_cassa_element_3", FileNameNode.SelectSingleNode("status")?.InnerText)}\n" +
                                     $"{Lang.GetText("line")}"

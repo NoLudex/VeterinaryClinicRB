@@ -53,21 +53,23 @@ namespace VeterinaryClinicRB
                 string password = "";
                 if (Authorization.nowLogin == "ADMIN")
                     if (login != "ADMIN")
-                        password = $"{Decrypt.Get(user.Attribute("password").Value, 3)} (ЗАЩИТА!)";
+                    {
+                        password = $"{Decrypt.Get(user.Attribute("password").Value, 3)} (Разблокировано)";
+                        password += $"\nP.S: Вы администратор и имеете право просмотреть пароли уч. записей!";
+                    }
 
                 if (password == "")
                     password = $"{user.Attribute("password").Value} (Зашифрован!)";
                 
                 Console.WriteLine(
-                    $"Сведения об учетной записи врача с ID ({user.Attribute("doctor-id").Value})\n" +
-                    $"Логин: {user.Attribute("login").Value}\n" +
-                    $"Пароль: {password}\n" +
-                    $"ФИО: {user.Attribute("fullname-user").Value}\n" +
-                    $"ID врача: {user.Attribute("doctor-id").Value}"
+                    $"{Lang.GetText("info_doctor", user.Attribute("doctor-id").Value)}\n" +
+                    $"{Lang.GetText("login", user.Attribute("login").Value)}\n" +
+                    $"{Lang.GetText("full", user.Attribute("fullname-user").Value)}\n" +
+                    $"{Lang.GetText("passvord", password)}"
                     );
             }
             else
-                Console.WriteLine("Произошла ошибка, пользователь не найден!");
+                Console.WriteLine($"{Lang.GetText("user_not_found")}");
             Title.Wait();
         }
 
@@ -81,8 +83,8 @@ namespace VeterinaryClinicRB
             if (pageNum < 1 || pageNum > pageCount)
             {   
                 Console.Clear();
-                Title.Set("Данной страницы не существует");
-                Console.WriteLine($"Страницы с номером {pageNum} не существует!");
+                Title.Set($"{Lang.GetText("page_not_valid")}");
+                Console.WriteLine($"{Lang.GetText("page_not_exist", pageNum)}");
                 Title.Wait();
             }
 
@@ -90,7 +92,7 @@ namespace VeterinaryClinicRB
             int endIndex = Math.Min(startIndex + pageSize - 1, users.Count - 1);
 
             Console.Clear();
-            Title.Set("{pageNum} / {pageCount} | Логины:");
+            Title.Set($"{Lang.GetText("page_login", pageNum, pageCount)}");
 
             for (int i = startIndex; i <= endIndex; i++)
             {
@@ -98,9 +100,9 @@ namespace VeterinaryClinicRB
             }
             
             Console.Write(
-                $"Страница {pageNum} / {pageCount}.\n" +
-                $"Введите номер пользователя для просмотра информации или 0 для выхода\n" +
-                $"Ввод: "
+                $"{Lang.GetText("page", pageNum, pageCount)}.\n" +
+                $"{Lang.GetText("input_user_number")}\n" +
+                $"{Lang.GetText("string_input")}: "
                 );
             
             int userNum;
@@ -124,14 +126,14 @@ namespace VeterinaryClinicRB
                     else if (userNum != 0)
                     {
                         Console.Clear();
-                        Console.Write($"Следует выбрать номер в диапазоне от 1 до {pageSize} или введите 0 для выхода.\nВвод: ");
+                        Console.WriteLine($"{Lang.GetText("incoorrect_input_1", pageSize)}.\n{Lang.GetText("string_input")}: ");
                         Title.Wait();
                     }
                 }
                 else if (keyInfo.Key != ConsoleKey.Enter && keyInfo.Key != ConsoleKey.Backspace)
                 {
                     Console.Clear();
-                    Console.WriteLine($"Некорректный ввод. Выберите номер пользователя в диапазоне от 1 до {pageSize} или введите 0 для выхода.\nВвод: ");
+                    Console.WriteLine($"{Lang.GetText("incoorrect_input", pageSize)}.\n{Lang.GetText("string_input")}: ");
                     Title.Wait();
                 }
             } while (userNum != 0);
@@ -146,7 +148,7 @@ namespace VeterinaryClinicRB
             if (Authorization.nowLogin == "ADMIN")
             {
                 Console.Clear();
-                Console.WriteLine("Введите логин учётной записи:");
+                Console.Write($"{Lang.GetText("login_input")}: ");
                 login = Console.ReadLine();
             }
             else
@@ -159,28 +161,28 @@ namespace VeterinaryClinicRB
             if (user == null)
             {
                 Console.Clear();
-                Console.WriteLine("Пользователь не найден");
+                Console.WriteLine(Lang.GetText("user_not_found"));
                 Title.Wait();
                 return;
             }
 
-            Console.WriteLine("Введите пароль:");
+            Console.Write($"{Lang.GetText("login_password")}: ");
             string password = Console.ReadLine();
 
             Console.Clear();
             if (Decrypt.Get((string)user.Attribute("password"), 3) != password && Decrypt.Get((string)admin.Attribute("password"), 3) != password)
             {
-                Console.WriteLine("Неверный пароль");
+                Console.WriteLine(Lang.GetText("login_password_error"));
                 Title.Wait();
                 return;
             }
 
-            Console.WriteLine("Выберите действие:");
-            string choice1 = "1. Изменить логин";
+            Console.WriteLine($"{Lang.GetText("string_choise")}:");
+            string choice1 = $"1. {Lang.GetText("choice_change_acc_0")}";
             if (login == "ADMIN")
-                choice1 += " (ЗАПРЕЩЕНО)";
+                choice1 += $" ({Lang.GetText("no_permission")})";
             Console.WriteLine(choice1);
-            Console.WriteLine("2. Изменить пароль");
+            Console.Write($"2. {Lang.GetText("choice_change_acc_1")}\n{Lang.GetText("string_input")}: ");
             int choice;
 
             try
@@ -190,7 +192,7 @@ namespace VeterinaryClinicRB
             catch (FormatException)
             {
                 Console.Clear();
-                Console.WriteLine("Некорректный выбор");
+                Console.WriteLine(Lang.GetText("string_error_input"));
                 Title.Wait();
                 return;
             }
@@ -199,7 +201,7 @@ namespace VeterinaryClinicRB
             switch (choice)
             {
                 case 1:
-                    Console.WriteLine("Введите новый логин:");
+                    Console.Write($"{Lang.GetText("input_new_password")}:");
                     string newLogin = Console.ReadLine();
 
                     // проверяем, что новый логин не повторяется
@@ -207,9 +209,9 @@ namespace VeterinaryClinicRB
                     {   
                         Console.Clear();
                         if (login != "ADMIN")
-                            Console.WriteLine("Пользователь с таким логином уже существует");
+                            Console.WriteLine(Lang.GetText("exit_account"));
                         else
-                            Console.WriteLine("Аккаунт администратора должен быть только с таким логином, менять его запрещено!");
+                            Console.WriteLine($"{Lang.GetText("account_admin_security")}");
                         Title.Wait();
                         return;
                     }
@@ -217,7 +219,7 @@ namespace VeterinaryClinicRB
                     if (string.IsNullOrWhiteSpace(newLogin))
                     {
                         Console.Clear();
-                        Console.WriteLine("Логин не может быть пустым");
+                        Console.WriteLine(Lang.GetText("reg_error_login"));
                         Title.Wait();
                         return;
                     }
@@ -226,15 +228,15 @@ namespace VeterinaryClinicRB
                     break;
 
                 case 2:
-                    Console.WriteLine("Введите новый пароль:");
+                    Console.Write($"{Lang.GetText("password_new")}: ");
                     string newPassword = Console.ReadLine();
-                    Console.WriteLine("Повторите новый пароль:");
+                    Console.Write($"{Lang.GetText("password_confirm_new")}: ");
                     string confirmPassword = Console.ReadLine();
 
                     if (string.IsNullOrWhiteSpace(newPassword))
                     {
                         Console.Clear();
-                        Console.WriteLine("Пароль не может быть пустым");
+                        Console.WriteLine(Lang.GetText("password_null"));
                         Title.Wait();
                         return;
                     }
@@ -242,7 +244,7 @@ namespace VeterinaryClinicRB
                     if (newPassword != confirmPassword)
                     {
                         Console.Clear();
-                        Console.WriteLine("Пароли не совпадают");
+                        Console.WriteLine(Lang.GetText("reg_error_pass_confirm"));
                         Title.Wait();
                         return;
                     }
@@ -252,14 +254,14 @@ namespace VeterinaryClinicRB
 
                 default:
                     Console.Clear();
-                    Console.WriteLine("Некорректный выбор");
+                    Console.WriteLine(Lang.GetText("title_error"));
                     Title.Wait();
                     return;
             }
 
             doc.Save(filePath); // сохраняем измененный XML-файл
             Console.Clear();
-            Console.WriteLine("Данные успешно изменены");
+            Console.WriteLine(Lang.GetText("done_woek_save_account"));
             Title.Wait();
         }
     }
