@@ -145,9 +145,8 @@ namespace VeterinaryClinicRB
             return;
         }
 
-        public static string? ValidateUser(bool autoLogin)
+        public static string? ValidateUser(bool autoLogin, string login = "")
         {
-            string? login = "";
             Title.Set(Lang.GetText("title_validate_user"));
             Console.Clear();
             if (autoLogin) // Есть ли логин в конфигах
@@ -196,6 +195,7 @@ namespace VeterinaryClinicRB
                     Console.WriteLine(Lang.GetText("login_done"));
                     Config.Set("Login", login);
                     Config.Set("AutoLogin", false);
+                    Authorization.nowLogin = login;
                     Title.Wait();
                     return null;
                 }
@@ -204,6 +204,8 @@ namespace VeterinaryClinicRB
                     Console.WriteLine(Lang.GetText("login_password_error"));
                     Config.Set("Login", "");
                     Config.Set("AutoLogin", false);
+                    Authorization.autoLogin = false;
+                    Authorization.nowLogin = "";
                 }
                 Title.Wait();
                 return "";

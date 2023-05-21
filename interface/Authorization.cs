@@ -15,6 +15,9 @@ namespace VeterinaryClinicRB
             $"2. {Lang.GetText("Autorization_choice_2")}\n" +
             $"3. {Lang.GetText("Autorization_choice_3")}\n" +
             $"0. {Lang.GetText("string_exit")}";
+
+        public static string nowLogin = Config.Get("Login");
+        public static bool autoLogin = Config.Get("AutoLogin", true);
         public static void Menu()
         {
             bool enableMenu = true;
@@ -27,9 +30,14 @@ namespace VeterinaryClinicRB
                 switch (Choice.Get())
                 {
                     case 1:
-                        string? fullname = Authorization.ValidateUser(Config.Get("AutoLogin", true));
+                        if (nowLogin == "Данный ключ отсутствует  ")
+                            nowLogin = "";
+                        string? fullname = Authorization.ValidateUser(autoLogin, login: nowLogin);
                         if (fullname != "")
-                            General.Menu(fullname);
+                        {
+                            while (true)
+                                General.Menu(fullname);
+                        }
                         break;
                     case 2:
                         Authorization.Register();
