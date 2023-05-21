@@ -31,7 +31,7 @@ namespace VeterinaryClinicRB
                     
                     Title.Set($"{Lang.GetText("title_general")}");
                     Console.Clear();
-                    Console.Write($"{Lang.GetText("General_menu_1", MenuStr0, todayCount)}\n{Lang.GetText("General_menu_2", fullnameUser)}\n{MenuStr1}\n{Lang.GetText("string_input")}: ");
+                    Console.Write($"{Lang.GetText("General_menu_1", MenuStr0, todayCount)}\n{Lang.GetText("General_menu_2", Authorization.nowLogin)}\n{MenuStr1}\n{Lang.GetText("string_input")}: ");
 
                     switch (Choice.Get())
                     {
@@ -45,7 +45,7 @@ namespace VeterinaryClinicRB
                             Pacientes.Menu(); // Меню пациентов (Pacientes.cs)
                             break;
                         case 4:
-                            Cassa.Menu(); // Меню касса
+                            Cassa.Menu(); // Меню касса (Cassa.cs)
                             break;
                         case 5:
                             Statistic.Menu(); // Меню статистики (./Statistic/Main.cs)
@@ -54,10 +54,11 @@ namespace VeterinaryClinicRB
                             Account.Menu(); // Меню аккаунта (Account.cs)
                             break;
                         case 7:
-                            Color.Menu(); // Меню аккаунта (Color.cs)
+                            Color.Menu(); // Меню цветовой схемы (Color.cs)
                             break;
                         case 0:
                             enableMenu = false;
+                            Environment.Exit(0);
                             break;
                         default:
                             Console.Clear();

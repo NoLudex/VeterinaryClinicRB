@@ -24,7 +24,7 @@ namespace VeterinaryClinicRB
             {
                 Title.Set("Касса");
                 Console.Clear();
-                Console.WriteLine(MenuStr + "\nВвод: ");
+                Console.Write(MenuStr + "\nВвод: ");
 
                 switch (Choice.Get())
                 {
