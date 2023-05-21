@@ -12,12 +12,12 @@ namespace VeterinaryClinicRB
             "Сегодня было совершено";
         public static string MenuStr1 =
             $"{Lang.GetText("General_menu_0")}:\n" +
-            $"1. {Lang.GetText("General_choice_1")}Врачи\n" +
-            $"2. {Lang.GetText("General_choice_2")}Приёмы\n" +
-            $"3. {Lang.GetText("General_choice_3")}Пациенты\n" +
-            $"4. {Lang.GetText("General_choice_4")}Статистика\n" +
-            $"5. {Lang.GetText("General_choice_5")}Аккаунт (NEW)\n" +
-            $"6. {Lang.GetText("General_choice_6")}Настройка цвета (NEW)\n" +
+            $"1. {Lang.GetText("General_choice_1")}\n" +
+            $"2. {Lang.GetText("General_choice_2")}\n" +
+            $"3. {Lang.GetText("General_choice_3")}\n" +
+            $"4. {Lang.GetText("General_choice_4")}\n" +
+            $"5. {Lang.GetText("General_choice_5")}\n" +
+            $"6. {Lang.GetText("General_choice_6")}\n" +
             $"0. {Lang.GetText("string_exit")}";
         public static void Menu(string fullnameUser)
         {
@@ -45,12 +45,15 @@ namespace VeterinaryClinicRB
                             Pacientes.Menu(); // Меню пациентов (Pacientes.cs)
                             break;
                         case 4:
-                            Statistic.Menu(); // Меню статистики (./Statistic/Main.cs)
+                            Cassa.Menu(); // Меню касса
                             break;
                         case 5:
-                            Account.Menu(); // Меню аккаунта (Account.cs)
+                            Statistic.Menu(); // Меню статистики (./Statistic/Main.cs)
                             break;
                         case 6:
+                            Account.Menu(); // Меню аккаунта (Account.cs)
+                            break;
+                        case 7:
                             Color.Menu(); // Меню аккаунта (Color.cs)
                             break;
                         case 0:
