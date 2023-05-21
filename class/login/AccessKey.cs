@@ -20,7 +20,8 @@ namespace VeterinaryClinicRB
                 "8MYNBF1AR9", "N9X9GNYLSQ", "JSJBC55ZNL", "F3LPLQSJW8", "KC0OURJXS9", "Z9ZZEWZ49W",
                 "EDD3O93CI3", "UX8FY5S5H5", "93QX9ZPG4W", "0H4P4YYANA", "IJHL0KSUMF", "7LBF1AJKDR",
                 "VXMFEWCJEJ", "7V2SW27ETO", "W2I96910AK", "JI3CI3Z9Y6", "DWM6LFSTT6", "48N6UJKJ6V",
-                "OHCAHERDAU", "I1IWV57XJ4", "R8GYM4Q4LL", "OLEGTOP4IK", "ILKVMOM228", "RBWEEXLOVE"
+                "OHCAHERDAU", "I1IWV57XJ4", "R8GYM4Q4LL", "OLEGTOP4IK", "ILKVMOM228", "RBWEEXLOVE",
+                "6DANYAGAY9"
             };
             
             // Возвращает, есть ли ключ (true || false)

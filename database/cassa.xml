@@ -1,24 +1,24 @@
-<?xml version = "1.0" encoding = "utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <cassa>
-    <payment>
-        <id>1</id>
-        <id-admission>1</id-admission>
-        <amount>500</amount>
-        <date>26.04.2023</date>
-        <status>Оплачен</status>
-    </payment>
-    <payment>
-        <id>2</id>
-        <id-admission>2</id-admission>
-        <amount>1500</amount>
-        <date>26.04.2023</date>
-        <status>Оплачен</status>
-    </payment>
-    <payment>
-        <id>3</id>
-        <id-admission>3</id-admission>
-        <amount>9000</amount>
-        <date>26.04.2023</date>
-        <status>Оплачен</status>
-    </payment>
+  <payment>
+    <id>1</id>
+    <id-admission>1</id-admission>
+    <amount>500</amount>
+    <date>26.04.2023</date>
+    <status>Оплачен</status>
+  </payment>
+  <payment>
+    <id>2</id>
+    <id-admission>2</id-admission>
+    <amount>1500</amount>
+    <date>26.04.2023</date>
+    <status>Оплачен</status>
+  </payment>
+  <payment>
+    <id>3</id>
+    <id-admission>3</id-admission>
+    <amount>9000</amount>
+    <date>26.04.2023</date>
+    <status>Оплачен</status>
+  </payment>
 </cassa>

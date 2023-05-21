@@ -13,8 +13,7 @@ namespace VeterinaryClinicRB
             $"1.{Lang.GetText("Cassa_choice_2")}\n" +
             $"2.{Lang.GetText("Cassa_choice_3")}\n" +
             $"3.{Lang.GetText("Cassa_choice_4")}\n" +
-            $"4.{Lang.GetText("Cassa_choice_5")}\n" +
-            $"5.{Lang.GetText("Cassa_choice_6")}\n" +
+            $"4.{Lang.GetText("Cassa_choice_6")}\n" +
             $"0.{Lang.GetText("string_back_to_main_menu")}";
         public static void Menu()
         {
@@ -43,13 +42,13 @@ namespace VeterinaryClinicRB
                             break;
                         XmlChange.Update("cassa", "cassa", "payment", IDToUpdate);
                         break;
-                    case 4:
+                    case 69:
                         string IDToChangeStatus = Valid.Number($"{Lang.GetText("cassa_menu_change_status")}\n{Lang.GetText("string_input")}: ");
                         if (IDToChangeStatus == "0")
                             break;
                         XmlChange.UpdatePaid(IDToChangeStatus);
                         break;
-                    case 5:
+                    case 4:
                         int IDToDelete = Convert.ToInt32(Valid.Number($"{Lang.GetText("cassa_menu_delete")}\n{Lang.GetText("string_input")}: "));
                         if (IDToDelete == 0)
                             break;

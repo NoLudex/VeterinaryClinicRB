@@ -312,6 +312,7 @@ namespace VeterinaryClinicRB
         {
             Title.Set($"{Lang.GetText("title_change_cassa", id)}");
             XmlDocument document = new XmlDocument();
+            
             document.Load($"./database/cassa.xml");
             XmlNode admissionNode = document.SelectSingleNode($"./cassa/payment[id='{id}']");
 
