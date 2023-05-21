@@ -204,28 +204,28 @@ namespace VeterinaryClinicRB
                 foreach (var admission in pagedResult)
                 {
                     Console.WriteLine($"{Lang.GetText("")}ID: {admission.Id}");
-                    Console.WriteLine($"{Lang.GetText("")}Время: {admission.Time}");
-                    Console.WriteLine($"{Lang.GetText("")}Идентификатор пациента: {admission.PacienteId}");
-                    Console.WriteLine($"{Lang.GetText("")}Дата и время приема: {admission.DateTime}");
-                    Console.WriteLine($"{Lang.GetText("")}ФИО врача: {admission.FullNameDoctor}");
-                    Console.WriteLine($"{Lang.GetText("")}Жалобы: {admission.Complaints}");
-                    Console.WriteLine($"{Lang.GetText("")}Диагноз: {admission.Diagnosis}");
-                    Console.WriteLine($"{Lang.GetText("")}Дополнительная информация: {admission.Info}");
+                    Console.WriteLine($"{Lang.GetText("time_1", admission.Time)}");
+                    Console.WriteLine($"{Lang.GetText("", admission.PacienteId)}");
+                    Console.WriteLine($"{Lang.GetText("", admission.DateTime)}");
+                    Console.WriteLine($"{Lang.GetText("", admission.FullNameDoctor)}");
+                    Console.WriteLine($"{Lang.GetText("", admission.Complaints)}");
+                    Console.WriteLine($"{Lang.GetText("", admission.Diagnosis)}");
+                    Console.WriteLine($"{Lang.GetText("", admission.Info)}");
                     Console.WriteLine();
                 }
                 if (totalRecords == 0)
                 {
                     Console.Clear();
-                    Console.WriteLine($"{Lang.GetText("")}В данную дату нет приёмов");
-                    Title.Set($"{Lang.GetText("")}Приёмов не найдено");
+                    Console.WriteLine($"{Lang.GetText("no_admissions")}");
+                    Title.Set($"{Lang.GetText("admissions_not_found")}");
                     Title.Wait();
                     return;
                 }
                 // Выводим информацию о количестве записей, текущей странице и общем количестве страниц
-                Console.WriteLine($"{Lang.GetText("")}Всего записей: {totalRecords}, Текущая страница: {currentPage}, Всего страниц: {totalPages}");
+                Console.WriteLine($"{Lang.GetText("all_zapis", totalRecords, currentPage, totalPages)}");
 
                 // Получаем команду от пользователя
-                Console.Write($"{Lang.GetText("")}Введите команду (n - следующая страница, p - предыдущая страница, что-то другое - выход): ");
+                Console.Write($"{Lang.GetText("prev_next_1")}: ");
                 string command = Console.ReadLine();
 
                 // Обрабатываем команду пользователя
@@ -269,16 +269,16 @@ namespace VeterinaryClinicRB
                 while (true)
                 {
                     Console.Clear();
-                    Console.WriteLine($"{Lang.GetText("")}Прием #" + (index + 1) + ":");
-                    Console.WriteLine($"{Lang.GetText("")}Время: " + admissions[index].Element("time").Value);
-                    Console.WriteLine($"{Lang.GetText("")}ID пациента: " + admissions[index].Element("paciente-id").Value);
-                    Console.WriteLine($"{Lang.GetText("")}Дата: " + admissions[index].Element("date-time").Value);
-                    Console.WriteLine($"{Lang.GetText("")}ФИО врача: " + admissions[index].Element("fullname-doctor").Value);
-                    Console.WriteLine($"{Lang.GetText("")}Жалобы: " + admissions[index].Element("complaints").Value);
-                    Console.WriteLine($"{Lang.GetText("")}Диагноз: " + admissions[index].Element("diagnosis").Value);
-                    Console.WriteLine($"{Lang.GetText("")}Информация: " + admissions[index].Element("info").Value);
+                    Console.WriteLine($"{Lang.GetText("priem", index + 1)}:");
+                    Console.WriteLine($"{Lang.GetText("time", admissions[index].Element("time").Value)}: ");
+                    Console.WriteLine($"{Lang.GetText("id", admissions[index].Element("paciente-id").Value)}: ");
+                    Console.WriteLine($"{Lang.GetText("data", admissions[index].Element("date-time").Value)}: ");
+                    Console.WriteLine($"{Lang.GetText("FIO", admissions[index].Element("fullname-doctor").Value)}: ");
+                    Console.WriteLine($"{Lang.GetText("con", admissions[index].Element("complaints").Value)}: " );
+                    Console.WriteLine($"{Lang.GetText("diagnosis", admissions[index].Element("diagnosis").Value)}: "  );
+                    Console.WriteLine($"{Lang.GetText("info", admissions[index].Element("info").Value)}: " );
 
-                    Console.WriteLine($"\n{Lang.GetText("")}Нажмите n для перехода к следующему приему, p - к предыдущему, любую другую клавишу для выхода");
+                    Console.WriteLine($"\n{Lang.GetText("prev_next")}");
                     ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                     if (keyInfo.Key == ConsoleKey.N)
                     {

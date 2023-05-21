@@ -11,7 +11,7 @@ namespace VeterinaryClinicRB
             $"{Lang.GetText("general_menu_1")}\n" +
             $"{Lang.GetText("general_menu_2")}";
         public static string MenuStr1 =
-            $"{Lang.GetText("General_menu_0")}:\n" +
+            $"{Lang.GetText("general_menu_0")}:\n" +
             $"1. {Lang.GetText("general_choice_1")}\n" +
             $"2. {Lang.GetText("general_choice_2")}\n" +
             $"3. {Lang.GetText("general_choice_3")}\n" +
@@ -31,7 +31,7 @@ namespace VeterinaryClinicRB
                     
                     Title.Set($"{Lang.GetText("title_general")}");
                     Console.Clear();
-                    Console.Write($"{Lang.GetText("general_menu_1", MenuStr0, todayCount)}\n{Lang.GetText("General_menu_2", Authorization.nowLogin)}\n{MenuStr1}\n{Lang.GetText("string_input")}: ");
+                    Console.Write($"{Lang.GetText("general_menu_1", MenuStr0, todayCount)}\n{Lang.GetText("general_menu_2", Authorization.nowLogin)}\n{MenuStr1}\n{Lang.GetText("string_input")}: ");
 
                     switch (Choice.Get())
                     {
