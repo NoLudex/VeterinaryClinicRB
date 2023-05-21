@@ -134,7 +134,7 @@ namespace VeterinaryClinicRB
                                 XmlNode cassaNode = cassa.SelectSingleNode($"./cassa/payment[id-admission='{id}']");
                                 Console.WriteLine($"{Lang.GetText("book_admission_element_0", FileNameNode.SelectSingleNode("date-time")?.InnerText, FileNameNode.SelectSingleNode("id")?.InnerText)}");
 
-                                Console.Write($"{Lang.GetText("book_admission_element_0")}: ");
+                                Console.Write($"{Lang.GetText("book_admission_element_1")}: ");
                                 // Проверяем наличие доктора в базе данных
                                 if (doctorNode != null)
                                 {

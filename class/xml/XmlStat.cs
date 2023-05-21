@@ -165,8 +165,8 @@ namespace VeterinaryClinicRB
             else
             {
                 Console.Clear();
-                Title.Set($"{Lang.GetText("")}Результаты не найдены");
-                Console.WriteLine($"{Lang.GetText("")}У данного врача нет истории приёмов");
+                Title.Set($"{Lang.GetText("title_find_doctor_stat_nothing")}");
+                Console.WriteLine($"{Lang.GetText("no_admissions_y_doctor")}");
                 Title.Wait();
             }
         }
@@ -203,14 +203,14 @@ namespace VeterinaryClinicRB
 
                 foreach (var admission in pagedResult)
                 {
-                    Console.WriteLine($"{Lang.GetText("")}ID: {admission.Id}");
+                    Console.WriteLine($"{Lang.GetText("id_1")}: {admission.Id}");
                     Console.WriteLine($"{Lang.GetText("time_1", admission.Time)}");
-                    Console.WriteLine($"{Lang.GetText("", admission.PacienteId)}");
-                    Console.WriteLine($"{Lang.GetText("", admission.DateTime)}");
-                    Console.WriteLine($"{Lang.GetText("", admission.FullNameDoctor)}");
-                    Console.WriteLine($"{Lang.GetText("", admission.Complaints)}");
-                    Console.WriteLine($"{Lang.GetText("", admission.Diagnosis)}");
-                    Console.WriteLine($"{Lang.GetText("", admission.Info)}");
+                    Console.WriteLine($"{Lang.GetText("ident", admission.PacienteId)}");
+                    Console.WriteLine($"{Lang.GetText("date_1", admission.DateTime)}");
+                    Console.WriteLine($"{Lang.GetText("full", admission.FullNameDoctor)}");
+                    Console.WriteLine($"{Lang.GetText("con_1", admission.Complaints)}");
+                    Console.WriteLine($"{Lang.GetText("diagn", admission.Diagnosis)}");
+                    Console.WriteLine($"{Lang.GetText("dop_info", admission.Info)}");
                     Console.WriteLine();
                 }
                 if (totalRecords == 0)
@@ -384,7 +384,7 @@ namespace VeterinaryClinicRB
                 }
             }
             Console.Clear();
-            System.Console.WriteLine($"{Lang.GetText("statistic_anumal_done", animalType)}");
+            System.Console.WriteLine($"{Lang.GetText("statistic_animal_done", animalType)}");
             Title.Wait();
         }
     }
