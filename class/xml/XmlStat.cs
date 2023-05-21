@@ -371,7 +371,7 @@ namespace VeterinaryClinicRB
                     Console.WriteLine($"{Lang.GetText("statistic_animal_age", avgAge)}");
 
                     Console.WriteLine();
-                    Console.WriteLine($"{Lang.GetText("statistic_anumal_skip")}");
+                    Console.WriteLine($"{Lang.GetText("statistic_animal_skip")}");
                     string choice = Console.ReadLine().ToLower();
                     if (choice == "n")
                     {
